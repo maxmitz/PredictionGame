@@ -34,7 +34,7 @@ class _SettingsFormState extends State<SettingsForm> {
   //Stream
   // ignore: close_sinks
   StreamController<List<String>> controller = StreamController();
-
+  UserData userData;
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<TheUser>(context);
@@ -43,7 +43,7 @@ class _SettingsFormState extends State<SettingsForm> {
         stream: DatabaseService(uid: user.uid).userData,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            //UserData userData = snapshot.data;
+            userData = snapshot.data;
             return Form(
               key: _formKey,
               child: Column(
@@ -218,7 +218,7 @@ class _SettingsFormState extends State<SettingsForm> {
                               liganame: _currentLiga,
                               ligalink: _currentLigaLink);
                           await DatabaseService(uid: user.uid)
-                              .addLigaToUserToLiga(liga, 'bla');
+                              .addLigaToUserToLiga(liga, userData.benutzername);
 
                           //Ligen ligen = DatabaseService(uid: user.uid)  userData.ligen;
                           Navigator.pop(context);

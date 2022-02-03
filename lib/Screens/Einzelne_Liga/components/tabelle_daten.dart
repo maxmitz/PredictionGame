@@ -49,38 +49,17 @@ class _TabelledatenState extends State<Tabelledaten> {
               return ListView.builder(
                   itemCount: snapshot.data.length,
                   itemBuilder: (BuildContext ctx, int index) {
-                    var tipper = snapshot.data[index];
+                    List unsortedList = snapshot.data;
+                    List sortedList = unsortedList
+                      ..sort((a, b) => int.parse(b['points'])
+                          .compareTo(int.parse(a['points'])));
+                    var tipper = sortedList[index];
                     return UserCardLeague(
                         name: tipper["name"], points: tipper['points']);
                   });
             }
           }),
     );
-
-    /*
-      ListView.builder(
-          itemCount: tab.length,
-          itemBuilder: (context, index) {
-            return TabelleTile(tab: tab[index], platz: index);
-          });
-      final user = Provider.of<TheUser>(context);
-      return StreamBuilder<UserData>(
-          stream: DatabaseService(uid: user.uid).userData,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              UserData userdata = snapshot.data;
-  
-              return ListView.builder(
-                  itemCount: userdata.ligen.length,
-                  itemBuilder: (context, index) {
-                    return LigenTile(liga: userdata.ligen[index]);
-                  });
-            } else {
-              return Loading();
-            }
-          });
-  
-          */
   }
 }
 

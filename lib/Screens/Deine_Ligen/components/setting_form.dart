@@ -217,7 +217,8 @@ class _SettingsFormState extends State<SettingsForm> {
                               kategoriename: _currentKategorie,
                               liganame: _currentLiga,
                               ligalink: _currentLigaLink);
-                          await DatabaseService(uid: user.uid).addLiga(liga);
+                          await DatabaseService(uid: user.uid)
+                              .addLigaToUserToLiga(liga, 'bla');
 
                           //Ligen ligen = DatabaseService(uid: user.uid)  userData.ligen;
                           Navigator.pop(context);

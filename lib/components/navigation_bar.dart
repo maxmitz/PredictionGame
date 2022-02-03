@@ -21,8 +21,6 @@ class NavigationBarState extends State<NavigationBar> {
   List<Widget> _screens = [
     TippenScreen(),
     DeineLigenScreen(),
-    UebersichtScreen(),
-    DeineTippgruppenScreen(),
     DeinProfilScreen()
   ];
 
@@ -43,15 +41,7 @@ class NavigationBarState extends State<NavigationBar> {
               backgroundColor: kPrimaryColor),
           BottomNavigationBarItem(
               icon: Icon(Icons.sports),
-              label: 'Liga',
-              backgroundColor: kPrimaryColor),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Übersicht',
-              backgroundColor: kPrimaryColor),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.group),
-              label: 'Gruppe',
+              label: 'Ligen',
               backgroundColor: kPrimaryColor),
           BottomNavigationBarItem(
               icon: Icon(Icons.person),

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_auth/Screens/Dein_Profil/components/nutzer_tile.dart';
+import 'package:flutter_auth/Screens/Dein_Profil/components/userCardLeague.dart';
 import 'package:flutter_auth/Screens/Deine_Ligen/components/ligen_tile.dart';
 import 'package:flutter_auth/Screens/Einzelne_Liga/components/tabelle_tile.dart';
 import 'package:flutter_auth/Services/database.dart';
@@ -48,10 +49,9 @@ class _TabelledatenState extends State<Tabelledaten> {
               return ListView.builder(
                   itemCount: snapshot.data.length,
                   itemBuilder: (BuildContext ctx, int index) {
-                    var name = snapshot.data[index];
-                    return ListTile(
-                      title: Text(name["name"]),
-                    );
+                    var tipper = snapshot.data[index];
+                    return UserCardLeague(
+                        name: tipper["name"], points: tipper['points']);
                   });
             }
           }),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_auth/Screens/Dein_Profil/components/gamedayData.dart';
 import 'package:flutter_auth/Screens/Tippen/components/gameDayWidget.dart';
 
 //import 'package:flutter_auth/constants.dart';
@@ -36,7 +37,8 @@ class Body extends StatelessWidget {
                     style: TextStyle(
                         fontSize: 30, fontWeight: FontWeight.bold, height: 2),
                   ),
-                  GameDayWidget()
+                  GameDayWidget(),
+                  GameDayData()
                 ]),
               ),
             )));

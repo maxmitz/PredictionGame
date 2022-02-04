@@ -9,8 +9,5 @@ class UserData {
   final String benutzername;
   final List ligen;
   final List gruppen;
-  final String lieblingsverein;
-
-  UserData({this.uid, this.benutzername,this.ligen, this.gruppen, this.lieblingsverein});
-
+  UserData({this.uid, this.benutzername, this.ligen, this.gruppen});
 }

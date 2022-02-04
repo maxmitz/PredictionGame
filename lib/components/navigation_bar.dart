@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth/Screens/Tippen/tippen_screen.dart';
-//import 'package:flutter_auth/Screens/Login/login_screen.dart';
 import 'package:flutter_auth/Screens/Deine_Ligen/deine_ligen_screen.dart';
-import 'package:flutter_auth/Screens/Deine_Tippgruppen/deine_tippgruppen_screen.dart';
-import 'package:flutter_auth/Screens/Dein_Profil/dein_profil_screen.dart';
-import 'package:flutter_auth/Screens/Uebersicht/uebersicht_screen.dart';
-//import 'package:flutter_auth/constants.dart';
 import 'package:flutter_auth/shared/constants.dart';
 
 class NavigationBar extends StatefulWidget {

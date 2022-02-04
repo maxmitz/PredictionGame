@@ -61,7 +61,6 @@ class DatabaseService {
       return UserData(
           uid: uid,
           benutzername: doc.data()['Benutzername'] ?? '',
-          lieblingsverein: doc.data()['Lieblingsverein'] ?? '',
           gruppen: doc.data()['Tippgruppen'] ?? ['Mustergruppe'],
           ligen: doc.data()['Ligen'] ?? ['Musterliga']);
     }).toList();
@@ -72,7 +71,6 @@ class DatabaseService {
     return UserData(
       uid: uid,
       benutzername: snapshot.data()['Benutzername'],
-      lieblingsverein: snapshot.data()['Lieblingsverein'],
       gruppen: snapshot.data()['Tippgruppen'],
       ligen: snapshot.data()['Ligen'],
     );

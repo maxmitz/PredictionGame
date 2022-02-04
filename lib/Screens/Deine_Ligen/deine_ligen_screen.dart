@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth/Screens/Deine_Ligen/components/ligen_daten.dart';
 import 'package:flutter_auth/Screens/Deine_Ligen/components/setting_form.dart';
+import 'package:flutter_auth/Services/auth.dart';
 import 'package:flutter_auth/models/user.dart';
 import 'package:flutter_auth/shared/constants.dart';
 import 'package:flutter_auth/Services/database.dart';
@@ -9,7 +10,7 @@ import 'package:provider/provider.dart';
 
 class DeineLigenScreen extends StatelessWidget {
   @override
-  //final AuthService _auth = AuthService();
+  final AuthService _auth = AuthService();
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +42,14 @@ class DeineLigenScreen extends StatelessWidget {
                 icon: Icon(Icons.library_add),
                 label: Text('Hinzufügen'),
                 onPressed: () => _showSettingsPanel(),
+              ),
+              TextButton.icon(
+                style: TextButton.styleFrom(primary: Colors.black),
+                icon: Icon(Icons.person),
+                label: Text('Abmelden'),
+                onPressed: () async {
+                  await _auth.signOut();
+                },
               )
             ],
           ),

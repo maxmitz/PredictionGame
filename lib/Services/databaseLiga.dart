@@ -12,12 +12,8 @@ class DatabaseServiceLiga {
 
   CollectionReference ligaCollection =
       FirebaseFirestore.instance.collection('Ligen');
-  UserData newUser = new UserData(
-      uid: '',
-      benutzername: 'name',
-      gruppen: [''],
-      lieblingsverein: '',
-      ligen: ['']);
+  UserData newUser =
+      new UserData(uid: '', benutzername: 'name', gruppen: [''], ligen: ['']);
 
   List<UserData> getUserDataFromLeague() {
     _userDataList.add(newUser);
@@ -33,11 +29,7 @@ class DatabaseServiceLiga {
 
     tipperDaten.forEach((element) {
       UserData user = new UserData(
-          uid: '',
-          benutzername: element['name'],
-          gruppen: [''],
-          lieblingsverein: '',
-          ligen: ['']);
+          uid: '', benutzername: element['name'], gruppen: [''], ligen: ['']);
       _userDataList.add(user);
     });
   }

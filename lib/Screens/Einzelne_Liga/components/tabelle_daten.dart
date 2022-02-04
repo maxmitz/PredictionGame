@@ -1,15 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_auth/Screens/Dein_Profil/components/nutzer_tile.dart';
-import 'package:flutter_auth/Screens/Dein_Profil/components/userCardLeague.dart';
-import 'package:flutter_auth/Screens/Deine_Ligen/components/ligen_tile.dart';
-import 'package:flutter_auth/Screens/Einzelne_Liga/components/tabelle_tile.dart';
-import 'package:flutter_auth/Services/database.dart';
-import 'package:flutter_auth/Services/databaseLiga.dart';
-import 'package:flutter_auth/models/user.dart';
-import 'package:flutter_auth/shared/loading.dart';
-import 'package:provider/provider.dart';
-import 'dart:developer' as dev;
+import 'package:flutter_auth/Screens/Einzelne_Liga/components/userCardLeague.dart';
 
 class Tabelledaten extends StatefulWidget {
   @override
@@ -29,13 +20,6 @@ class _TabelledatenState extends State<Tabelledaten> {
   @override
   Widget build(BuildContext context) {
     List tipper = [''];
-/*
-    DatabaseServiceLiga ligaService = new DatabaseServiceLiga();
-    Future.delayed(Duration(seconds: 1), () async {
-      ligaService.getUserDataLeagueFromFirebase().then((value) => null);
-      List tipper = ligaService.getUserDataFromLeague();
-    });
-*/
 
     return Container(
       child: FutureBuilder(

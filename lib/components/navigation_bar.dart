@@ -16,12 +16,11 @@ class NavigationBar extends StatefulWidget {
 }
 
 class NavigationBarState extends State<NavigationBar> {
-  int _selectedIndex = 2;
+  int _selectedIndex = 1;
 
   List<Widget> _screens = [
     TippenScreen(),
     DeineLigenScreen(),
-    DeinProfilScreen()
   ];
 
 //Style of the icons:
@@ -42,10 +41,6 @@ class NavigationBarState extends State<NavigationBar> {
           BottomNavigationBarItem(
               icon: Icon(Icons.sports),
               label: 'Ligen',
-              backgroundColor: kPrimaryColor),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: 'Profil',
               backgroundColor: kPrimaryColor)
         ],
         selectedLabelStyle: TextStyle(color: Colors.white),

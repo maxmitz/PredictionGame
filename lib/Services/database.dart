@@ -25,7 +25,7 @@ class DatabaseService {
   }
 
   Future addLigaToUserToLiga(Liga liga, String userName) async {
-    leagueCollection.doc('_liga_bundesliga').update({
+    leagueCollection.doc('_liga_DJK').update({
       'tipper': FieldValue.arrayUnion([
         {"name": userName, "points": "0"}
       ])

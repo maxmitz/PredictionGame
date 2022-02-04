@@ -27,8 +27,7 @@ class DatabaseServiceLiga {
   Future<void> getUserDataLeagueFromFirebase() async {
     _instance = FirebaseFirestore.instance;
 
-    DocumentSnapshot snapshot =
-        await ligaCollection.doc('_liga_bundesliga').get();
+    DocumentSnapshot snapshot = await ligaCollection.doc('_liga_DJK').get();
     var data = snapshot.data();
     var tipperDaten = data['tipper'] as List<dynamic>;
 
@@ -53,16 +52,17 @@ class DatabaseServiceLiga {
     List<Gameday> gamedayList = [];
     QueryDocumentSnapshot doc;
     for (QueryDocumentSnapshot helper in snapshot.docs) {
-      if (helper.id == '_liga_bundesliga') {
+      if (helper.id == '_liga_DJK') {
         doc = helper;
       }
     }
-    List list = doc.data()['spieltage'];
+    List list = doc.data()['spieltage']["15"]['spiele'];
     for (var i = 0; i < list.length; i++) {
       gamedayList.add(Gameday(
-          home: doc.data()['spieltage'][i]['home'] ?? '',
-          away: doc.data()['spieltage'][i]['away'] ?? '',
-          score: doc.data()['spieltage'][i]['score'] ?? ''));
+          home: list[i]['home'] ?? '',
+          away: list[i]['away'] ?? '',
+          score: list[i]['score'] ?? '',
+          dateTime: list[i]['date'].toDate() ?? DateTime.now()));
     }
     return gamedayList;
   }

@@ -21,7 +21,7 @@ class _TabelledatenState extends State<Tabelledaten> {
     var firestore = FirebaseFirestore.instance;
 
     DocumentSnapshot ds =
-        await firestore.collection("Ligen").doc('_liga_bundesliga').get();
+        await firestore.collection("Ligen").doc('_liga_DJK').get();
 
     return ds.get('tipper');
   }

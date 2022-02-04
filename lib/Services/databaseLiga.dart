@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_auth/models/gameday.dart';
 import 'package:flutter_auth/models/tabelle.dart';
 import 'package:flutter_auth/models/user.dart';
 
@@ -9,6 +10,8 @@ class DatabaseServiceLiga {
   FirebaseFirestore _instance;
   List<UserData> _userDataList = [];
 
+  CollectionReference ligaCollection =
+      FirebaseFirestore.instance.collection('Ligen');
   UserData newUser = new UserData(
       uid: '',
       benutzername: 'name',
@@ -23,9 +26,6 @@ class DatabaseServiceLiga {
 
   Future<void> getUserDataLeagueFromFirebase() async {
     _instance = FirebaseFirestore.instance;
-
-    CollectionReference ligaCollection =
-        FirebaseFirestore.instance.collection('Ligen');
 
     DocumentSnapshot snapshot =
         await ligaCollection.doc('_liga_bundesliga').get();
@@ -43,32 +43,27 @@ class DatabaseServiceLiga {
     });
   }
 
-  // userData from Snapshot
-  /*List tabelleFromSnapshot(DocumentSnapshot snapshot, snapshot) {
-    List help =
-        snapshot.data()['Tabelle'] ?? ['kein Zugriff', 'wirklich kein Zugriff'];
-    List tab;
-    tab[0] = help[0]['Name'];
-    tab[1] = help[1]['Name'];
-
-    return tab;
-  }*/
-
-  /*get user stream
-  Stream<Tabelle> get tabelle {
-    return ligaCollection
-        .doc('_liga_bundesliga')
-        .snapshots()
-        .map(_tabelleFromSnapshot);
-  }
-*/
-  List get tabelleliste {
-    return ['Schalke', 'Bayern', 'Dortmund'];
+  //get user stream
+  Stream<List<Gameday>> get gameday {
+    return ligaCollection.snapshots().map(_gamedayFromSnapshot);
   }
 
-  /* get user doc stream
-  Stream<UserData> get userData {
-    return userCollection.doc(uid).snapshots().map(_userDataFromSnapshot);
+  // Liste Nutzer
+  List<Gameday> _gamedayFromSnapshot(QuerySnapshot snapshot) {
+    List<Gameday> gamedayList = [];
+    QueryDocumentSnapshot doc;
+    for (QueryDocumentSnapshot helper in snapshot.docs) {
+      if (helper.id == '_liga_bundesliga') {
+        doc = helper;
+      }
+    }
+    List list = doc.data()['spieltage'];
+    for (var i = 0; i < list.length; i++) {
+      gamedayList.add(Gameday(
+          home: doc.data()['spieltage'][i]['home'] ?? '',
+          away: doc.data()['spieltage'][i]['away'] ?? '',
+          score: doc.data()['spieltage'][i]['score'] ?? ''));
+    }
+    return gamedayList;
   }
-*/
 }

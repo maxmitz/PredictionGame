@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_auth/Screens/Tippen/components/gamedayData.dart';
 import 'package:flutter_auth/Services/databaseLiga.dart';
 import 'package:flutter_auth/models/liga.dart';
 import 'package:flutter_auth/models/user.dart';

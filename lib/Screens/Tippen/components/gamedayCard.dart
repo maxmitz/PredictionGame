@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_auth/models/user.dart';
+import 'package:flutter_auth/models/gameday.dart';
 
 class GamedayCard extends StatelessWidget {
-  final String hometeam;
-  final String awayteam;
-  final String score;
+  final Gameday gameday;
 
   //final UserData userData;
 
-  GamedayCard({this.hometeam, this.awayteam, this.score});
+  GamedayCard(this.gameday);
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +14,7 @@ class GamedayCard extends StatelessWidget {
         padding: EdgeInsets.only(top: 8.0),
         child: Card(
             margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
-            child: Text(hometeam + " vs " + awayteam + "  " + score)));
+            child: Text(
+                gameday.home + " vs " + gameday.away + "  " + gameday.score)));
   }
 }

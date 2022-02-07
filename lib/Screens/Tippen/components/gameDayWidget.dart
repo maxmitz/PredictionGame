@@ -11,7 +11,7 @@ class GameDayWidget extends StatelessWidget {
           ),
           onPressed: () {}),
       Text(
-        '1. Spieltag',
+        '15. Spieltag',
         textAlign: TextAlign.center,
         style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, height: 2),
       ),

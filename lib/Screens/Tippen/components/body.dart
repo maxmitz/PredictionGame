@@ -18,6 +18,7 @@ class Body extends StatelessWidget {
         value: DatabaseServiceLiga().gameday,
         child: MaterialApp(
             home: Scaffold(
+                resizeToAvoidBottomInset: false,
                 appBar: AppBar(
                   backgroundColor: kPrimaryColor,
                   title: Text(
@@ -34,7 +35,7 @@ class Body extends StatelessWidget {
                             fit: BoxFit.cover)),
                     child: Column(children: <Widget>[
                       Text(
-                        'Bundesliga',
+                        'B-Klasse Karlsruhe Staffel 1',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 30,
@@ -42,7 +43,7 @@ class Body extends StatelessWidget {
                             height: 2),
                       ),
                       GameDayWidget(),
-                      GameDayData()
+                      SingleChildScrollView(child: GameDayData())
                     ]),
                   ),
                 ))));

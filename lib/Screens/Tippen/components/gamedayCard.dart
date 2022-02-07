@@ -13,17 +13,29 @@ class GamedayCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
         padding: EdgeInsets.only(top: 8.0),
-        child: Card(
-            margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
-            child: Text(gameday.home +
-                " vs " +
-                gameday.away +
-                "  " +
-                gameday.score +
-                "  " +
-                DateFormat.yMd()
-                    .add_Hm()
-                    .format(gameday.dateTime)
-                    .toString())));
+        child: Row(
+          children: <Widget>[
+            Expanded(
+              child: Text(gameday.home +
+                  " vs " +
+                  gameday.away +
+                  "  " +
+                  gameday.score +
+                  "  " +
+                  DateFormat.yMd()
+                      .add_Hm()
+                      .format(gameday.dateTime)
+                      .toString()),
+            ),
+            Expanded(
+                child: (gameday.dateTime.isAfter(DateTime.now()))
+                    ? TextField(textAlign: TextAlign.center)
+                    : Text('0', textAlign: TextAlign.center)),
+            Expanded(
+                child: (gameday.dateTime.isAfter(DateTime.now()))
+                    ? TextField(textAlign: TextAlign.center)
+                    : Text('0Resultat', textAlign: TextAlign.center)),
+          ],
+        ));
   }
 }

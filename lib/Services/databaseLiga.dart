@@ -10,7 +10,7 @@ class DatabaseServiceLiga {
   FirebaseFirestore _instance;
   List<UserData> _userDataList = [];
 
-  CollectionReference ligaCollection =
+  CollectionReference leagueCollection =
       FirebaseFirestore.instance.collection('Ligen');
   UserData newUser =
       new UserData(uid: '', benutzername: 'name', gruppen: [''], ligen: ['']);
@@ -23,7 +23,7 @@ class DatabaseServiceLiga {
   Future<void> getUserDataLeagueFromFirebase() async {
     _instance = FirebaseFirestore.instance;
 
-    DocumentSnapshot snapshot = await ligaCollection.doc('_liga_DJK').get();
+    DocumentSnapshot snapshot = await leagueCollection.doc('_liga_DJK').get();
     var data = snapshot.data();
     var tipperDaten = data['tipper'] as List<dynamic>;
 
@@ -36,7 +36,7 @@ class DatabaseServiceLiga {
 
   //get user stream
   Stream<List<Gameday>> get gameday {
-    return ligaCollection.snapshots().map(_gamedayFromSnapshot);
+    return leagueCollection.snapshots().map(_gamedayFromSnapshot);
   }
 
   // Liste Nutzer
@@ -48,15 +48,31 @@ class DatabaseServiceLiga {
         doc = helper;
       }
     }
-    List list = doc.data()['spieltage']["15"]['spiele'];
-    for (var i = 0; i < list.length; i++) {
+    Map list = doc.data()['spieltage']["15"]['spiele'];
+    for (var i = 1; i < list.length; i++) {
       gamedayList.add(Gameday(
-          home: list[i]['home'] ?? '',
-          away: list[i]['away'] ?? '',
-          scoreHome: list[i]['scoreHome'] ?? '?',
-          scoreAway: list[i]['scoreHome'] ?? '?',
-          dateTime: list[i]['date'].toDate() ?? DateTime.now()));
+          home: list[i.toString()]['home'] ?? '',
+          away: list[i.toString()]['away'] ?? '',
+          scoreHome: list[i.toString()]['scoreHome'] ?? '?',
+          scoreAway: list[i.toString()]['scoreAway'] ?? '?',
+          dateTime: list[i.toString()]['date'].toDate() ?? DateTime.now()));
     }
     return gamedayList;
+  }
+
+  Future submitPrediction(String userName) async {
+    leagueCollection.doc('_liga_DJK').set({
+      'spieltage': {
+        "15": {
+          'spiele': {
+            '1': {
+              'tipps': {
+                'TestName': {'homeScore': '5', 'awayScore': '5'}
+              }
+            },
+          }
+        }
+      }
+    }, SetOptions(merge: true));
   }
 }

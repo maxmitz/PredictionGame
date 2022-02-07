@@ -13,8 +13,6 @@ class Ligendaten extends StatefulWidget {
 class _LigendatenState extends State<Ligendaten> {
   @override
   Widget build(BuildContext context) {
-    //final nutzerdaten = Provider.of<List<UserData>>(context) ?? [];
-    //final UserData = Provider.ofStream<UserData>(context);
     final user = Provider.of<TheUser>(context);
 
     return StreamBuilder<UserData>(

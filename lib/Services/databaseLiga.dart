@@ -53,7 +53,8 @@ class DatabaseServiceLiga {
       gamedayList.add(Gameday(
           home: list[i]['home'] ?? '',
           away: list[i]['away'] ?? '',
-          score: list[i]['score'] ?? '',
+          scoreHome: list[i]['scoreHome'] ?? '?',
+          scoreAway: list[i]['scoreHome'] ?? '?',
           dateTime: list[i]['date'].toDate() ?? DateTime.now()));
     }
     return gamedayList;

@@ -20,8 +20,6 @@ class GamedayCard extends StatelessWidget {
                   " vs " +
                   gameday.away +
                   "  " +
-                  gameday.score +
-                  "  " +
                   DateFormat.yMd()
                       .add_Hm()
                       .format(gameday.dateTime)
@@ -30,11 +28,11 @@ class GamedayCard extends StatelessWidget {
             Expanded(
                 child: (gameday.dateTime.isAfter(DateTime.now()))
                     ? TextField(textAlign: TextAlign.center)
-                    : Text('0', textAlign: TextAlign.center)),
+                    : Text(gameday.scoreHome, textAlign: TextAlign.center)),
             Expanded(
                 child: (gameday.dateTime.isAfter(DateTime.now()))
                     ? TextField(textAlign: TextAlign.center)
-                    : Text('0Resultat', textAlign: TextAlign.center)),
+                    : Text(gameday.scoreHome, textAlign: TextAlign.center)),
           ],
         ));
   }

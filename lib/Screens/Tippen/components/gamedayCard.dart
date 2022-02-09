@@ -22,10 +22,10 @@ class GamedayCard extends StatelessWidget {
     _instance = FirebaseFirestore.instance;
 
     DocumentSnapshot snapshot = await leagueCollection.doc('_liga_DJK').get();
-    homeScore = snapshot['spieltage']['15']['spiele']['1']['tipps'][userName]
-        ['homeScore'];
-    awayScore = snapshot['spieltage']['15']['spiele']['1']['tipps'][userName]
-        ['awayScore'];
+    homeScore = snapshot['spieltage']['15']['spiele'][gameday.matchNumber]
+        ['tipps'][userName]['homeScore'];
+    awayScore = snapshot['spieltage']['15']['spiele'][gameday.matchNumber]
+        ['tipps'][userName]['awayScore'];
   }
 
   @override
@@ -63,16 +63,16 @@ class GamedayCard extends StatelessWidget {
                                         textAlign: TextAlign.center,
                                         onChanged: (text) {
                                           databaseServiceLiga
-                                              .submitPredictionHome(
-                                                  user.uid, text);
+                                              .submitPredictionHome(user.uid,
+                                                  text, gameday.matchNumber);
                                         })
                                     : TextFormField(
                                         initialValue: homeScore,
                                         textAlign: TextAlign.center,
                                         onChanged: (text) {
                                           databaseServiceLiga
-                                              .submitPredictionHome(
-                                                  user.uid, text);
+                                              .submitPredictionHome(user.uid,
+                                                  text, gameday.matchNumber);
                                         }))
                                 : Text(gameday.scoreHome,
                                     textAlign: TextAlign.center)),
@@ -83,16 +83,16 @@ class GamedayCard extends StatelessWidget {
                                         textAlign: TextAlign.center,
                                         onChanged: (text) {
                                           databaseServiceLiga
-                                              .submitPredictionAway(
-                                                  user.uid, text);
+                                              .submitPredictionAway(user.uid,
+                                                  text, gameday.matchNumber);
                                         })
                                     : TextFormField(
                                         initialValue: awayScore,
                                         textAlign: TextAlign.center,
                                         onChanged: (text) {
                                           databaseServiceLiga
-                                              .submitPredictionAway(
-                                                  user.uid, text);
+                                              .submitPredictionAway(user.uid,
+                                                  text, gameday.matchNumber);
                                         }))
                                 : Text(gameday.scoreHome,
                                     textAlign: TextAlign.center)),

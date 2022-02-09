@@ -57,19 +57,21 @@ class DatabaseServiceLiga {
             away: list[i.toString()]['away'] ?? '',
             scoreHome: list[i.toString()]['scoreHome'] ?? '?',
             scoreAway: list[i.toString()]['scoreAway'] ?? '?',
-            dateTime: list[i.toString()]['date'].toDate() ?? DateTime.now()));
+            dateTime: list[i.toString()]['date'].toDate() ?? DateTime.now(),
+            matchNumber: i.toString()));
         i++;
       }
     } catch (e) {}
     return gamedayList;
   }
 
-  Future submitPredictionHome(String userName, String scoreHome) async {
+  Future submitPredictionHome(
+      String userName, String scoreHome, String matchNumber) async {
     leagueCollection.doc('_liga_DJK').set({
       'spieltage': {
         '15': {
           'spiele': {
-            '1': {
+            matchNumber: {
               'tipps': {
                 userName: {'homeScore': scoreHome}
               }
@@ -80,12 +82,13 @@ class DatabaseServiceLiga {
     }, SetOptions(merge: true));
   }
 
-  Future submitPredictionAway(String userName, String scoreAway) async {
+  Future submitPredictionAway(
+      String userName, String scoreAway, String matchNumber) async {
     leagueCollection.doc('_liga_DJK').set({
       'spieltage': {
         '15': {
           'spiele': {
-            '1': {
+            matchNumber: {
               'tipps': {
                 userName: {'awayScore': scoreAway}
               }

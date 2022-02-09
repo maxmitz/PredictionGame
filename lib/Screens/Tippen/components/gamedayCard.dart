@@ -22,10 +22,10 @@ class GamedayCard extends StatelessWidget {
     _instance = FirebaseFirestore.instance;
 
     DocumentSnapshot snapshot = await leagueCollection.doc('_liga_DJK').get();
-    homeScore = snapshot['spieltage']['15']['spiele'][gameday.matchNumber]
-        ['tipps'][userName]['homeScore'];
-    awayScore = snapshot['spieltage']['15']['spiele'][gameday.matchNumber]
-        ['tipps'][userName]['awayScore'];
+    homeScore = snapshot['spieltage']['15'][gameday.matchNumber]['tipps']
+        [userName]['homeScore'];
+    awayScore = snapshot['spieltage']['15'][gameday.matchNumber]['tipps']
+        [userName]['awayScore'];
   }
 
   @override

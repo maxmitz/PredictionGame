@@ -68,13 +68,11 @@ class DatabaseServiceLiga {
     leagueCollection.doc('_liga_DJK').set({
       'spieltage': {
         '15': {
-          'spiele': {
-            matchNumber: {
-              'tipps': {
-                userName: {'homeScore': scoreHome}
-              }
-            },
-          }
+          matchNumber: {
+            'tipps': {
+              userName: {'homeScore': scoreHome}
+            }
+          },
         }
       }
     }, SetOptions(merge: true));
@@ -85,13 +83,11 @@ class DatabaseServiceLiga {
     leagueCollection.doc('_liga_DJK').set({
       'spieltage': {
         '15': {
-          'spiele': {
-            matchNumber: {
-              'tipps': {
-                userName: {'awayScore': scoreAway}
-              }
-            },
-          }
+          matchNumber: {
+            'tipps': {
+              userName: {'awayScore': scoreAway}
+            }
+          },
         }
       }
     }, SetOptions(merge: true));

@@ -14,13 +14,6 @@ class _GamedayDataState extends State<GameDayData> {
   @override
   Widget build(BuildContext context) {
     final gameday = Provider.of<List<Gameday>>(context) ?? [];
-    Gameday test = new Gameday(
-        home: 'teams1',
-        away: "team2",
-        scoreHome: "99",
-        scoreAway: "98",
-        dateTime: DateTime.utc(2023, 11, 9, 20, 19));
-    gameday.add(test);
 
     return ListView.builder(
         itemCount: gameday.length,

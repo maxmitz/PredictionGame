@@ -49,14 +49,18 @@ class DatabaseServiceLiga {
       }
     }
     Map list = doc.data()['spieltage']["15"]['spiele'];
-    for (var i = 1; i < list.length; i++) {
-      gamedayList.add(Gameday(
-          home: list[i.toString()]['home'] ?? '',
-          away: list[i.toString()]['away'] ?? '',
-          scoreHome: list[i.toString()]['scoreHome'] ?? '?',
-          scoreAway: list[i.toString()]['scoreAway'] ?? '?',
-          dateTime: list[i.toString()]['date'].toDate() ?? DateTime.now()));
-    }
+    var i = 1;
+    try {
+      while (list[i.toString()]['home'] != "") {
+        gamedayList.add(Gameday(
+            home: list[i.toString()]['home'] ?? '',
+            away: list[i.toString()]['away'] ?? '',
+            scoreHome: list[i.toString()]['scoreHome'] ?? '?',
+            scoreAway: list[i.toString()]['scoreAway'] ?? '?',
+            dateTime: list[i.toString()]['date'].toDate() ?? DateTime.now()));
+        i++;
+      }
+    } catch (e) {}
     return gamedayList;
   }
 

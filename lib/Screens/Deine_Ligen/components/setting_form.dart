@@ -30,6 +30,10 @@ class _SettingsFormState extends State<SettingsForm> {
       1, 'Bitte zuerst Kategorie wählen',
       growable: true);
   var regiongewaehlt = false;
+  final List<String> alleregionen2 = ['Mittelbaden'];
+  final List<String> bezirkshilfe2 = ['Karlsruhe'];
+  final List<String> kategoriehilfe2 = ['Herren'];
+  final List<String> ligahilfe2 = ['Kreisklasse B2'];
 
   //Stream
   // ignore: close_sinks
@@ -57,7 +61,7 @@ class _SettingsFormState extends State<SettingsForm> {
                   DropdownButtonFormField(
                     validator: (value) =>
                         value == null ? 'Bitte auswählen' : null,
-                    items: alleregionen.map((region) {
+                    items: alleregionen2.map((region) {
                       return DropdownMenuItem(
                         value: region ?? 'Wähle deine Region aus',
                         child: Text('$region'),
@@ -90,7 +94,7 @@ class _SettingsFormState extends State<SettingsForm> {
                   DropdownButtonFormField(
                     validator: (value) =>
                         value == null ? 'Bitte auswählen' : null,
-                    items: bezirkshilfe.map((bezirk) {
+                    items: bezirkshilfe2.map((bezirk) {
                       return DropdownMenuItem(
                         value: bezirk ?? 'Wähle deinen Bezirk aus',
                         child: Text('$bezirk'),
@@ -133,7 +137,7 @@ class _SettingsFormState extends State<SettingsForm> {
                   DropdownButtonFormField(
                     validator: (value) =>
                         value == null ? 'Bitte auswählen' : null,
-                    items: kategoriehilfe.map((kategorie) {
+                    items: kategoriehilfe2.map((kategorie) {
                       return DropdownMenuItem(
                         value: kategorie ?? 'Wähle deine Kategorie aus',
                         child: Text('$kategorie'),
@@ -176,7 +180,7 @@ class _SettingsFormState extends State<SettingsForm> {
                   DropdownButtonFormField(
                     validator: (value) =>
                         value == null ? 'Bitte auswählen' : null,
-                    items: ligahilfe.map((liga) {
+                    items: ligahilfe2.map((liga) {
                       return DropdownMenuItem(
                         value: liga ?? 'Wähle deinen Liga aus',
                         child: Text('$liga'),

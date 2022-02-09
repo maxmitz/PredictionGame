@@ -27,7 +27,8 @@ class _LigendatenState extends State<Ligendaten> {
                   return LigenTile(liga: userdata.ligen[index]);
                 });
           } else {
-            return Loading();
+            return Text("Füge eine Liga hinzu");
+            //return Loading();
           }
         });
   }

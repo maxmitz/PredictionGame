@@ -37,20 +37,6 @@ class _SettingsFormEinzelneLigaState extends State<SettingsFormEinzelneLiga> {
               key: _formKey,
               child: Column(
                 children: <Widget>[
-                  Text(
-                    'Keine Funktionalität',
-                    style: TextStyle(fontSize: 18.0),
-                  ),
-                  SizedBox(height: 20.0),
-                  TextFormField(
-                    decoration: textInputDecoration,
-                    validator: (val) =>
-                        val.length < 3 ? 'Bitte Gruppennamen eingeben' : null,
-                    onChanged: (val) => setState(() => neueLiga = val),
-                  ),
-                  SizedBox(height: 20.0),
-                  //dropdown
-                  //slider
                   ElevatedButton(
                       style: TextButton.styleFrom(primary: Colors.orange[200]),
                       child: Text(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth/Services/auth.dart';
+import 'package:flutter_auth/Services/database.dart';
 import 'package:flutter_auth/shared/constants.dart';
 import 'package:flutter_auth/shared/loading.dart';
 
@@ -88,9 +89,12 @@ class _RegisterState extends State<Register> {
                           dynamic result =
                               await _auth.registerWithEmailAndPassword(
                                   email, password, benutzername);
+                          DatabaseService databaseService =
+                              new DatabaseService();
+                          databaseService.updateUserData(result, [""], "");
                           if (result == null) {
                             setState(() {
-                              error = 'Bitte gib eine gültige E-Mail-Adresse.';
+                              error = 'Gib eine gültige E-Mail-Adresse.';
                               loading = false;
                             });
                           }

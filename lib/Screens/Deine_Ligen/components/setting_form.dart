@@ -56,8 +56,6 @@ class _SettingsFormState extends State<SettingsForm> {
                     'Auswahl Region',
                     style: TextStyle(fontSize: 18.0),
                   ),
-                  //SizedBox(height: 10.0),
-                  //dropdown
                   DropdownButtonFormField(
                     validator: (value) =>
                         value == null ? 'Bitte auswählen' : null,

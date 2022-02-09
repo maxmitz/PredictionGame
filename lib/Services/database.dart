@@ -12,22 +12,21 @@ class DatabaseService {
   final CollectionReference leagueCollection =
       FirebaseFirestore.instance.collection('Ligen');
 
-  Future updateUserData(String nutzername, List ligen, List tippgruppen,
-      String lieblingsverein) async {
+  Future updateUserData(
+      String nutzername, List ligen, String lieblingsverein) async {
     return await userCollection.doc(uid).set({
       'Benutzername': nutzername,
       'Ligen': ligen,
-      'Tippgruppen': tippgruppen,
       'Lieblingsverein': lieblingsverein
-    });
+    }, SetOptions(merge: true));
   }
 
   Future addLigaToUserToLiga(Liga liga, String userName) async {
-    leagueCollection.doc('_liga_DJK').update({
+    leagueCollection.doc('_liga_DJK').set({
       'tipper': FieldValue.arrayUnion([
         {"name": userName, "points": "0"}
       ])
-    });
+    }, SetOptions(merge: true));
     return userCollection.doc(uid).update({
       'Ligen': FieldValue.arrayUnion([
         {
@@ -47,10 +46,11 @@ class DatabaseService {
     });
   }
 
+  // !!! delteLiga deletes now all Leagues
   Future deleteLiga(String liga) async {
-    return userCollection.doc(uid).update({
-      'Ligen': FieldValue.arrayRemove([liga]),
-    });
+    return userCollection.doc(uid).set({
+      'Ligen': [],
+    }, SetOptions(merge: true));
   }
 
   // Liste Nutzer
@@ -59,24 +59,22 @@ class DatabaseService {
       return UserData(
           uid: uid,
           benutzername: doc.data()['Benutzername'] ?? '',
-          gruppen: doc.data()['Tippgruppen'] ?? ['Mustergruppe'],
           ligen: doc.data()['Ligen'] ?? ['Musterliga']);
     }).toList();
-  }
-
-  // userData from Snapshot
-  UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
-    return UserData(
-      uid: uid,
-      benutzername: snapshot.data()['Benutzername'],
-      gruppen: snapshot.data()['Tippgruppen'],
-      ligen: snapshot.data()['Ligen'],
-    );
   }
 
   //get user stream
   Stream<List<UserData>> get nutzerdaten {
     return userCollection.snapshots().map(_userDataListFromSnapshot);
+  }
+
+  // userData from Snapshot
+  UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
+    return UserData(
+      uid: uid ?? "",
+      benutzername: snapshot.data()['Benutzername'] ?? "Fehler",
+      ligen: snapshot.data()['Ligen'] ?? ['Musterliga'],
+    );
   }
 
   // get user doc stream

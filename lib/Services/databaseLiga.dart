@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_auth/models/gameday.dart';
-import 'package:flutter_auth/models/tabelle.dart';
 import 'package:flutter_auth/models/user.dart';
 
 class DatabaseServiceLiga {
@@ -12,8 +11,7 @@ class DatabaseServiceLiga {
 
   CollectionReference leagueCollection =
       FirebaseFirestore.instance.collection('Ligen');
-  UserData newUser =
-      new UserData(uid: '', benutzername: 'name', gruppen: [''], ligen: ['']);
+  UserData newUser = new UserData(uid: '', benutzername: 'name', ligen: ['']);
 
   List<UserData> getUserDataFromLeague() {
     _userDataList.add(newUser);
@@ -28,8 +26,8 @@ class DatabaseServiceLiga {
     var tipperDaten = data['tipper'] as List<dynamic>;
 
     tipperDaten.forEach((element) {
-      UserData user = new UserData(
-          uid: '', benutzername: element['name'], gruppen: [''], ligen: ['']);
+      UserData user =
+          new UserData(uid: '', benutzername: element['name'], ligen: ['']);
       _userDataList.add(user);
     });
   }

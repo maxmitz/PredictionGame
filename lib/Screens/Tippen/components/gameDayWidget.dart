@@ -58,12 +58,14 @@ class _GameDayWidgetState extends State<GameDayWidget> {
               }),
         ]),
         SingleChildScrollView(
-            child: ListView.builder(
-                itemCount: gameday.length,
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return GamedayCard(gameday[index]);
-                }))
+            physics: ClampingScrollPhysics(),
+            child: SizedBox(
+                height: 293, // constrain height
+                child: ListView.builder(
+                    itemCount: gameday.length,
+                    itemBuilder: (context, index) {
+                      return GamedayCard(gameday[index]);
+                    })))
       ],
     );
   }

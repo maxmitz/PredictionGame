@@ -72,11 +72,11 @@ class DatabaseServiceLiga {
     return gamedayList;
   }
 
-  Future submitPredictionHome(
-      String userName, String scoreHome, String matchNumber) async {
+  Future submitPredictionHome(String userName, String scoreHome,
+      String matchNumber, String spieltag) async {
     leagueCollection.doc('_liga_DJK').set({
       'spieltage': {
-        '15': {
+        spieltag: {
           matchNumber: {
             'tipps': {
               userName: {'homeScore': scoreHome}
@@ -87,11 +87,11 @@ class DatabaseServiceLiga {
     }, SetOptions(merge: true));
   }
 
-  Future submitPredictionAway(
-      String userName, String scoreAway, String matchNumber) async {
+  Future submitPredictionAway(String userName, String scoreAway,
+      String matchNumber, String spieltag) async {
     leagueCollection.doc('_liga_DJK').set({
       'spieltage': {
-        '15': {
+        spieltag: {
           matchNumber: {
             'tipps': {
               userName: {'awayScore': scoreAway}

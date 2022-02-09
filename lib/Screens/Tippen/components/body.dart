@@ -43,7 +43,6 @@ class Body extends StatelessWidget {
                             height: 2),
                       ),
                       GameDayWidget(),
-                      SingleChildScrollView(child: GameDayData())
                     ]),
                   ),
                 ))));

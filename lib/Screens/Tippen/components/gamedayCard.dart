@@ -22,10 +22,10 @@ class GamedayCard extends StatelessWidget {
     _instance = FirebaseFirestore.instance;
 
     DocumentSnapshot snapshot = await leagueCollection.doc('_liga_DJK').get();
-    homeScore = snapshot['spieltage']['15'][gameday.matchNumber]['tipps']
-        [userName]['homeScore'];
-    awayScore = snapshot['spieltage']['15'][gameday.matchNumber]['tipps']
-        [userName]['awayScore'];
+    homeScore = snapshot['spieltage'][gameday.spieltag][gameday.matchNumber]
+        ['tipps'][userName]['homeScore'];
+    awayScore = snapshot['spieltage'][gameday.spieltag][gameday.matchNumber]
+        ['tipps'][userName]['awayScore'];
   }
 
   @override
@@ -63,16 +63,22 @@ class GamedayCard extends StatelessWidget {
                                         textAlign: TextAlign.center,
                                         onChanged: (text) {
                                           databaseServiceLiga
-                                              .submitPredictionHome(user.uid,
-                                                  text, gameday.matchNumber);
+                                              .submitPredictionHome(
+                                                  user.uid,
+                                                  text,
+                                                  gameday.matchNumber,
+                                                  gameday.spieltag);
                                         })
                                     : TextFormField(
                                         initialValue: homeScore,
                                         textAlign: TextAlign.center,
                                         onChanged: (text) {
                                           databaseServiceLiga
-                                              .submitPredictionHome(user.uid,
-                                                  text, gameday.matchNumber);
+                                              .submitPredictionHome(
+                                                  user.uid,
+                                                  text,
+                                                  gameday.matchNumber,
+                                                  gameday.spieltag);
                                         }))
                                 : Text(gameday.scoreHome,
                                     textAlign: TextAlign.center)),
@@ -83,16 +89,22 @@ class GamedayCard extends StatelessWidget {
                                         textAlign: TextAlign.center,
                                         onChanged: (text) {
                                           databaseServiceLiga
-                                              .submitPredictionAway(user.uid,
-                                                  text, gameday.matchNumber);
+                                              .submitPredictionAway(
+                                                  user.uid,
+                                                  text,
+                                                  gameday.matchNumber,
+                                                  gameday.spieltag);
                                         })
                                     : TextFormField(
                                         initialValue: awayScore,
                                         textAlign: TextAlign.center,
                                         onChanged: (text) {
                                           databaseServiceLiga
-                                              .submitPredictionAway(user.uid,
-                                                  text, gameday.matchNumber);
+                                              .submitPredictionAway(
+                                                  user.uid,
+                                                  text,
+                                                  gameday.matchNumber,
+                                                  gameday.spieltag);
                                         }))
                                 : Text(gameday.scoreHome,
                                     textAlign: TextAlign.center)),

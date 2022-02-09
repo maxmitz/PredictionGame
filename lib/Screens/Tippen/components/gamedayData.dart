@@ -1,23 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth/models/game.dart';
-import 'package:flutter_auth/models/user.dart';
 import 'package:provider/provider.dart';
-
 import 'gamedayCard.dart';
 
 class GameDayData extends StatefulWidget {
+  var whichGameday;
+  GameDayData(String this.whichGameday);
+
   @override
-  _GamedayDataState createState() => _GamedayDataState();
+  _GamedayDataState createState() => _GamedayDataState(whichGameday);
 }
 
 class _GamedayDataState extends State<GameDayData> {
+  var whichGameday;
+  _GamedayDataState(this.whichGameday);
+
   @override
   Widget build(BuildContext context) {
     final games = Provider.of<List<Game>>(context) ?? [];
 
     List<Game> gameday = [];
 
-    for (Game game in games) {}
+    for (Game game in games) {
+      if (game.spieltag == whichGameday) {
+        gameday.add(game);
+      }
+    }
 
     return ListView.builder(
         itemCount: gameday.length,

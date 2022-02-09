@@ -1,13 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_auth/Services/databaseLiga.dart';
-import 'package:flutter_auth/models/gameday.dart';
+import 'package:flutter_auth/models/game.dart';
 import 'package:flutter_auth/models/user.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class GamedayCard extends StatelessWidget {
-  final Gameday gameday;
+  final Game gameday;
   var homeScore;
   var awayScore;
 

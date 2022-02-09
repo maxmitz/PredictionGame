@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_auth/models/gameday.dart';
+import 'package:flutter_auth/models/game.dart';
 import 'package:flutter_auth/models/user.dart';
 import 'package:provider/provider.dart';
 
@@ -13,7 +13,11 @@ class GameDayData extends StatefulWidget {
 class _GamedayDataState extends State<GameDayData> {
   @override
   Widget build(BuildContext context) {
-    final gameday = Provider.of<List<Gameday>>(context) ?? [];
+    final games = Provider.of<List<Game>>(context) ?? [];
+
+    List<Game> gameday = [];
+
+    for (Game game in games) {}
 
     return ListView.builder(
         itemCount: gameday.length,

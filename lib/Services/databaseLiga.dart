@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_auth/models/gameday.dart';
+import 'package:flutter_auth/models/game.dart';
 import 'package:flutter_auth/models/user.dart';
 
 class DatabaseServiceLiga {
@@ -33,33 +33,42 @@ class DatabaseServiceLiga {
   }
 
   //get user stream
-  Stream<List<Gameday>> get gameday {
+  Stream<List<Game>> get gameday {
     return leagueCollection.snapshots().map(_gamedayFromSnapshot);
   }
 
   // Liste Nutzer
-  List<Gameday> _gamedayFromSnapshot(QuerySnapshot snapshot) {
-    List<Gameday> gamedayList = [];
+  List<Game> _gamedayFromSnapshot(QuerySnapshot snapshot) {
+    List<Game> gamedayList = [];
     QueryDocumentSnapshot doc;
     for (QueryDocumentSnapshot helper in snapshot.docs) {
       if (helper.id == '_liga_DJK') {
         doc = helper;
       }
     }
-    Map list = doc.data()['spieltage']["15"];
-    var i = 1;
+    Map list = doc.data()['spieltage'];
+    var j = 15;
     try {
-      while (list[i.toString()]['home'] != "") {
-        gamedayList.add(Gameday(
-            home: list[i.toString()]['home'] ?? '',
-            away: list[i.toString()]['away'] ?? '',
-            scoreHome: list[i.toString()]['scoreHome'] ?? '?',
-            scoreAway: list[i.toString()]['scoreAway'] ?? '?',
-            dateTime: list[i.toString()]['date'].toDate() ?? DateTime.now(),
-            matchNumber: i.toString()));
-        i++;
+      while (list[j.toString()]['1']['home'] != "") {
+        var i = 1;
+        try {
+          while (list[j.toString()][i.toString()]['home'] != "") {
+            gamedayList.add(Game(
+                home: list[j.toString()][i.toString()]['home'] ?? '',
+                away: list[j.toString()][i.toString()]['away'] ?? '',
+                scoreHome: list[j.toString()][i.toString()]['scoreHome'] ?? '?',
+                scoreAway: list[j.toString()][i.toString()]['scoreAway'] ?? '?',
+                dateTime: list[j.toString()][i.toString()]['date'].toDate() ??
+                    DateTime.now(),
+                matchNumber: i.toString(),
+                spieltag: j.toString()));
+            i++;
+          }
+        } catch (e) {}
+        j++;
       }
     } catch (e) {}
+
     return gamedayList;
   }
 

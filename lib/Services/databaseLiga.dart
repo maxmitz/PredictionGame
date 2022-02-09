@@ -46,7 +46,7 @@ class DatabaseServiceLiga {
         doc = helper;
       }
     }
-    Map list = doc.data()['spieltage']["15"]['spiele'];
+    Map list = doc.data()['spieltage']["15"];
     var i = 1;
     try {
       while (list[i.toString()]['home'] != "") {

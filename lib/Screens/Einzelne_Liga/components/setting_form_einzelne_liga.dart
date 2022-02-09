@@ -46,6 +46,7 @@ class _SettingsFormEinzelneLigaState extends State<SettingsFormEinzelneLiga> {
                       onPressed: () async {
                         await DatabaseService(uid: user.uid).deleteLiga(liga);
                         Navigator.pop(context);
+                        Navigator.of(context).pop();
                       }),
                 ],
               ),

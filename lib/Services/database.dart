@@ -21,11 +21,11 @@ class DatabaseService {
     }, SetOptions(merge: true));
   }
 
-  Future addLigaToUserToLiga(Liga liga, String userName) async {
+  Future addLigaToUserToLiga(Liga liga, String userId, String name) async {
     leagueCollection.doc('_liga_DJK').set({
-      'tipper': FieldValue.arrayUnion([
-        {"name": userName, "points": "0"}
-      ])
+      'tipper': {
+        userId: {"points": "0", 'name': name}
+      }
     }, SetOptions(merge: true));
     return userCollection.doc(uid).update({
       'Ligen': FieldValue.arrayUnion([

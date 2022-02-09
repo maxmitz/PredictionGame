@@ -19,8 +19,6 @@ class _TabelledatenState extends State<Tabelledaten> {
 
   @override
   Widget build(BuildContext context) {
-    List tipper = [''];
-
     return Container(
       child: FutureBuilder(
           future: getUsersFromLeague(),
@@ -33,13 +31,12 @@ class _TabelledatenState extends State<Tabelledaten> {
               return ListView.builder(
                   itemCount: snapshot.data.length,
                   itemBuilder: (BuildContext ctx, int index) {
-                    List unsortedList = snapshot.data;
-                    List sortedList = unsortedList
-                      ..sort((a, b) => int.parse(b['points'])
-                          .compareTo(int.parse(a['points'])));
-                    var tipper = sortedList[index];
+                    var unsorted = snapshot.data;
+                    var sorted = unsorted.keys.toList()..sort();
+                    var tipper = sorted[snapshot.data.length - index - 1];
                     return UserCardLeague(
-                        name: tipper["name"], points: tipper['points']);
+                        name: unsorted[tipper]['name'],
+                        points: unsorted[tipper]['points']);
                   });
             }
           }),

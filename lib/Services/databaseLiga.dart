@@ -101,4 +101,43 @@ class DatabaseServiceLiga {
       }
     }, SetOptions(merge: true));
   }
+
+  Future checkPointsForUser(String userId) async {
+    var points = 0;
+    QuerySnapshot snapshot = leagueCollection.snapshots() as QuerySnapshot;
+    List<Game> gamedayList = [];
+    QueryDocumentSnapshot doc;
+    for (QueryDocumentSnapshot helper in snapshot.docs) {
+      if (helper.id == '_liga_DJK') {
+        doc = helper;
+      }
+    }
+    Map list = doc.data()['spieltage'];
+    var j = 15;
+    try {
+      while (list[j.toString()]['1']['home'] != "") {
+        var i = 1;
+        try {
+          while (list[j.toString()][i.toString()]['home'] != "") {
+            if (list[j.toString()][i.toString()]['scoreHome'] ==
+                list[j.toString()][i.toString()]['tipps']['uid']['scoreHome'] &
+                    (list[j.toString()][i.toString()]['scoreAway'] ==
+                        list[j.toString()][i.toString()]['tipps']['uid']
+                            ['scoreAway'])) {
+              points = points + 5;
+            }
+            // 1 und 3 punkte Vergleich fehlt
+
+            i++;
+          }
+        } catch (e) {}
+        j++;
+      }
+    } catch (e) {}
+    leagueCollection.doc('_liga_DJK').set({
+      'tipper': FieldValue.arrayUnion([
+        {"name": userId, "points": "0"}
+      ])
+    }, SetOptions(merge: true));
+  }
 }

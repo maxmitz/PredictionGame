@@ -113,14 +113,26 @@ class DatabaseServiceLiga {
         var i = 1;
         try {
           while (list[j.toString()][i.toString()]['home'] != "") {
-            if (list[j.toString()][i.toString()]['scoreHome'] ==
-                list[j.toString()][i.toString()]['tipps']['uid']['scoreHome'] &
-                    (list[j.toString()][i.toString()]['scoreAway'] ==
-                        list[j.toString()][i.toString()]['tipps']['uid']
-                            ['scoreAway'])) {
-              points = points + 5;
+            var a = list[j.toString()][i.toString()]['scoreHome'];
+            var b =
+                list[j.toString()][i.toString()]['tipps'][userId]['scoreHome'];
+            var c = list[j.toString()][i.toString()]['scoreAway'];
+            var d =
+                list[j.toString()][i.toString()]['tipps'][userId]['scoreAway'];
+            var x = 1;
+            if ((a == b) & (c == d)) {
+              points += 5;
+            } else if ((int.parse(a) - int.parse(c)) ==
+                (int.parse(b) - int.parse(d))) {
+              points += 3;
+            } else if ((((int.parse(a) - int.parse(c)) < 0) &
+                    ((int.parse(b) - int.parse(d)) < 0)) ||
+                (((int.parse(a) - int.parse(c)) > 0) &
+                    ((int.parse(b) - int.parse(d)) > 0)) ||
+                ((int.parse(a) == int.parse(c)) &
+                    (int.parse(b) == int.parse(d)))) {
+              points += 1;
             }
-            // 1 und 3 punkte Vergleich fehlt
 
             i++;
           }

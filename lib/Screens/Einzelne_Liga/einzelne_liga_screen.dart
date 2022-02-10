@@ -14,6 +14,8 @@ class EinzelneLigaScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<TheUser>(context);
+
     void _showSettingsPanel(String liga) {
       showModalBottomSheet(
           context: context,
@@ -28,8 +30,7 @@ class EinzelneLigaScreen extends StatelessWidget {
     Future updatePoints() async {
       DatabaseServiceLiga databaseServiceLiga =
           new DatabaseServiceLiga(ligaid: '_liga_DJK');
-      await databaseServiceLiga
-          .checkPointsForUser('0ZSytZCh5AU8l752QV7CHOKo1wx2');
+      await databaseServiceLiga.checkPointsForUser(user.uid);
     }
 
     return FutureBuilder(

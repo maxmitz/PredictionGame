@@ -4,10 +4,11 @@ import 'package:flutter_auth/models/user.dart';
 class UserCardLeague extends StatelessWidget {
   final String name;
   final points;
+  final String position;
 
   //final UserData userData;
 
-  UserCardLeague({this.name, this.points});
+  UserCardLeague({this.name, this.points, this.position});
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +19,14 @@ class UserCardLeague extends StatelessWidget {
           child: ListTile(
               leading: CircleAvatar(
                 radius: 25.0,
-                backgroundColor: Colors.orange[200],
-                backgroundImage: AssetImage('assets/images/signup_top.png'),
+                backgroundColor: Colors.purple[50],
+                child: Text(
+                  '${position}.',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                      fontSize: 30),
+                ),
               ),
               title: Text(name),
               subtitle: Text('Punkte: ${points}')),

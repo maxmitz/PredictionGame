@@ -32,11 +32,15 @@ class _TabelledatenState extends State<Tabelledaten> {
                   itemCount: snapshot.data.length,
                   itemBuilder: (BuildContext ctx, int index) {
                     var unsorted = snapshot.data;
-                    var sorted = unsorted.keys.toList()..sort();
-                    var tipper = sorted[snapshot.data.length - index - 1];
+                    var sorted = unsorted.keys.toList()
+                      ..sort((a, b) => int.parse(unsorted[b]['points'])
+                          .compareTo(int.parse(unsorted[a]['points'])));
+                    var tipper = sorted[index];
                     return UserCardLeague(
-                        name: unsorted[tipper]['name'],
-                        points: unsorted[tipper]['points']);
+                      name: unsorted[tipper]['name'],
+                      points: unsorted[tipper]['points'],
+                      position: (index + 1).toString(),
+                    );
                   });
             }
           }),

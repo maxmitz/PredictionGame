@@ -142,7 +142,7 @@ class DatabaseServiceLiga {
     } catch (e) {}
     leagueCollection.doc('_liga_DJK').set({
       'tipper': {
-        userId: {"points": points}
+        userId: {"points": points.toString()}
       }
     }, SetOptions(merge: true));
   }

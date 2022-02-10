@@ -104,15 +104,9 @@ class DatabaseServiceLiga {
 
   Future checkPointsForUser(String userId) async {
     var points = 0;
-    QuerySnapshot snapshot = leagueCollection.snapshots() as QuerySnapshot;
-    List<Game> gamedayList = [];
-    QueryDocumentSnapshot doc;
-    for (QueryDocumentSnapshot helper in snapshot.docs) {
-      if (helper.id == '_liga_DJK') {
-        doc = helper;
-      }
-    }
-    Map list = doc.data()['spieltage'];
+    DocumentSnapshot snapshot = await leagueCollection.doc('_liga_DJK').get();
+
+    Map list = snapshot.data()['spieltage'];
     var j = 15;
     try {
       while (list[j.toString()]['1']['home'] != "") {
@@ -135,9 +129,9 @@ class DatabaseServiceLiga {
       }
     } catch (e) {}
     leagueCollection.doc('_liga_DJK').set({
-      'tipper': FieldValue.arrayUnion([
-        {"name": userId, "points": "0"}
-      ])
+      'tipper': {
+        userId: {"points": points}
+      }
     }, SetOptions(merge: true));
   }
 }

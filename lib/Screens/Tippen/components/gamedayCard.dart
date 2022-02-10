@@ -8,8 +8,8 @@ import 'package:provider/provider.dart';
 
 class GamedayCard extends StatelessWidget {
   final Game gameday;
-  var homeScore;
-  var awayScore;
+  var scoreHome;
+  var scoreAway;
 
   DatabaseServiceLiga databaseServiceLiga;
   FirebaseFirestore _instance;
@@ -22,10 +22,10 @@ class GamedayCard extends StatelessWidget {
     _instance = FirebaseFirestore.instance;
 
     DocumentSnapshot snapshot = await leagueCollection.doc('_liga_DJK').get();
-    homeScore = snapshot['spieltage'][gameday.spieltag][gameday.matchNumber]
-        ['tipps'][userName]['homeScore'];
-    awayScore = snapshot['spieltage'][gameday.spieltag][gameday.matchNumber]
-        ['tipps'][userName]['awayScore'];
+    scoreHome = snapshot['spieltage'][gameday.spieltag][gameday.matchNumber]
+        ['tipps'][userName]['scoreHome'];
+    scoreAway = snapshot['spieltage'][gameday.spieltag][gameday.matchNumber]
+        ['tipps'][userName]['scoreAway'];
   }
 
   @override
@@ -58,7 +58,7 @@ class GamedayCard extends StatelessWidget {
                         ),
                         Expanded(
                             child: (gameday.dateTime.isAfter(DateTime.now()))
-                                ? ((homeScore == null)
+                                ? ((scoreHome == null)
                                     ? TextField(
                                         textAlign: TextAlign.center,
                                         onChanged: (text) {
@@ -70,7 +70,7 @@ class GamedayCard extends StatelessWidget {
                                                   gameday.spieltag);
                                         })
                                     : TextFormField(
-                                        initialValue: homeScore,
+                                        initialValue: scoreHome,
                                         textAlign: TextAlign.center,
                                         onChanged: (text) {
                                           databaseServiceLiga
@@ -87,7 +87,7 @@ class GamedayCard extends StatelessWidget {
                                         decoration: TextDecoration.underline))),
                         Expanded(
                             child: (gameday.dateTime.isAfter(DateTime.now()))
-                                ? ((awayScore == null)
+                                ? ((scoreAway == null)
                                     ? TextField(
                                         textAlign: TextAlign.center,
                                         onChanged: (text) {
@@ -99,7 +99,7 @@ class GamedayCard extends StatelessWidget {
                                                   gameday.spieltag);
                                         })
                                     : TextFormField(
-                                        initialValue: awayScore,
+                                        initialValue: scoreAway,
                                         textAlign: TextAlign.center,
                                         onChanged: (text) {
                                           databaseServiceLiga

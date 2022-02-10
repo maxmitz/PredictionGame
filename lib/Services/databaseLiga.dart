@@ -79,7 +79,7 @@ class DatabaseServiceLiga {
         spieltag: {
           matchNumber: {
             'tipps': {
-              userName: {'homeScore': scoreHome}
+              userName: {'scoreHome': scoreHome}
             }
           },
         }
@@ -94,7 +94,7 @@ class DatabaseServiceLiga {
         spieltag: {
           matchNumber: {
             'tipps': {
-              userName: {'awayScore': scoreAway}
+              userName: {'scoreAway': scoreAway}
             }
           },
         }

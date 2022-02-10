@@ -81,7 +81,10 @@ class GamedayCard extends StatelessWidget {
                                                   gameday.spieltag);
                                         }))
                                 : Text(gameday.scoreHome,
-                                    textAlign: TextAlign.center)),
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        decoration: TextDecoration.underline))),
                         Expanded(
                             child: (gameday.dateTime.isAfter(DateTime.now()))
                                 ? ((awayScore == null)
@@ -107,7 +110,10 @@ class GamedayCard extends StatelessWidget {
                                                   gameday.spieltag);
                                         }))
                                 : Text(gameday.scoreHome,
-                                    textAlign: TextAlign.center)),
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        decoration: TextDecoration.underline))),
                       ],
                     ));
               }

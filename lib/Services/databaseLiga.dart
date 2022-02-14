@@ -48,9 +48,9 @@ class DatabaseServiceLiga {
       }
     }
     Map list = doc.data()['spieltage'];
-    var j = 15;
+    var j = 1;
     try {
-      while (list[j.toString()]['1']['home'] != "") {
+      while (j < 40) {
         var i = 1;
         try {
           while (list[j.toString()][i.toString()]['home'] != "") {

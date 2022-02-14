@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth/Screens/Tippen/components/gamedayCard.dart';
-import 'package:flutter_auth/Screens/Tippen/components/gamedayData.dart';
 import 'package:flutter_auth/models/game.dart';
 import 'package:provider/provider.dart';
 
@@ -10,6 +9,7 @@ class GameDayWidget extends StatefulWidget {
 }
 
 class _GameDayWidgetState extends State<GameDayWidget> {
+  // TODO aktueller Spieltag
   var spieltag = 15;
 
   @override
@@ -32,7 +32,7 @@ class _GameDayWidgetState extends State<GameDayWidget> {
                 size: 50,
               ),
               onPressed: () {
-                if (spieltag > 15) {
+                if (spieltag > 1) {
                   setState(() {
                     spieltag--;
                   });
@@ -50,7 +50,8 @@ class _GameDayWidgetState extends State<GameDayWidget> {
                 size: 50,
               ),
               onPressed: () {
-                if (spieltag < 16) {
+                //TODO richtiger Bereich
+                if (spieltag < 30) {
                   setState(() {
                     spieltag++;
                   });

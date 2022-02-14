@@ -14,7 +14,7 @@ class GamedayCard extends StatelessWidget {
   DatabaseServiceLiga databaseServiceLiga;
   FirebaseFirestore _instance;
   CollectionReference leagueCollection =
-      FirebaseFirestore.instance.collection('Ligen');
+      FirebaseFirestore.instance.collection('ligen');
 
   GamedayCard(this.gameday);
 

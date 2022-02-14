@@ -10,7 +10,7 @@ class DatabaseServiceLiga {
   List<UserData> _userDataList = [];
 
   CollectionReference leagueCollection =
-      FirebaseFirestore.instance.collection('Ligen');
+      FirebaseFirestore.instance.collection('ligen');
   UserData newUser = new UserData(uid: '', benutzername: 'name', ligen: ['']);
 
   List<UserData> getUserDataFromLeague() {

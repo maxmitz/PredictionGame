@@ -22,7 +22,7 @@ class DatabaseService {
   }
 
   Future addLigaToUserToLiga(Liga liga, String userId, String name) async {
-    leagueCollection.doc('_liga_DJK').set({
+    leagueCollection.doc('karlsruhe-kreisklasse-b2').set({
       'tipper': {
         userId: {"points": "0", 'name': name}
       }

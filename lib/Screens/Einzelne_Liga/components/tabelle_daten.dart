@@ -11,8 +11,10 @@ class _TabelledatenState extends State<Tabelledaten> {
   Future getUsersFromLeague() async {
     var firestore = FirebaseFirestore.instance;
 
-    DocumentSnapshot ds =
-        await firestore.collection("Ligen").doc('_liga_DJK').get();
+    DocumentSnapshot ds = await firestore
+        .collection("ligen")
+        .doc('karlsruhe-kreisklasse-b2')
+        .get();
 
     return ds.get('tipper');
   }

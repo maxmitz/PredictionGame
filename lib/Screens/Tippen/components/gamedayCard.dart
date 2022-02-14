@@ -21,7 +21,8 @@ class GamedayCard extends StatelessWidget {
   Future getPredictionFromUser(String userName) async {
     _instance = FirebaseFirestore.instance;
 
-    DocumentSnapshot snapshot = await leagueCollection.doc('_liga_DJK').get();
+    DocumentSnapshot snapshot =
+        await leagueCollection.doc('karlsruhe-kreisklasse-b2').get();
     scoreHome = snapshot['spieltage'][gameday.spieltag][gameday.matchNumber]
         ['tipps'][userName]['scoreHome'];
     scoreAway = snapshot['spieltage'][gameday.spieltag][gameday.matchNumber]

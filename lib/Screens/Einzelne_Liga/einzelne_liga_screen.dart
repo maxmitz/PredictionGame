@@ -29,7 +29,7 @@ class EinzelneLigaScreen extends StatelessWidget {
 
     Future updatePoints() async {
       DatabaseServiceLiga databaseServiceLiga =
-          new DatabaseServiceLiga(ligaid: '_liga_DJK');
+          new DatabaseServiceLiga(ligaid: 'karlsruhe-kreisklasse-b2');
       await databaseServiceLiga.checkPointsForUser(user.uid);
     }
 

@@ -21,7 +21,8 @@ class DatabaseServiceLiga {
   Future<void> getUserDataLeagueFromFirebase() async {
     _instance = FirebaseFirestore.instance;
 
-    DocumentSnapshot snapshot = await leagueCollection.doc('_liga_DJK').get();
+    DocumentSnapshot snapshot =
+        await leagueCollection.doc('karlsruhe-kreisklasse-b2').get();
     var data = snapshot.data();
     var tipperDaten = data['tipper'] as List<dynamic>;
 
@@ -42,7 +43,7 @@ class DatabaseServiceLiga {
     List<Game> gamedayList = [];
     QueryDocumentSnapshot doc;
     for (QueryDocumentSnapshot helper in snapshot.docs) {
-      if (helper.id == '_liga_DJK') {
+      if (helper.id == 'karlsruhe-kreisklasse-b2') {
         doc = helper;
       }
     }
@@ -58,8 +59,9 @@ class DatabaseServiceLiga {
                 away: list[j.toString()][i.toString()]['away'] ?? '',
                 scoreHome: list[j.toString()][i.toString()]['scoreHome'] ?? '?',
                 scoreAway: list[j.toString()][i.toString()]['scoreAway'] ?? '?',
-                dateTime: list[j.toString()][i.toString()]['date'].toDate() ??
-                    DateTime.now(),
+                dateTime:
+                    DateTime.parse(list[j.toString()][i.toString()]['date']) ??
+                        DateTime.now(),
                 matchNumber: i.toString(),
                 spieltag: j.toString()));
             i++;
@@ -74,7 +76,7 @@ class DatabaseServiceLiga {
 
   Future submitPredictionHome(String userName, String scoreHome,
       String matchNumber, String spieltag) async {
-    leagueCollection.doc('_liga_DJK').set({
+    leagueCollection.doc('karlsruhe-kreisklasse-b2').set({
       'spieltage': {
         spieltag: {
           matchNumber: {
@@ -89,7 +91,7 @@ class DatabaseServiceLiga {
 
   Future submitPredictionAway(String userName, String scoreAway,
       String matchNumber, String spieltag) async {
-    leagueCollection.doc('_liga_DJK').set({
+    leagueCollection.doc('karlsruhe-kreisklasse-b2').set({
       'spieltage': {
         spieltag: {
           matchNumber: {
@@ -104,7 +106,8 @@ class DatabaseServiceLiga {
 
   Future checkPointsForUser(String userId) async {
     var points = 0;
-    DocumentSnapshot snapshot = await leagueCollection.doc('_liga_DJK').get();
+    DocumentSnapshot snapshot =
+        await leagueCollection.doc('karlsruhe-kreisklasse-b2').get();
 
     Map list = snapshot.data()['spieltage'];
     var j = 15;
@@ -140,7 +143,7 @@ class DatabaseServiceLiga {
         j++;
       }
     } catch (e) {}
-    leagueCollection.doc('_liga_DJK').set({
+    leagueCollection.doc('karlsruhe-kreisklasse-b2').set({
       'tipper': {
         userId: {"points": points.toString()}
       }

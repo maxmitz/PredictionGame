@@ -11,24 +11,6 @@ class Liga {
       this.kategoriename,
       this.liganame,
       this.ligalink});
-
-  /*Map<String, dynamic> ligaItem(String region,String bezirk, String kategorie, String liga, String link) => {
-    return {
-    
-    'Ligen': FieldValue.arrayUnion([
-      {
-
-        'region': region,
-        'bezirk': bezirk,
-        'kategorie': kategorie,
-        'liga': liga,
-        'link': link
-      },
-
-    ]),
-    }
-  };*/
-
 }
 
 class Ligen {

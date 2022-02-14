@@ -222,8 +222,6 @@ class _SettingsFormState extends State<SettingsForm> {
                           await DatabaseService(uid: user.uid)
                               .addLigaToUserToLiga(
                                   liga, userData.uid, userData.benutzername);
-
-                          //Ligen ligen = DatabaseService(uid: user.uid)  userData.ligen;
                           Navigator.pop(context);
                         }
                       }),

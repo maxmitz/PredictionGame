@@ -10,7 +10,7 @@ class DatabaseService {
   final CollectionReference userCollection =
       FirebaseFirestore.instance.collection('nutzerdaten');
   final CollectionReference leagueCollection =
-      FirebaseFirestore.instance.collection('Ligen');
+      FirebaseFirestore.instance.collection('ligen');
 
   Future updateUserData(
       String id, String nutzername, List ligen, String lieblingsverein) async {

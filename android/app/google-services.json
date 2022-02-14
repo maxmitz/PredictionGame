@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "1029616179318",
-    "project_id": "futipp-34480",
-    "storage_bucket": "futipp-34480.appspot.com"
+    "project_number": "113677981293",
+    "project_id": "kippen-3e2eb",
+    "storage_bucket": "kippen-3e2eb.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1029616179318:android:338ff01c2784b7d6fae757",
+        "mobilesdk_app_id": "1:113677981293:android:37895a9f96ff901f8d9164",
         "android_client_info": {
           "package_name": "com.futipp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1029616179318-6l6p7aqulgv52dn7n10k3sosiav90ucq.apps.googleusercontent.com",
+          "client_id": "113677981293-35odg06sv1r4amukpc1k740lglhm9t44.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBUN3PYtIWZjF8bU-aZhG09-txSctGRWSg"
+          "current_key": "AIzaSyAHVFt8D_MchMdb0dijjRxdb9oPWCGBCFk"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1029616179318-6l6p7aqulgv52dn7n10k3sosiav90ucq.apps.googleusercontent.com",
+              "client_id": "113677981293-35odg06sv1r4amukpc1k740lglhm9t44.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

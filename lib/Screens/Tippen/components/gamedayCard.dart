@@ -62,6 +62,7 @@ class GamedayCard extends StatelessWidget {
                                 ? ((scoreHome == null)
                                     ? TextField(
                                         textAlign: TextAlign.center,
+                                        keyboardType: TextInputType.number,
                                         onChanged: (text) {
                                           databaseServiceLiga
                                               .submitPredictionHome(
@@ -71,6 +72,7 @@ class GamedayCard extends StatelessWidget {
                                                   gameday.spieltag);
                                         })
                                     : TextFormField(
+                                        keyboardType: TextInputType.number,
                                         initialValue: scoreHome,
                                         textAlign: TextAlign.center,
                                         onChanged: (text) {
@@ -90,6 +92,7 @@ class GamedayCard extends StatelessWidget {
                             child: (gameday.dateTime.isAfter(DateTime.now()))
                                 ? ((scoreAway == null)
                                     ? TextField(
+                                        keyboardType: TextInputType.number,
                                         textAlign: TextAlign.center,
                                         onChanged: (text) {
                                           databaseServiceLiga
@@ -100,6 +103,7 @@ class GamedayCard extends StatelessWidget {
                                                   gameday.spieltag);
                                         })
                                     : TextFormField(
+                                        keyboardType: TextInputType.number,
                                         initialValue: scoreAway,
                                         textAlign: TextAlign.center,
                                         onChanged: (text) {

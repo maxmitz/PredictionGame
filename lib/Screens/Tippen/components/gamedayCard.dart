@@ -10,6 +10,8 @@ class GamedayCard extends StatelessWidget {
   final Game gameday;
   var scoreHome;
   var scoreAway;
+  final formatDate = new DateFormat('dd.MM.yyyy');
+  final formatDateWithTime = new DateFormat('dd.MM.yyyy hh:mm');
 
   DatabaseServiceLiga databaseServiceLiga;
   FirebaseFirestore _instance;
@@ -48,14 +50,21 @@ class GamedayCard extends StatelessWidget {
                     child: Row(
                       children: <Widget>[
                         Expanded(
-                          child: Text(gameday.home +
-                              " vs " +
-                              gameday.away +
-                              "  " +
-                              DateFormat.yMd()
-                                  .add_Hm()
-                                  .format(gameday.dateTime)
-                                  .toString()),
+                          child: (gameday.dateTime.isAfter(DateTime.now()))
+                              ? Text(gameday.home +
+                                  " vs " +
+                                  gameday.away +
+                                  "  " +
+                                  formatDateWithTime
+                                      .format(gameday.dateTime)
+                                      .toString())
+                              : Text(gameday.home +
+                                  " vs " +
+                                  gameday.away +
+                                  "  " +
+                                  formatDate
+                                      .format(gameday.dateTime)
+                                      .toString()),
                         ),
                         Expanded(
                             child: (gameday.dateTime.isAfter(DateTime.now()))

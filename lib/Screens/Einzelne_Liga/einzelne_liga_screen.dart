@@ -38,7 +38,7 @@ class EinzelneLigaScreen extends StatelessWidget {
         builder: (_, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
-              child: Text("Loading"),
+              child: CircularProgressIndicator(),
             );
           } else {
             return StreamProvider<List<UserData>>.value(

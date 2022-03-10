@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_auth/Screens/Deine_Ligen/components/ligen_tile.dart';
 import 'package:flutter_auth/Services/database.dart';
 import 'package:flutter_auth/models/user.dart';
-import 'package:flutter_auth/shared/loading.dart';
 import 'package:provider/provider.dart';
 
 class Ligendaten extends StatefulWidget {
@@ -28,7 +27,6 @@ class _LigendatenState extends State<Ligendaten> {
                 });
           } else {
             return Text("Füge eine Liga hinzu");
-            //return Loading();
           }
         });
   }

@@ -27,7 +27,7 @@ class _TabelledatenState extends State<Tabelledaten> {
           builder: (_, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(
-                child: Text("Loading"),
+                child: CircularProgressIndicator(),
               );
             } else {
               return ListView.builder(

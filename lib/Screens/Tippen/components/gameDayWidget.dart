@@ -10,7 +10,7 @@ class GameDayWidget extends StatefulWidget {
 
 class _GameDayWidgetState extends State<GameDayWidget> {
   // TODO aktueller Spieltag
-  var spieltag = 15;
+  var spieltag = 1;
 
   @override
   Widget build(BuildContext context) {

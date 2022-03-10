@@ -110,7 +110,7 @@ class GamedayCard extends StatelessWidget {
                                                   gameday.matchNumber,
                                                   gameday.spieltag);
                                         }))
-                                : Text(gameday.scoreHome,
+                                : Text(gameday.scoreAway,
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,

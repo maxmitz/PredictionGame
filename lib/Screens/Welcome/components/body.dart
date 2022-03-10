@@ -3,7 +3,6 @@ import 'package:flutter_auth/Screens/Login/login_screen.dart';
 import 'package:flutter_auth/Screens/Signup/signup_screen.dart';
 import 'package:flutter_auth/Screens/Welcome/components/background.dart';
 import 'package:flutter_auth/components/rounded_button.dart';
-//import 'package:flutter_auth/constants.dart';
 import 'package:flutter_auth/shared/constants.dart';
 import 'package:flutter_svg/svg.dart';
 

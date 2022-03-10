@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_auth/Services/auth.dart';
 import 'package:flutter_auth/Services/database.dart';
@@ -34,15 +35,6 @@ class _RegisterState extends State<Register> {
               backgroundColor: kPrimaryColor,
               elevation: 0.0,
               title: Text('Bei FuTipp registrieren'),
-              actions: <Widget>[
-                TextButton.icon(
-                    style: TextButton.styleFrom(primary: Colors.black),
-                    icon: Icon(Icons.person),
-                    label: Text('Anmelden'),
-                    onPressed: () {
-                      widget.toggleView();
-                    })
-              ],
             ),
             body: Container(
               padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
@@ -78,6 +70,21 @@ class _RegisterState extends State<Register> {
                         setState(() => password = val);
                       }),
                   SizedBox(height: 20.0),
+                  RichText(
+                    text: TextSpan(
+                      text: 'Du hast einen Account?',
+                      style: TextStyle(color: Colors.black, fontSize: 14.0),
+                      children: <TextSpan>[
+                        TextSpan(
+                            text: ' Anmelden.',
+                            style:
+                                TextStyle(color: Colors.blue, fontSize: 14.0),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () => widget.toggleView()),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 10.0),
                   ElevatedButton(
                       style: TextButton.styleFrom(primary: kPrimaryColor),
                       child: Text(

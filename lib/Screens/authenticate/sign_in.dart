@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_auth/Services/auth.dart';
 import 'package:flutter_auth/shared/constants.dart';
@@ -31,15 +32,6 @@ class _SignInState extends State<SignIn> {
               backgroundColor: kPrimaryColor,
               elevation: 0.0,
               title: Text('Bei FuTipp anmelden'),
-              actions: <Widget>[
-                TextButton.icon(
-                    style: TextButton.styleFrom(primary: Colors.black),
-                    icon: Icon(Icons.person),
-                    label: Text('Registrieren'),
-                    onPressed: () {
-                      widget.toggleView();
-                    })
-              ],
             ),
             body: Container(
               padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
@@ -66,6 +58,21 @@ class _SignInState extends State<SignIn> {
                         setState(() => password = val);
                       }),
                   SizedBox(height: 20.0),
+                  RichText(
+                    text: TextSpan(
+                      text: 'Du hast noch keinen Account?',
+                      style: TextStyle(color: Colors.black, fontSize: 14.0),
+                      children: <TextSpan>[
+                        TextSpan(
+                            text: ' Registrieren.',
+                            style:
+                                TextStyle(color: Colors.blue, fontSize: 14.0),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () => widget.toggleView()),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 10.0),
                   ElevatedButton(
                       style: TextButton.styleFrom(primary: kPrimaryColor),
                       child: Text(
@@ -90,7 +97,7 @@ class _SignInState extends State<SignIn> {
                   Text(
                     error,
                     style: TextStyle(color: Colors.red, fontSize: 14.0),
-                  ),
+                  )
                 ]),
               ),
             ),

@@ -30,10 +30,14 @@ class _SettingsFormState extends State<SettingsForm> {
       1, 'Bitte zuerst Kategorie wählen',
       growable: true);
   var regiongewaehlt = false;
-  final List<String> alleregionen2 = ['Mittelbaden'];
+  final List<String> alleregionen2 = ['Mittelbaden', 'Rheinland'];
   final List<String> bezirkshilfe2 = ['Karlsruhe'];
+  final List<String> bezirkshilfe3 = ['Trier/Saar'];
   final List<String> kategoriehilfe2 = ['Herren'];
   final List<String> ligahilfe2 = ['Kreisklasse B2'];
+  final List<String> ligahilfe3 = ['Kreisliga B'];
+  final String ligaLinkDJK = 'karlsruhe-kreisklasse-b2';
+  final String ligaLinkTrier = 'kreisliga-b-triersaarburg';
 
   //Stream
   // ignore: close_sinks
@@ -92,12 +96,19 @@ class _SettingsFormState extends State<SettingsForm> {
                   DropdownButtonFormField(
                     validator: (value) =>
                         value == null ? 'Bitte auswählen' : null,
-                    items: bezirkshilfe2.map((bezirk) {
-                      return DropdownMenuItem(
-                        value: bezirk ?? 'Wähle deinen Bezirk aus',
-                        child: Text('$bezirk'),
-                      );
-                    }).toList(),
+                    items: (_currentRegion == alleregionen2[0])
+                        ? bezirkshilfe2.map((bezirk) {
+                            return DropdownMenuItem(
+                              value: bezirk ?? 'Wähle deinen Bezirk aus',
+                              child: Text('$bezirk'),
+                            );
+                          }).toList()
+                        : bezirkshilfe3.map((bezirk) {
+                            return DropdownMenuItem(
+                              value: bezirk ?? 'Wähle deinen Bezirk aus',
+                              child: Text('$bezirk'),
+                            );
+                          }).toList(),
                     onChanged: (String value) {
                       _currentBezirk = value;
 
@@ -173,17 +184,22 @@ class _SettingsFormState extends State<SettingsForm> {
                     'Auswahl Liga',
                     style: TextStyle(fontSize: 18.0),
                   ),
-                  //SizedBox(height: 10.0),
-                  //dropdown
                   DropdownButtonFormField(
                     validator: (value) =>
                         value == null ? 'Bitte auswählen' : null,
-                    items: ligahilfe2.map((liga) {
-                      return DropdownMenuItem(
-                        value: liga ?? 'Wähle deinen Liga aus',
-                        child: Text('$liga'),
-                      );
-                    }).toList(),
+                    items: (_currentRegion == alleregionen2[0])
+                        ? ligahilfe2.map((liga) {
+                            return DropdownMenuItem(
+                              value: liga ?? 'Wähle deinen Liga aus',
+                              child: Text('$liga'),
+                            );
+                          }).toList()
+                        : ligahilfe3.map((liga) {
+                            return DropdownMenuItem(
+                              value: liga ?? 'Wähle deinen Liga aus',
+                              child: Text('$liga'),
+                            );
+                          }).toList(),
                     onChanged: (String value) {
                       _currentLiga = value;
                       for (int j = 0; j < alleligen.length; j++) {
@@ -218,7 +234,9 @@ class _SettingsFormState extends State<SettingsForm> {
                               bezirksname: _currentBezirk,
                               kategoriename: _currentKategorie,
                               liganame: _currentLiga,
-                              ligalink: _currentLigaLink);
+                              ligalink: (_currentRegion == alleregionen2[0])
+                                  ? ligaLinkDJK
+                                  : ligaLinkTrier);
                           await DatabaseService(uid: user.uid)
                               .addLigaToUserToLiga(
                                   liga, userData.uid, userData.benutzername);

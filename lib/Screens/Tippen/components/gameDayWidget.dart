@@ -60,13 +60,31 @@ class _GameDayWidgetState extends State<GameDayWidget> {
         ]),
         SingleChildScrollView(
             physics: ClampingScrollPhysics(),
-            child: SizedBox(
-                height: 293, // constrain height
-                child: ListView.builder(
-                    itemCount: gameday.length,
-                    itemBuilder: (context, index) {
-                      return GamedayCard(gameday[index]);
-                    })))
+            child: GestureDetector(
+                onHorizontalDragEnd: (DragEndDetails details) {
+                  if (details.primaryVelocity > 0) {
+                    // User swiped Left
+                    if (spieltag > 1) {
+                      setState(() {
+                        spieltag--;
+                      });
+                    }
+                  } else if (details.primaryVelocity < 0) {
+                    // User swiped Right
+                    if (spieltag < 30) {
+                      setState(() {
+                        spieltag++;
+                      });
+                    }
+                  }
+                },
+                child: SizedBox(
+                    height: 293, // constrain height
+                    child: ListView.builder(
+                        itemCount: gameday.length,
+                        itemBuilder: (context, index) {
+                          return GamedayCard(gameday[index]);
+                        }))))
       ],
     );
   }

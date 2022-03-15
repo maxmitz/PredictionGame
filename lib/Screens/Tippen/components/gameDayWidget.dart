@@ -58,6 +58,7 @@ class _GameDayWidgetState extends State<GameDayWidget> {
                 }
               }),
         ]),
+        Divider(),
         SingleChildScrollView(
             physics: ClampingScrollPhysics(),
             child: GestureDetector(

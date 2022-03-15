@@ -49,85 +49,109 @@ class GamedayCard extends StatelessWidget {
                     padding: EdgeInsets.only(top: 8.0),
                     child: Row(
                       children: <Widget>[
-                        Expanded(
+                        Flexible(
+                          flex: 2,
                           child: (gameday.dateTime.isAfter(DateTime.now()))
-                              ? Text(gameday.home +
-                                  " vs " +
-                                  gameday.away +
-                                  "  " +
-                                  formatDateWithTime
-                                      .format(gameday.dateTime)
-                                      .toString())
-                              : Text(gameday.home +
-                                  " vs " +
-                                  gameday.away +
-                                  "  " +
-                                  formatDate
-                                      .format(gameday.dateTime)
-                                      .toString()),
+                              ? Text(
+                                  gameday.home +
+                                      " vs " +
+                                      gameday.away +
+                                      "  " +
+                                      formatDateWithTime
+                                          .format(gameday.dateTime)
+                                          .toString(),
+                                  style: TextStyle(fontSize: 17),
+                                )
+                              : Text(
+                                  gameday.home +
+                                      " vs " +
+                                      gameday.away +
+                                      "  " +
+                                      formatDate
+                                          .format(gameday.dateTime)
+                                          .toString(),
+                                  style: TextStyle(fontSize: 17)),
                         ),
-                        Expanded(
-                            child: (gameday.dateTime.isAfter(DateTime.now()))
-                                ? ((scoreHome == null)
-                                    ? TextField(
-                                        textAlign: TextAlign.center,
-                                        keyboardType: TextInputType.number,
-                                        onChanged: (text) {
-                                          databaseServiceLiga
-                                              .submitPredictionHome(
-                                                  user.uid,
-                                                  text,
-                                                  gameday.matchNumber,
-                                                  gameday.spieltag);
-                                        })
-                                    : TextFormField(
-                                        keyboardType: TextInputType.number,
-                                        initialValue: scoreHome,
-                                        textAlign: TextAlign.center,
-                                        onChanged: (text) {
-                                          databaseServiceLiga
-                                              .submitPredictionHome(
-                                                  user.uid,
-                                                  text,
-                                                  gameday.matchNumber,
-                                                  gameday.spieltag);
-                                        }))
-                                : Text(gameday.scoreHome,
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        decoration: TextDecoration.underline))),
-                        Expanded(
-                            child: (gameday.dateTime.isAfter(DateTime.now()))
-                                ? ((scoreAway == null)
-                                    ? TextField(
-                                        keyboardType: TextInputType.number,
-                                        textAlign: TextAlign.center,
-                                        onChanged: (text) {
-                                          databaseServiceLiga
-                                              .submitPredictionAway(
-                                                  user.uid,
-                                                  text,
-                                                  gameday.matchNumber,
-                                                  gameday.spieltag);
-                                        })
-                                    : TextFormField(
-                                        keyboardType: TextInputType.number,
-                                        initialValue: scoreAway,
-                                        textAlign: TextAlign.center,
-                                        onChanged: (text) {
-                                          databaseServiceLiga
-                                              .submitPredictionAway(
-                                                  user.uid,
-                                                  text,
-                                                  gameday.matchNumber,
-                                                  gameday.spieltag);
-                                        }))
-                                : Text(gameday.scoreAway,
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        decoration: TextDecoration.underline))),
+                        Flexible(
+                            child: Row(children: <Widget>[
+                              Expanded(
+                                  child: (gameday.dateTime
+                                          .isAfter(DateTime.now()))
+                                      ? ((scoreHome == null)
+                                          ? TextField(
+                                              textAlign: TextAlign.center,
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              onChanged: (text) {
+                                                databaseServiceLiga
+                                                    .submitPredictionHome(
+                                                        user.uid,
+                                                        text,
+                                                        gameday.matchNumber,
+                                                        gameday.spieltag);
+                                              },
+                                              style: TextStyle(fontSize: 17))
+                                          : TextFormField(
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              initialValue: scoreHome,
+                                              textAlign: TextAlign.center,
+                                              onChanged: (text) {
+                                                databaseServiceLiga
+                                                    .submitPredictionHome(
+                                                        user.uid,
+                                                        text,
+                                                        gameday.matchNumber,
+                                                        gameday.spieltag);
+                                              },
+                                              style: TextStyle(fontSize: 17)))
+                                      : Text(gameday.scoreHome,
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              decoration:
+                                                  TextDecoration.underline,
+                                              fontSize: 17))),
+                              Expanded(
+                                  child: (gameday.dateTime
+                                          .isAfter(DateTime.now()))
+                                      ? ((scoreAway == null)
+                                          ? TextField(
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              textAlign: TextAlign.center,
+                                              onChanged: (text) {
+                                                databaseServiceLiga
+                                                    .submitPredictionAway(
+                                                        user.uid,
+                                                        text,
+                                                        gameday.matchNumber,
+                                                        gameday.spieltag);
+                                              },
+                                              style: TextStyle(fontSize: 17))
+                                          : TextFormField(
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              initialValue: scoreAway,
+                                              textAlign: TextAlign.center,
+                                              onChanged: (text) {
+                                                databaseServiceLiga
+                                                    .submitPredictionAway(
+                                                        user.uid,
+                                                        text,
+                                                        gameday.matchNumber,
+                                                        gameday.spieltag);
+                                              },
+                                              style: TextStyle(fontSize: 17)))
+                                      : Text(gameday.scoreAway,
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              decoration:
+                                                  TextDecoration.underline,
+                                              fontSize: 17))),
+                            ]),
+                            flex: 1),
                       ],
                     ));
               }

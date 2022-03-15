@@ -27,7 +27,9 @@ class _GamedayDataState extends State<GameDayData> {
       }
     }
 
-    return ListView.builder(
+    return ListView.separated(
+        separatorBuilder: (BuildContext context, int index) =>
+            Divider(height: 100),
         itemCount: gameday.length,
         shrinkWrap: true,
         itemBuilder: (context, index) {

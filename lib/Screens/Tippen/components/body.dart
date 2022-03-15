@@ -40,6 +40,7 @@ class Body extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             height: 2),
                       ),
+                      Divider(),
                       GameDayWidget(),
                     ]),
                   ),

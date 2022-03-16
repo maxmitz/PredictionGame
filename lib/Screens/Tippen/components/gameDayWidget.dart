@@ -79,13 +79,19 @@ class _GameDayWidgetState extends State<GameDayWidget> {
                     }
                   }
                 },
-                child: SizedBox(
-                    height: 293, // constrain height
+                child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                        maxHeight: MediaQuery.of(context).size.height -
+                            300 -
+                            MediaQuery.of(context)
+                                .padding
+                                .top), // constrain height
                     child: ListView.builder(
                         itemCount: gameday.length,
                         itemBuilder: (context, index) {
                           return GamedayCard(gameday[index]);
-                        }))))
+                        })))),
+        Divider(),
       ],
     );
   }

@@ -4,8 +4,6 @@ import 'package:flutter_auth/Screens/einzelne_liga/einzelne_liga_screen.dart';
 class LigenTile extends StatelessWidget {
   final Map<String, dynamic> liga;
 
-  //final UserData userData;
-
   LigenTile({this.liga});
 
   @override

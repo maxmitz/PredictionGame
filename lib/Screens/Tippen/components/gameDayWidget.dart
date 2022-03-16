@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_auth/Screens/Tippen/components/GamedayCardList.dart';
+import 'package:flutter_auth/Screens/Tippen/components/gamedayCard.dart';
 import 'package:flutter_auth/models/game.dart';
 import 'package:provider/provider.dart';
 
@@ -84,7 +84,7 @@ class _GameDayWidgetState extends State<GameDayWidget> {
                     child: ListView.builder(
                         itemCount: gameday.length,
                         itemBuilder: (context, index) {
-                          return GamedayCardList(gameday[index]);
+                          return GamedayCard(gameday[index]);
                         }))))
       ],
     );

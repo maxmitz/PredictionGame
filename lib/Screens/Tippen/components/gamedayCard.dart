@@ -6,7 +6,7 @@ import 'package:flutter_auth/models/user.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-class GamedayCardList extends StatelessWidget {
+class GamedayCard extends StatelessWidget {
   final Game gameday;
   var scoreHome;
   var scoreAway;
@@ -18,7 +18,7 @@ class GamedayCardList extends StatelessWidget {
   CollectionReference leagueCollection =
       FirebaseFirestore.instance.collection('ligen');
 
-  GamedayCardList(this.gameday);
+  GamedayCard(this.gameday);
 
   Future getPredictionFromUser(String userName) async {
     _instance = FirebaseFirestore.instance;
@@ -47,46 +47,45 @@ class GamedayCardList extends StatelessWidget {
               } else {
                 return Padding(
                     padding: EdgeInsets.only(top: 8.0),
-                    child: Row(
-                      children: <Widget>[
-                        Flexible(
-                          flex: 2,
-                          child: (gameday.dateTime.isAfter(DateTime.now()))
-                              ? Column(
-                                  children: [
-                                    Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: Text(
-                                          gameday.home,
-                                          style: TextStyle(fontSize: 17),
-                                        )),
-                                    Align(
-                                        alignment: Alignment.centerLeft,
+                    child: Container(
+                      color: Colors.white,
+                      padding: EdgeInsets.all(10),
+                      constraints: BoxConstraints(minWidth: 100, maxWidth: 200),
+                      child: Column(
+                        children: <Widget>[
+                          Container(
+                            child: Row(
+                              children: [
+                                Flexible(
+                                    flex: 5,
+                                    child: Align(
+                                        alignment: Alignment.center,
+                                        child: Text(gameday.home,
+                                            style: TextStyle(fontSize: 17)))),
+                                Flexible(
+                                    flex: 1,
+                                    child: Align(
+                                        alignment: Alignment.center,
+                                        child: Text(" vs ",
+                                            style: TextStyle(fontSize: 17)))),
+                                Flexible(
+                                    flex: 5,
+                                    child: Align(
+                                        alignment: Alignment.centerRight,
                                         child: Text(
                                           gameday.away,
                                           style: TextStyle(fontSize: 17),
-                                        )),
-                                    Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: Text(
-                                          formatDateWithTime
-                                              .format(gameday.dateTime)
-                                              .toString(),
-                                          style: TextStyle(fontSize: 17),
-                                        )),
-                                  ],
-                                )
-                              : Text(
-                                  gameday.home +
-                                      " vs " +
-                                      gameday.away +
-                                      "  " +
-                                      formatDate
-                                          .format(gameday.dateTime)
-                                          .toString(),
-                                  style: TextStyle(fontSize: 17)),
-                        ),
-                        Flexible(
+                                          textAlign: TextAlign.right,
+                                        ))),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(formatDate.format(gameday.dateTime).toString(),
+                              style: TextStyle(fontSize: 17)),
+                          Container(
                             child: Row(children: <Widget>[
                               Expanded(
                                   child: (gameday.dateTime
@@ -119,7 +118,10 @@ class GamedayCardList extends StatelessWidget {
                                                         gameday.spieltag);
                                               },
                                               style: TextStyle(fontSize: 17)))
-                                      : Text(gameday.scoreHome,
+                                      : Text(
+                                          (gameday.scoreHome == '')
+                                              ? "Ergebnis noch nicht verfügbar"
+                                              : gameday.scoreHome,
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
@@ -165,8 +167,9 @@ class GamedayCardList extends StatelessWidget {
                                                   TextDecoration.underline,
                                               fontSize: 17))),
                             ]),
-                            flex: 1),
-                      ],
+                          ),
+                        ],
+                      ),
                     ));
               }
             }));

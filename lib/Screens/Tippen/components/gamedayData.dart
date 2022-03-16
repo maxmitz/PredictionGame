@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth/models/game.dart';
 import 'package:provider/provider.dart';
-import 'GamedayCardList.dart';
+import 'GamedayCard.dart';
 
 class GameDayData extends StatefulWidget {
   var whichGameday;
@@ -33,7 +33,7 @@ class _GamedayDataState extends State<GameDayData> {
         itemCount: gameday.length,
         shrinkWrap: true,
         itemBuilder: (context, index) {
-          return GamedayCardList(gameday[index]);
+          return GamedayCard(gameday[index]);
         });
   }
 }

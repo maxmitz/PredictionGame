@@ -6,7 +6,7 @@ import 'package:flutter_auth/models/user.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-class GamedayCard extends StatelessWidget {
+class GamedayCardList extends StatelessWidget {
   final Game gameday;
   var scoreHome;
   var scoreAway;
@@ -18,7 +18,7 @@ class GamedayCard extends StatelessWidget {
   CollectionReference leagueCollection =
       FirebaseFirestore.instance.collection('ligen');
 
-  GamedayCard(this.gameday);
+  GamedayCardList(this.gameday);
 
   Future getPredictionFromUser(String userName) async {
     _instance = FirebaseFirestore.instance;
@@ -52,15 +52,29 @@ class GamedayCard extends StatelessWidget {
                         Flexible(
                           flex: 2,
                           child: (gameday.dateTime.isAfter(DateTime.now()))
-                              ? Text(
-                                  gameday.home +
-                                      " vs " +
-                                      gameday.away +
-                                      "  " +
-                                      formatDateWithTime
-                                          .format(gameday.dateTime)
-                                          .toString(),
-                                  style: TextStyle(fontSize: 17),
+                              ? Column(
+                                  children: [
+                                    Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          gameday.home,
+                                          style: TextStyle(fontSize: 17),
+                                        )),
+                                    Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          gameday.away,
+                                          style: TextStyle(fontSize: 17),
+                                        )),
+                                    Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          formatDateWithTime
+                                              .format(gameday.dateTime)
+                                              .toString(),
+                                          style: TextStyle(fontSize: 17),
+                                        )),
+                                  ],
                                 )
                               : Text(
                                   gameday.home +

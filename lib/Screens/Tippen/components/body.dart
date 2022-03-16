@@ -52,18 +52,7 @@ class Body extends StatelessWidget {
                         image: DecorationImage(
                             image: AssetImage('assets/images/main_top.png'),
                             fit: BoxFit.cover)),
-                    child: Column(children: <Widget>[
-                      Text(
-                        'B-Klasse Karlsruhe Staffel 1',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                            height: 2),
-                      ),
-                      Divider(),
-                      GameDayWidget(),
-                    ]),
+                    child: GameDayWidget(),
                   ),
                 ))));
   }

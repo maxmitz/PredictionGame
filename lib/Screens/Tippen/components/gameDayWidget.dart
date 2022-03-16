@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth/Screens/Tippen/components/gamedayCard.dart';
 import 'package:flutter_auth/models/game.dart';
+import 'package:flutter_auth/models/user.dart';
 import 'package:provider/provider.dart';
 
 class GameDayWidget extends StatefulWidget {
@@ -15,6 +16,7 @@ class _GameDayWidgetState extends State<GameDayWidget> {
   @override
   Widget build(BuildContext context) {
     final games = Provider.of<List<Game>>(context) ?? [];
+    final user = Provider.of<TheUser>(context);
 
     List<Game> gameday = [];
 
@@ -25,6 +27,13 @@ class _GameDayWidgetState extends State<GameDayWidget> {
     }
     return Column(
       children: [
+        Text(
+          'B-Klasse Karlsruhe Staffel 1' + user.uid,
+          textAlign: TextAlign.center,
+          style:
+              TextStyle(fontSize: 30, fontWeight: FontWeight.bold, height: 2),
+        ),
+        Divider(),
         Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
           IconButton(
               icon: Icon(

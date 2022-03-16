@@ -12,19 +12,40 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void _showHelpPanel() {
+      showModalBottomSheet(
+          context: context,
+          builder: (context) {
+            return Container(
+              padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
+              child: Text(
+                  'Unter Ligen kannst du deine Ligen hinzufügen. Unter Tippen kannst du tippen. Unter Tippen kannst du deine Liga und den Spieltag aussuchen und dann die Ergebnisse eintragen. Vergangene Ergebnisse können nicht mehr getippt werden. Wenn du getippt hast und das Spiel eingetragen ist (das kann evtl. dauern) bekommst du 5 Punkte, wennd as Ergebnis genau stimmt, 3 Punkte, wenn die Tendenz stimmt (z.B. gewonnen mit einem Tor Vorsprung) und einen Punkte wenn die Richtung stimmt (gewonnen/ verloren). Viel Spaß!'),
+            );
+          });
+    }
+
     return StreamProvider<List<Game>>.value(
         value: DatabaseServiceLiga().gameday,
         child: MaterialApp(
             home: Scaffold(
                 resizeToAvoidBottomInset: false,
                 appBar: AppBar(
-                  backgroundColor: kPrimaryColor,
-                  title: Text(
-                    'Tippen',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ),
+                    backgroundColor: kPrimaryColor,
+                    title: Text(
+                      'Tippen',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    actions: <Widget>[
+                      TextButton.icon(
+                        style: TextButton.styleFrom(primary: Colors.black),
+                        icon: Icon(Icons.help_outline),
+                        label: Text('Hilfe'),
+                        onPressed: () {
+                          _showHelpPanel();
+                        },
+                      )
+                    ]),
                 body: SizedBox.expand(
                   child: Container(
                     decoration: BoxDecoration(

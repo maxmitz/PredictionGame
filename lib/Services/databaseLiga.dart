@@ -33,47 +33,6 @@ class DatabaseServiceLiga {
     });
   }
 
-  //get user stream
-  Stream<List<Game>> get gameday {
-    return leagueCollection.snapshots().map(_gamedayFromSnapshot);
-  }
-
-  // Liste Nutzer
-  List<Game> _gamedayFromSnapshot(QuerySnapshot snapshot) {
-    List<Game> gamedayList = [];
-    QueryDocumentSnapshot doc;
-    for (QueryDocumentSnapshot helper in snapshot.docs) {
-      if (helper.id == 'karlsruhe-kreisklasse-b2') {
-        doc = helper;
-      }
-    }
-    Map list = doc.data()['spieltage'];
-    var j = 1;
-    try {
-      while (j < 40) {
-        var i = 1;
-        try {
-          while (list[j.toString()][i.toString()]['home'] != "") {
-            gamedayList.add(Game(
-                home: list[j.toString()][i.toString()]['home'] ?? '',
-                away: list[j.toString()][i.toString()]['away'] ?? '',
-                scoreHome: list[j.toString()][i.toString()]['scoreHome'] ?? '?',
-                scoreAway: list[j.toString()][i.toString()]['scoreAway'] ?? '?',
-                dateTime:
-                    DateTime.parse(list[j.toString()][i.toString()]['date']) ??
-                        DateTime.now(),
-                matchNumber: i.toString(),
-                spieltag: j.toString()));
-            i++;
-          }
-        } catch (e) {}
-        j++;
-      }
-    } catch (e) {}
-
-    return gamedayList;
-  }
-
   Future submitPredictionHome(String userName, String scoreHome,
       String matchNumber, String spieltag) async {
     leagueCollection.doc('karlsruhe-kreisklasse-b2').set({

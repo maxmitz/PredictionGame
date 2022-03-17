@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth/Screens/Tippen/components/gameDayWidget.dart';
-import 'package:flutter_auth/Services/databaseLiga.dart';
+import 'package:flutter_auth/Services/database.dart';
 import 'package:flutter_auth/models/game.dart';
 import 'package:flutter_auth/shared/constants.dart';
 import 'package:provider/provider.dart';
@@ -24,8 +24,8 @@ class Body extends StatelessWidget {
           });
     }
 
-    return StreamProvider<List<Game>>.value(
-        value: DatabaseServiceLiga().gameday,
+    return StreamProvider<List<List<Game>>>.value(
+        value: DatabaseService().gameday,
         child: MaterialApp(
             home: Scaffold(
                 resizeToAvoidBottomInset: false,

@@ -17,11 +17,11 @@ class _GamedayDataState extends State<GameDayData> {
 
   @override
   Widget build(BuildContext context) {
-    final games = Provider.of<List<Game>>(context) ?? [];
+    final games = Provider.of<List<List<Game>>>(context) ?? [[]];
 
     List<Game> gameday = [];
 
-    for (Game game in games) {
+    for (Game game in games[0]) {
       if (game.spieltag == whichGameday) {
         gameday.add(game);
       }

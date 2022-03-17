@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_auth/models/game.dart';
 import 'package:flutter_auth/models/liga.dart';
 import 'package:flutter_auth/models/user.dart';
 
@@ -80,5 +81,69 @@ class DatabaseService {
   // get user doc stream
   Stream<UserData> get userData {
     return userCollection.doc(uid).snapshots().map(_userDataFromSnapshot);
+  }
+
+  //get games stream
+  Stream<List<List<Game>>> get gameday {
+    return leagueCollection.snapshots().map(_gamedayFromSnapshot);
+  }
+
+  // Liste Games
+  List<List<Game>> _gamedayFromSnapshot(QuerySnapshot snapshot) {
+    List<List<Game>> gamedayList = [[], [], [], [], [], [], [], [], [], []];
+    List<QueryDocumentSnapshot> docs = [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ];
+    var i = 0;
+    for (QueryDocumentSnapshot helper in snapshot.docs) {
+      if (helper.id == 'karlsruhe-kreisklasse-b2' ||
+          helper.id == 'kreisliga-b-triersaarburg') {
+        docs[i] = helper;
+        i++;
+      }
+    }
+
+    var k = 0;
+
+    for (QueryDocumentSnapshot doc in docs) {
+      if (docs[k] != null) {
+        Map list = doc.data()['spieltage'];
+        var j = 1;
+        try {
+          while (j < 40) {
+            var i = 1;
+            try {
+              while (list[j.toString()][i.toString()]['home'] != "") {
+                gamedayList[k].add(Game(
+                    home: list[j.toString()][i.toString()]['home'] ?? '',
+                    away: list[j.toString()][i.toString()]['away'] ?? '',
+                    scoreHome:
+                        list[j.toString()][i.toString()]['scoreHome'] ?? '?',
+                    scoreAway:
+                        list[j.toString()][i.toString()]['scoreAway'] ?? '?',
+                    dateTime: DateTime.parse(
+                            list[j.toString()][i.toString()]['date']) ??
+                        DateTime.now(),
+                    matchNumber: i.toString(),
+                    spieltag: j.toString()));
+                i++;
+              }
+            } catch (e) {}
+            j++;
+          }
+          k++;
+        } catch (e) {}
+      }
+    }
+    return gamedayList;
   }
 }

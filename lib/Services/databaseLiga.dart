@@ -34,8 +34,8 @@ class DatabaseServiceLiga {
   }
 
   Future submitPredictionHome(String userName, String scoreHome,
-      String matchNumber, String spieltag) async {
-    leagueCollection.doc('karlsruhe-kreisklasse-b2').set({
+      String matchNumber, String spieltag, String leagueCode) async {
+    leagueCollection.doc(leagueCode).set({
       'spieltage': {
         spieltag: {
           matchNumber: {
@@ -49,8 +49,8 @@ class DatabaseServiceLiga {
   }
 
   Future submitPredictionAway(String userName, String scoreAway,
-      String matchNumber, String spieltag) async {
-    leagueCollection.doc('karlsruhe-kreisklasse-b2').set({
+      String matchNumber, String spieltag, String leagueCode) async {
+    leagueCollection.doc(leagueCode).set({
       'spieltage': {
         spieltag: {
           matchNumber: {

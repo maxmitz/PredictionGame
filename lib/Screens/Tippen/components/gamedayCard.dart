@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 
 class GamedayCard extends StatelessWidget {
   final Game gameday;
+  final String leagueCode;
   var scoreHome;
   var scoreAway;
   final formatDate = new DateFormat('dd.MM.yyyy');
@@ -18,13 +19,12 @@ class GamedayCard extends StatelessWidget {
   CollectionReference leagueCollection =
       FirebaseFirestore.instance.collection('ligen');
 
-  GamedayCard(this.gameday);
+  GamedayCard({this.gameday, this.leagueCode});
 
   Future getPredictionFromUser(String userName) async {
     _instance = FirebaseFirestore.instance;
 
-    DocumentSnapshot snapshot =
-        await leagueCollection.doc('karlsruhe-kreisklasse-b2').get();
+    DocumentSnapshot snapshot = await leagueCollection.doc(leagueCode).get();
     scoreHome = snapshot['spieltage'][gameday.spieltag][gameday.matchNumber]
         ['tipps'][userName]['scoreHome'];
     scoreAway = snapshot['spieltage'][gameday.spieltag][gameday.matchNumber]
@@ -101,7 +101,8 @@ class GamedayCard extends StatelessWidget {
                                                         user.uid,
                                                         text,
                                                         gameday.matchNumber,
-                                                        gameday.spieltag);
+                                                        gameday.spieltag,
+                                                        leagueCode);
                                               },
                                               style: TextStyle(fontSize: 17))
                                           : TextFormField(
@@ -115,7 +116,8 @@ class GamedayCard extends StatelessWidget {
                                                         user.uid,
                                                         text,
                                                         gameday.matchNumber,
-                                                        gameday.spieltag);
+                                                        gameday.spieltag,
+                                                        leagueCode);
                                               },
                                               style: TextStyle(fontSize: 17)))
                                       : Text(
@@ -142,7 +144,8 @@ class GamedayCard extends StatelessWidget {
                                                         user.uid,
                                                         text,
                                                         gameday.matchNumber,
-                                                        gameday.spieltag);
+                                                        gameday.spieltag,
+                                                        leagueCode);
                                               },
                                               style: TextStyle(fontSize: 17))
                                           : TextFormField(
@@ -156,7 +159,8 @@ class GamedayCard extends StatelessWidget {
                                                         user.uid,
                                                         text,
                                                         gameday.matchNumber,
-                                                        gameday.spieltag);
+                                                        gameday.spieltag,
+                                                        leagueCode);
                                               },
                                               style: TextStyle(fontSize: 17)))
                                       : Text(gameday.scoreAway,

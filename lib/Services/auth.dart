@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_auth/Services/database.dart';
 import 'package:flutter_auth/models/user.dart';
 
 class AuthService {

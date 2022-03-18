@@ -33,7 +33,13 @@ class _LigendatenState extends State<Ligendaten> {
                       }),
                 ),
                 SizedBox(height: 20.0),
-                Expanded(child: Text('Hier könnte deine Werbung stehen!'))
+                Text('Hier könnte deine Werbung stehen!'),
+                SizedBox(height: 20.0),
+                Expanded(
+                    child: Text(
+                  'Du kennst dich aus mit Python, Flutter oder App-Design und hast Lust auf ein cooles Projekt? Melde dich!',
+                  textAlign: TextAlign.center,
+                ))
               ],
             );
           } else {

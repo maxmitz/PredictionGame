@@ -4,17 +4,19 @@ import 'package:flutter_auth/Screens/Einzelne_Liga/components/userCardLeague.dar
 
 class Tabelledaten extends StatefulWidget {
   @override
-  _TabelledatenState createState() => _TabelledatenState();
+  final Map<String, dynamic> liga;
+  Tabelledaten(this.liga);
+  _TabelledatenState createState() => _TabelledatenState(liga: liga);
 }
 
 class _TabelledatenState extends State<Tabelledaten> {
+  final Map<String, dynamic> liga;
+  _TabelledatenState({this.liga});
   Future getUsersFromLeague() async {
     var firestore = FirebaseFirestore.instance;
 
-    DocumentSnapshot ds = await firestore
-        .collection("ligen")
-        .doc('karlsruhe-kreisklasse-b2')
-        .get();
+    DocumentSnapshot ds =
+        await firestore.collection("ligen").doc(liga['Link']).get();
 
     return ds.get('tipper');
   }

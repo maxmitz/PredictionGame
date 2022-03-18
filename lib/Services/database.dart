@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_auth/models/game.dart';
 import 'package:flutter_auth/models/liga.dart';
 import 'package:flutter_auth/models/user.dart';
@@ -6,6 +7,7 @@ import 'package:flutter_auth/models/user.dart';
 class DatabaseService {
   final String uid;
   DatabaseService({this.uid});
+  UserData userData2;
 
   //collection reference
   final CollectionReference userCollection =
@@ -47,7 +49,6 @@ class DatabaseService {
     });
   }
 
-  // !!! delteLiga deletes now all Leagues
   Future deleteLiga(String liga) async {
     return userCollection.doc(uid).set({
       'Ligen': [],

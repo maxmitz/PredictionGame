@@ -21,8 +21,7 @@ class DatabaseServiceLiga {
   Future<void> getUserDataLeagueFromFirebase() async {
     _instance = FirebaseFirestore.instance;
 
-    DocumentSnapshot snapshot =
-        await leagueCollection.doc('karlsruhe-kreisklasse-b2').get();
+    DocumentSnapshot snapshot = await leagueCollection.doc(ligaid).get();
     var data = snapshot.data();
     var tipperDaten = data['tipper'] as List<dynamic>;
 
@@ -65,8 +64,7 @@ class DatabaseServiceLiga {
 
   Future checkPointsForUser(String userId) async {
     var points = 0;
-    DocumentSnapshot snapshot =
-        await leagueCollection.doc('karlsruhe-kreisklasse-b2').get();
+    DocumentSnapshot snapshot = await leagueCollection.doc(ligaid).get();
 
     Map list = snapshot.data()['spieltage'];
     var j = 15;
@@ -102,7 +100,7 @@ class DatabaseServiceLiga {
         j++;
       }
     } catch (e) {}
-    leagueCollection.doc('karlsruhe-kreisklasse-b2').set({
+    leagueCollection.doc(ligaid).set({
       'tipper': {
         userId: {"points": points.toString()}
       }

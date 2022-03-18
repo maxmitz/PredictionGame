@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_auth/Screens/Tippen/components/gameDayWidget.dart';
 import 'package:flutter_auth/Services/database.dart';
 import 'package:flutter_auth/models/game.dart';
+import 'package:flutter_auth/models/user.dart';
 import 'package:flutter_auth/shared/constants.dart';
 import 'package:provider/provider.dart';
 
@@ -12,6 +13,22 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userdata = Provider.of<UserData>(context);
+    var ligen;
+    try {
+      ligen = userdata.ligen;
+    } catch (e) {
+      ligen = [
+        {
+          'Bezirk': 'Füge eine Liga hinzu',
+          'Kategorie': 'Füge eine Liga hinzu',
+          'Liga': 'Füge eine Liga hinzu',
+          'Link': 'Füge eine Liga hinzu',
+          'Region': 'Füge eine Liga hinzu'
+        }
+      ];
+    }
+
     void _showHelpPanel() {
       showModalBottomSheet(
           context: context,
@@ -25,7 +42,7 @@ class Body extends StatelessWidget {
     }
 
     return StreamProvider<List<List<Game>>>.value(
-        value: DatabaseService().gameday,
+        value: DatabaseService(ligen: ligen).gameday,
         child: MaterialApp(
             home: Scaffold(
                 resizeToAvoidBottomInset: false,

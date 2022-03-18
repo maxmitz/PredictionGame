@@ -6,7 +6,8 @@ import 'package:flutter_auth/models/user.dart';
 
 class DatabaseService {
   final String uid;
-  DatabaseService({this.uid});
+  final List ligen;
+  DatabaseService({this.uid, this.ligen});
   UserData userData2;
 
   //collection reference
@@ -106,10 +107,11 @@ class DatabaseService {
     ];
     var i = 0;
     for (QueryDocumentSnapshot helper in snapshot.docs) {
-      if (helper.id == 'karlsruhe-kreisklasse-b2' ||
-          helper.id == 'kreisliga-b-triersaarburg') {
-        docs[i] = helper;
-        i++;
+      for (Map liga in ligen) {
+        if (liga['Link'].contains(helper.id)) {
+          docs[i] = helper;
+          i++;
+        }
       }
     }
 

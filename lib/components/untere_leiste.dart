@@ -14,7 +14,8 @@ class UntereLeiste extends StatelessWidget {
     return StreamProvider<UserData>.value(
         value: DatabaseService(uid: user.uid).userData,
         builder: (context, snapshot) {
-          return Scaffold(body: Body(), bottomNavigationBar: NavigationBar());
+          return Scaffold(
+              body: Body(), bottomNavigationBar: CustomNavigationBar());
         });
   }
 }

@@ -2,15 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_auth/Screens/Tippen/tippen_screen.dart';
 import 'package:flutter_auth/Screens/Deine_Ligen/deine_ligen_screen.dart';
 import 'package:flutter_auth/shared/constants.dart';
+import 'package:new_version/new_version.dart';
 
-class NavigationBar extends StatefulWidget {
-  NavigationBar({Key key}) : super(key: key);
+class CustomNavigationBar extends StatefulWidget {
+  CustomNavigationBar({Key key}) : super(key: key);
 
   @override
   NavigationBarState createState() => NavigationBarState();
 }
 
-class NavigationBarState extends State<NavigationBar> {
+class NavigationBarState extends State<CustomNavigationBar> {
+  @override
+  void initState() {
+    super.initState();
+    NewVersion(
+      context: context,
+      iOSId: 'com.google.Vespa',
+      androidId: 'com.google.android.apps.cloudconsole',
+    ).showAlertIfNecessary();
+  }
+
   int _selectedIndex = 1;
 
   List<Widget> _screens = [

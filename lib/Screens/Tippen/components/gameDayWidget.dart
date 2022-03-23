@@ -62,7 +62,7 @@ class _GameDayWidgetState extends State<GameDayWidget> {
                     }
                   }),
               Text(
-                userdata.ligen[ligaNummer]['Link'] ?? 'Füge eine Liga hinzu',
+                userdata.ligen[ligaNummer]['Liga'] ?? 'Füge eine Liga hinzu',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: 20, fontWeight: FontWeight.bold, height: 2),

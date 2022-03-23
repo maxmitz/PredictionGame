@@ -17,17 +17,7 @@ class Body extends StatelessWidget {
     var ligen;
     try {
       ligen = userdata.ligen;
-    } catch (e) {
-      ligen = [
-        {
-          'Teamtyp': 'Füge eine Liga hinzu',
-          'Spielklasse': 'Füge eine Liga hinzu',
-          'Liga': 'Füge eine Liga hinzu',
-          'Link': 'Füge eine Liga hinzu',
-          'Region': 'Füge eine Liga hinzu'
-        }
-      ];
-    }
+    } catch (e) {}
 
     void _showHelpPanel() {
       showModalBottomSheet(

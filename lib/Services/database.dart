@@ -74,10 +74,11 @@ class DatabaseService {
   // userData from Snapshot
   UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
     return UserData(
-      uid: uid ?? "",
-      benutzername: snapshot.data()['Benutzername'] ?? "Fehler",
-      ligen: snapshot.data()['Ligen'] ?? ['Musterliga'],
-    );
+        uid: uid ?? "",
+        benutzername: snapshot.data()['Benutzername'] ?? "Fehler",
+        ligen: snapshot.data()['Ligen'] ?? ['Musterliga'],
+        lieblingsteam:
+            snapshot.data()['Lieblingsverein'] ?? ['DJK Karlsruhe-Ost']);
   }
 
   // get user doc stream

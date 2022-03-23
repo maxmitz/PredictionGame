@@ -7,6 +7,7 @@ class TheUser {
 class UserData {
   final String uid;
   final String benutzername;
+  final String lieblingsteam;
   final List ligen;
-  UserData({this.uid, this.benutzername, this.ligen});
+  UserData({this.uid, this.benutzername, this.ligen, this.lieblingsteam});
 }

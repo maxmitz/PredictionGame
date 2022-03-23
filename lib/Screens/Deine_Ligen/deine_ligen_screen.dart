@@ -5,6 +5,7 @@ import 'package:flutter_auth/Services/auth.dart';
 import 'package:flutter_auth/models/user.dart';
 import 'package:flutter_auth/shared/constants.dart';
 import 'package:flutter_auth/Services/database.dart';
+import 'package:flutter_auth/shared/loading.dart';
 import 'package:provider/provider.dart';
 //import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -12,9 +13,12 @@ class DeineLigenScreen extends StatelessWidget {
   @override
   final AuthService _auth = AuthService();
   String _lieblingsTeam;
+  var userData;
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<TheUser>(context);
+
     void _showSettingsPanel() {
       showModalBottomSheet(
           context: context,
@@ -26,7 +30,7 @@ class DeineLigenScreen extends StatelessWidget {
           });
     }
 
-    void _showLigaPanel() {
+    void _showLigaPanel(UserData userData) {
       showModalBottomSheet(
           context: context,
           builder: (context) {
@@ -39,11 +43,12 @@ class DeineLigenScreen extends StatelessWidget {
                     style: TextStyle(fontSize: 18.0),
                   ),
                   TextFormField(
-                    //TODO richtige Default Mannschaft
-                    decoration: textInputDecoration.copyWith(
-                        hintText: 'Dein Lieblingsteam'),
+                    initialValue: userData.lieblingsteam,
                     validator: (val) =>
                         val.isEmpty ? 'Gib dein Lieblingsteam ein.' : null,
+                    onChanged: (val) {
+                      _lieblingsTeam = val;
+                    },
                   ),
                   ElevatedButton(
                     style: TextButton.styleFrom(primary: Colors.orange[200]),
@@ -53,8 +58,11 @@ class DeineLigenScreen extends StatelessWidget {
                     ),
                     onPressed: () async {
                       if (_lieblingsTeam != null) {
-                        //TODO aktualisieren
-                        //await DatabaseService().updateUserData(user, nutzername, ligen, lieblingsverein)
+                        await DatabaseService().updateUserData(
+                            user.uid,
+                            userData.benutzername,
+                            userData.ligen,
+                            _lieblingsTeam);
                       }
                     },
                   ),
@@ -76,40 +84,48 @@ class DeineLigenScreen extends StatelessWidget {
           });
     }
 
-    return StreamProvider<List<UserData>>.value(
-      value: DatabaseService().nutzerdaten,
-      child: MaterialApp(
-        home: Scaffold(
-          appBar: AppBar(
-            backgroundColor: kPrimaryColor,
-            title: Text(
-              'Ligen',
-              textAlign: TextAlign.left,
-              style: TextStyle(fontSize: 20),
-            ),
-            actions: <Widget>[
-              TextButton.icon(
-                style: TextButton.styleFrom(primary: Colors.black),
-                icon: Icon(Icons.library_add),
-                label: Text('Hinzufügen'),
-                onPressed: () => _showSettingsPanel(),
+    return StreamBuilder<UserData>(
+        stream: DatabaseService(uid: user.uid).userData,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            userData = snapshot.data;
+
+            return MaterialApp(
+              home: Scaffold(
+                appBar: AppBar(
+                  backgroundColor: kPrimaryColor,
+                  title: Text(
+                    'Ligen',
+                    textAlign: TextAlign.left,
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  actions: <Widget>[
+                    TextButton.icon(
+                      style: TextButton.styleFrom(primary: Colors.black),
+                      icon: Icon(Icons.library_add),
+                      label: Text('Hinzufügen'),
+                      onPressed: () => _showSettingsPanel(),
+                    ),
+                    TextButton.icon(
+                      style: TextButton.styleFrom(primary: Colors.black),
+                      icon: Icon(Icons.settings),
+                      label:
+                          Text('Einstellungen', style: TextStyle(fontSize: 15)),
+                      onPressed: () => _showLigaPanel(userData),
+                    ),
+                  ],
+                ),
+                body: Container(
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage('assets/images/main_top.png'),
+                            fit: BoxFit.cover)),
+                    child: Ligendaten()),
               ),
-              TextButton.icon(
-                style: TextButton.styleFrom(primary: Colors.black),
-                icon: Icon(Icons.settings),
-                label: Text('Einstellungen', style: TextStyle(fontSize: 15)),
-                onPressed: () => _showLigaPanel(),
-              ),
-            ],
-          ),
-          body: Container(
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage('assets/images/main_top.png'),
-                      fit: BoxFit.cover)),
-              child: Ligendaten()),
-        ),
-      ),
-    );
+            );
+          } else {
+            return Loading();
+          }
+        });
   }
 }

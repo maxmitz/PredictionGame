@@ -97,15 +97,17 @@ class _RegisterState extends State<Register> {
                           TheUser result =
                               await _auth.registerWithEmailAndPassword(
                                   email, password, benutzername);
-                          DatabaseService databaseService =
-                              new DatabaseService();
-                          databaseService.updateUserData(
-                              result.uid, benutzername, [], "");
+
                           if (result == null) {
                             setState(() {
                               error = 'Gib eine gültige E-Mail-Adresse.';
                               loading = false;
                             });
+                          } else {
+                            DatabaseService databaseService =
+                                new DatabaseService();
+                            databaseService.updateUserData(
+                                result.uid, benutzername, [], "");
                           }
                         }
                       }),

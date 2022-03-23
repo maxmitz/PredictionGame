@@ -19,7 +19,7 @@ class LigenTile extends StatelessWidget {
               backgroundImage: AssetImage('assets/images/signup_top.png'),
             ),
             title: Text(liga['Liga']),
-            subtitle: Text(liga['Bezirk']),
+            subtitle: Text(liga['Teamtyp']),
             enabled: true,
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(

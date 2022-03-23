@@ -20,8 +20,8 @@ class Body extends StatelessWidget {
     } catch (e) {
       ligen = [
         {
-          'Bezirk': 'Füge eine Liga hinzu',
-          'Kategorie': 'Füge eine Liga hinzu',
+          'Teamtyp': 'Füge eine Liga hinzu',
+          'Spielklasse': 'Füge eine Liga hinzu',
           'Liga': 'Füge eine Liga hinzu',
           'Link': 'Füge eine Liga hinzu',
           'Region': 'Füge eine Liga hinzu'

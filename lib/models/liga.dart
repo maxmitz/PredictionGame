@@ -1,14 +1,14 @@
 class Liga {
-  final String regionname;
-  final String bezirksname;
-  final String kategoriename;
+  final String verbandname;
+  final String teamtypsname;
+  final String spielklassename;
   final String liganame;
   final String ligalink;
 
   Liga(
-      {this.regionname,
-      this.bezirksname,
-      this.kategoriename,
+      {this.verbandname,
+      this.teamtypsname,
+      this.spielklassename,
       this.liganame,
       this.ligalink});
 }

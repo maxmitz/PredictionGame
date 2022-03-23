@@ -34,9 +34,9 @@ class DatabaseService {
     return userCollection.doc(uid).update({
       'Ligen': FieldValue.arrayUnion([
         {
-          'Region': liga.regionname,
-          'Bezirk': liga.bezirksname,
-          'Kategorie': liga.kategoriename,
+          'Verband': liga.verbandname,
+          'Teamtyp': liga.teamtypsname,
+          'Spielklasse': liga.spielklassename,
           'Liga': liga.liganame,
           'Link': liga.ligalink
         }

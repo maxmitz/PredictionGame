@@ -14,8 +14,10 @@ class _AuthenticateState extends State<Authenticate> {
     super.initState();
     NewVersion(
       context: context,
+      //TODO if app is available for iOS change this
+
       iOSId: 'com.google.Vespa',
-      androidId: 'com.google.android.apps.cloudconsole',
+      androidId: 'com.futipp',
     ).showAlertIfNecessary();
   }
 

@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 class DeineLigenScreen extends StatelessWidget {
   @override
   final AuthService _auth = AuthService();
+  String _lieblingsTeam;
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +22,56 @@ class DeineLigenScreen extends StatelessWidget {
             return Container(
               padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
               child: SettingsForm(),
+            );
+          });
+    }
+
+    void _showLigaPanel() {
+      showModalBottomSheet(
+          context: context,
+          builder: (context) {
+            return Container(
+              padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
+              child: Column(
+                children: <Widget>[
+                  Text(
+                    'Zu welchem Amateurteam fühlst du dich zugehörig?',
+                    style: TextStyle(fontSize: 18.0),
+                  ),
+                  TextFormField(
+                    //TODO richtige Default Mannschaft
+                    decoration: textInputDecoration.copyWith(
+                        hintText: 'Dein Lieblingsteam'),
+                    validator: (val) =>
+                        val.isEmpty ? 'Gib dein Lieblingsteam ein.' : null,
+                  ),
+                  ElevatedButton(
+                    style: TextButton.styleFrom(primary: Colors.orange[200]),
+                    child: Text(
+                      'Team aktualisieren',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    onPressed: () async {
+                      if (_lieblingsTeam != null) {
+                        //TODO aktualisieren
+                        //await DatabaseService().updateUserData(user, nutzername, ligen, lieblingsverein)
+                      }
+                    },
+                  ),
+                  Divider(),
+                  ElevatedButton(
+                    style: TextButton.styleFrom(primary: Colors.orange[200]),
+                    child: Text(
+                      'Logout',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    onPressed: () async {
+                      await _auth.signOut();
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
             );
           });
     }
@@ -45,12 +96,10 @@ class DeineLigenScreen extends StatelessWidget {
               ),
               TextButton.icon(
                 style: TextButton.styleFrom(primary: Colors.black),
-                icon: Icon(Icons.person),
-                label: Text('Abmelden'),
-                onPressed: () async {
-                  await _auth.signOut();
-                },
-              )
+                icon: Icon(Icons.settings),
+                label: Text('Einstellungen', style: TextStyle(fontSize: 15)),
+                onPressed: () => _showLigaPanel(),
+              ),
             ],
           ),
           body: Container(

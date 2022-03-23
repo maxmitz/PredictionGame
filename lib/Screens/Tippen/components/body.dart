@@ -51,7 +51,7 @@ class Body extends StatelessWidget {
                         onPressed: () {
                           _showHelpPanel();
                         },
-                      )
+                      ),
                     ]),
                 body: SizedBox.expand(
                   child: Container(

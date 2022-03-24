@@ -16,13 +16,13 @@ class EinzelneLigaScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final user = Provider.of<TheUser>(context);
 
-    void _showSettingsPanel(String liga) {
+    void _showSettingsPanel(String ligaName, String ligaID) {
       showModalBottomSheet(
           context: context,
           builder: (context) {
             return Container(
               padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
-              child: SettingsFormEinzelneLiga(liga),
+              child: SettingsFormEinzelneLiga(ligaName, ligaID),
             );
           });
     }
@@ -58,7 +58,8 @@ class EinzelneLigaScreen extends StatelessWidget {
                           icon: Icon(Icons.settings),
                           label: Text('Einstellungen',
                               style: TextStyle(fontSize: 15)),
-                          onPressed: () => _showSettingsPanel(liga['Liga']),
+                          onPressed: () =>
+                              _showSettingsPanel(liga['Liga'], liga['Link']),
                         )
                       ],
                     ),

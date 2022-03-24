@@ -7,12 +7,13 @@ import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class SettingsFormEinzelneLiga extends StatefulWidget {
-  String ligaLink;
-  SettingsFormEinzelneLiga(this.ligaLink);
+  String ligaName;
+  String ligaID;
+  SettingsFormEinzelneLiga(this.ligaName, this.ligaID);
 
   @override
   _SettingsFormEinzelneLigaState createState() =>
-      _SettingsFormEinzelneLigaState(ligaLink: ligaLink);
+      _SettingsFormEinzelneLigaState(ligaName: ligaName, ligaID: ligaID);
 }
 
 class _SettingsFormEinzelneLigaState extends State<SettingsFormEinzelneLiga> {
@@ -20,8 +21,9 @@ class _SettingsFormEinzelneLigaState extends State<SettingsFormEinzelneLiga> {
 
   int helfer;
   String neueLiga;
-  String ligaLink;
-  _SettingsFormEinzelneLigaState({this.ligaLink});
+  String ligaName;
+  String ligaID;
+  _SettingsFormEinzelneLigaState({this.ligaName, this.ligaID});
   UserData ligaUser;
   String _meinVerein;
 
@@ -34,59 +36,65 @@ class _SettingsFormEinzelneLigaState extends State<SettingsFormEinzelneLiga> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             //UserData userData = snapshot.data;
-            DatabaseServiceLiga(ligaid: ligaLink)
+            DatabaseServiceLiga(ligaid: ligaID)
                 .getUserDataLeagueFromFirebase(user.uid)
                 .then((result) {
               setState(() {
                 ligaUser = result;
               });
             });
-            return Form(
-              key: _formKey,
-              child: Column(
-                children: <Widget>[
-                  Text(
-                    'Zu welchem Team fühlst du dich zugehörig?',
-                    style: TextStyle(fontSize: 18.0),
-                  ),
-                  TextFormField(
-                    initialValue:
-                        (ligaUser != null) ? ligaUser.lieblingsteam : '',
-                    validator: (val) =>
-                        val.isEmpty ? 'Gib dein Lieblingsteam ein.' : null,
-                    onChanged: (val) {
-                      _meinVerein = val;
-                    },
-                  ),
-                  ElevatedButton(
-                      style: TextButton.styleFrom(primary: Colors.orange[200]),
-                      child: Text(
-                        'Lieblingsteam speichern',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                      //TODO füge verein zu ligatipp hinzu
-                      onPressed: () async {
-                        await DatabaseServiceLiga(ligaid: ligaLink)
-                            .updateUserDataLeagueFromFirebase(
-                                user.uid, _meinVerein);
-                        //Navigator.pop(context);
-                      }),
-                  Divider(),
-                  ElevatedButton(
-                      style: TextButton.styleFrom(primary: Colors.orange[200]),
-                      child: Text(
-                        'Liga verlassen',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                      onPressed: () async {
-                        await DatabaseService(uid: user.uid)
-                            .deleteLiga(ligaLink);
-                        Navigator.pop(context);
-                        Navigator.of(context).pop();
-                      }),
-                ],
-              ),
-            );
+
+            if (ligaUser != null) {
+              return Form(
+                key: _formKey,
+                child: Column(
+                  children: <Widget>[
+                    Text(
+                      'Zu welchem Team fühlst du dich zugehörig?',
+                      style: TextStyle(fontSize: 18.0),
+                    ),
+                    TextFormField(
+                      initialValue:
+                          (ligaUser == null) ? '' : ligaUser.lieblingsteam,
+                      validator: (val) =>
+                          val.isEmpty ? 'Gib dein Lieblingsteam ein.' : null,
+                      onChanged: (val) {
+                        _meinVerein = val;
+                      },
+                    ),
+                    ElevatedButton(
+                        style:
+                            TextButton.styleFrom(primary: Colors.orange[200]),
+                        child: Text(
+                          'Lieblingsteam speichern',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        onPressed: () async {
+                          await DatabaseServiceLiga(ligaid: ligaID)
+                              .updateUserDataLeagueFromFirebase(
+                                  user.uid, _meinVerein);
+                          Navigator.pop(context);
+                        }),
+                    Divider(),
+                    ElevatedButton(
+                        style:
+                            TextButton.styleFrom(primary: Colors.orange[200]),
+                        child: Text(
+                          'Liga verlassen',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        onPressed: () async {
+                          await DatabaseService(uid: user.uid)
+                              .deleteLiga(ligaName);
+                          Navigator.pop(context);
+                          Navigator.of(context).pop();
+                        }),
+                  ],
+                ),
+              );
+            } else {
+              return Loading();
+            }
           } else {
             return Loading();
           }

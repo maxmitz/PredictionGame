@@ -66,14 +66,16 @@ class _SettingsFormEinzelneLigaState extends State<SettingsFormEinzelneLiga> {
                         style:
                             TextButton.styleFrom(primary: Colors.orange[200]),
                         child: Text(
-                          'Lieblingsteam speichern',
+                          'Lieblingsteam aktualisieren',
                           style: TextStyle(color: Colors.black),
                         ),
                         onPressed: () async {
                           await DatabaseServiceLiga(ligaid: ligaID)
                               .updateUserDataLeagueFromFirebase(
                                   user.uid, _meinVerein);
+                          // TODO nicht ins alleligen menü zurück, sondern daten zurückgeben und nur poppen
                           Navigator.pop(context);
+                          Navigator.of(context).pop();
                         }),
                     Divider(),
                     ElevatedButton(

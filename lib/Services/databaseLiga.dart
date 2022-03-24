@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_auth/models/game.dart';
 import 'package:flutter_auth/models/user.dart';
 
+import '../models/liga.dart';
+
 class DatabaseServiceLiga {
   final String ligaid;
   DatabaseServiceLiga({this.ligaid});
@@ -18,18 +20,33 @@ class DatabaseServiceLiga {
     return _userDataList;
   }
 
-  Future<void> getUserDataLeagueFromFirebase() async {
+  Future<UserData> getUserDataLeagueFromFirebase(String userID) async {
     _instance = FirebaseFirestore.instance;
+    UserData user;
 
     DocumentSnapshot snapshot = await leagueCollection.doc(ligaid).get();
     var data = snapshot.data();
-    var tipperDaten = data['tipper'] as List<dynamic>;
+    var tipperDaten = data['tipper'] as Map;
 
-    tipperDaten.forEach((element) {
-      UserData user =
-          new UserData(uid: '', benutzername: element['name'], ligen: ['']);
-      _userDataList.add(user);
+    tipperDaten.forEach((key, value) {
+      if (key == userID) {
+        user = new UserData(
+            uid: '',
+            benutzername: value['name'],
+            ligen: [''],
+            lieblingsteam: value['meinVerein']);
+      }
     });
+    return user;
+  }
+
+  Future<void> updateUserDataLeagueFromFirebase(
+      String userID, String meinVerein) async {
+    leagueCollection.doc(ligaid).set({
+      'tipper': {
+        userID: {'meinVerein': meinVerein}
+      }
+    }, SetOptions(merge: true));
   }
 
   Future submitPredictionHome(String userName, String scoreHome,

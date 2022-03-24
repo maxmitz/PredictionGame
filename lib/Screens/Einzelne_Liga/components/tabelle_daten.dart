@@ -43,6 +43,7 @@ class _TabelledatenState extends State<Tabelledaten> {
                     return UserCardLeague(
                       name: unsorted[tipper]['name'],
                       points: unsorted[tipper]['points'],
+                      meinVerein: unsorted[tipper]['meinVerein'],
                       position: (index + 1).toString(),
                     );
                   });

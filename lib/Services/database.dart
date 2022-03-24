@@ -28,7 +28,7 @@ class DatabaseService {
   Future addLigaToUserToLiga(Liga liga, String userId, String name) async {
     leagueCollection.doc(liga.ligalink).set({
       'tipper': {
-        userId: {"points": "0", 'name': name}
+        userId: {"points": "0", 'name': name, 'meinVerein': ''}
       }
     }, SetOptions(merge: true));
     return userCollection.doc(uid).update({
@@ -50,6 +50,7 @@ class DatabaseService {
     });
   }
 
+  // TODO nur eine Liga löschen
   Future deleteLiga(String liga) async {
     return userCollection.doc(uid).set({
       'Ligen': [],

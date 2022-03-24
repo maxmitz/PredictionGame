@@ -3,15 +3,19 @@ import 'package:flutter_auth/models/user.dart';
 
 class UserCardLeague extends StatelessWidget {
   final String name;
-  final points;
+  final String points;
   final String position;
+  String meinVerein;
 
   //final UserData userData;
 
-  UserCardLeague({this.name, this.points, this.position});
+  UserCardLeague({this.name, this.points, this.position, this.meinVerein});
 
   @override
   Widget build(BuildContext context) {
+    if (meinVerein == null) {
+      meinVerein = '';
+    }
     return Padding(
         padding: EdgeInsets.only(top: 8.0),
         child: Card(
@@ -29,7 +33,7 @@ class UserCardLeague extends StatelessWidget {
                 ),
               ),
               title: Text(name),
-              subtitle: Text('Punkte: ${points}')),
+              subtitle: Text('Punkte: ${points} \nMein Verein: ${meinVerein}')),
         ));
   }
 }

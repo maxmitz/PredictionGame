@@ -161,9 +161,13 @@ class _SettingsFormState extends State<SettingsForm> {
                           }).toList(),
                     onChanged: (String value) {
                       _currentLiga = value;
-                      for (int i = 0; i < ligacodesBaden.length; i++) {
-                        if (ligacodesBaden[i][0] == _currentLiga) {
-                          _currentLigaLink = ligacodesBaden[i][1];
+                      if (_currentVerband == 'Rheinland') {
+                        _currentLigaLink = 'kreisliga-b-triersaarburg';
+                      } else {
+                        for (int i = 0; i < ligacodesBaden.length; i++) {
+                          if (ligacodesBaden[i][0] == _currentLiga) {
+                            _currentLigaLink = ligacodesBaden[i][1];
+                          }
                         }
                       }
                     },

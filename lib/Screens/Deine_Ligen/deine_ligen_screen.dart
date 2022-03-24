@@ -38,6 +38,7 @@ class DeineLigenScreen extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
               child: Column(
                 children: <Widget>[
+                  /*
                   Text(
                     'Zu welchem Amateurteam fühlst du dich zugehörig?',
                     style: TextStyle(fontSize: 18.0),
@@ -67,6 +68,7 @@ class DeineLigenScreen extends StatelessWidget {
                     },
                   ),
                   Divider(),
+                  */
                   ElevatedButton(
                     style: TextButton.styleFrom(primary: Colors.orange[200]),
                     child: Text(

@@ -115,37 +115,34 @@ class _GameDayWidgetState extends State<GameDayWidget> {
                   }),
             ]),
             Divider(),
-            SingleChildScrollView(
-                physics: ClampingScrollPhysics(),
-                child: GestureDetector(
-                    onHorizontalDragEnd: (DragEndDetails details) {
-                      if (details.primaryVelocity > 0) {
-                        // User swiped Left
-                        if (spieltag > 1) {
-                          setState(() {
-                            spieltag--;
-                          });
-                        }
-                      } else if (details.primaryVelocity < 0) {
-                        // User swiped Right
-                        if (spieltag < 30) {
-                          setState(() {
-                            spieltag++;
-                          });
-                        }
-                      }
-                    },
-                    child: ConstrainedBox(
-                        constraints: BoxConstraints(maxHeight: 300),
-                        //MediaQuery.of(context).size.height -300 -MediaQuery.of(context).padding.top), // constrain height
-                        child: ListView.builder(
-                            itemCount: gameday.length,
-                            itemBuilder: (context, index) {
-                              return GamedayCard(
-                                  gameday: gameday[index],
-                                  leagueCode: userdata.ligen[ligaNummer]
-                                      ['Link']);
-                            })))),
+            Expanded(
+              child: GestureDetector(
+                onHorizontalDragEnd: (DragEndDetails details) {
+                  if (details.primaryVelocity > 0) {
+                    // User swiped Left
+                    if (spieltag > 1) {
+                      setState(() {
+                        spieltag--;
+                      });
+                    }
+                  } else if (details.primaryVelocity < 0) {
+                    // User swiped Right
+                    if (spieltag < 30) {
+                      setState(() {
+                        spieltag++;
+                      });
+                    }
+                  }
+                },
+                child: ListView.builder(
+                    itemCount: gameday.length,
+                    itemBuilder: (context, index) {
+                      return GamedayCard(
+                          gameday: gameday[index],
+                          leagueCode: userdata.ligen[ligaNummer]['Link']);
+                    }),
+              ),
+            ),
             Divider(),
           ],
         );

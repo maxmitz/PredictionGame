@@ -143,7 +143,6 @@ class _GameDayWidgetState extends State<GameDayWidget> {
                     }),
               ),
             ),
-            Divider(),
           ],
         );
       }

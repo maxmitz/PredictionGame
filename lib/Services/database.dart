@@ -51,9 +51,17 @@ class DatabaseService {
   }
 
   // TODO nur eine Liga löschen
-  Future deleteLiga(String liga) async {
+  Future deleteLiga(String ligaName) async {
+    var userData = await userCollection.doc(uid).get();
+    var ligen = userData['Ligen'];
+    var neueLigaliste = [];
+    for (var liga in ligen) {
+      if (liga['Liga'] != ligaName) {
+        neueLigaliste.add(liga);
+      }
+    }
     return userCollection.doc(uid).set({
-      'Ligen': [],
+      'Ligen': neueLigaliste,
     }, SetOptions(merge: true));
   }
 

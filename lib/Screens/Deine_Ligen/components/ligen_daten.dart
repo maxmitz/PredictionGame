@@ -37,7 +37,7 @@ class _LigendatenState extends State<Ligendaten> {
                 SizedBox(height: 20.0),
                 Expanded(
                     child: Text(
-                  'Du kennst dich aus mit Python, Flutter oder App-Design und hast Lust auf ein cooles Projekt? Melde dich!',
+                  'Du kennst dich aus mit Python, Flutter, Marketing oder App-Design und hast Lust auf ein cooles Projekt? Melde dich!',
                   textAlign: TextAlign.center,
                 ))
               ],

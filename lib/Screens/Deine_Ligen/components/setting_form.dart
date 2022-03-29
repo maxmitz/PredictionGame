@@ -36,8 +36,6 @@ class _SettingsFormState extends State<SettingsForm> {
   final List<String> teamtypshilfe2 = ['Karlsruhe'];
   final List<String> teamtypshilfe3 = ['Trier/Saar'];
   final List<String> spielklassehilfe2 = ['Herren'];
-  final String ligaLinkDJK = 'karlsruhe-kreisklasse-b2';
-  final String ligaLinkTrier = 'kreisliga-b-triersaarburg';
 
   //Stream
   // ignore: close_sinks
@@ -105,13 +103,16 @@ class _SettingsFormState extends State<SettingsForm> {
                         _currentTeamtyp = value;
 
                         setState(() {
+                          spielklassehilfe = [];
                           if (_currentVerband == 'Rheinland') {
                             spielklassehilfe = ['Kreisliga B'];
                           } else {
-                            spielklassehilfe = new List<String>.filled(
-                                klassezuligaBaden.length, 'Hallo');
-                            for (int j = 0; j < klassezuligaBaden.length; j++) {
-                              spielklassehilfe[j] = klassezuligaBaden[j][0];
+                            for (int i = 0; i < ligacodes.length; i++) {
+                              if (ligacodes[i][0] == _currentVerband) {
+                                if (ligacodes[i][1] == _currentTeamtyp) {
+                                  spielklassehilfe.add(ligacodes[i][2]);
+                                }
+                              }
                             }
                           }
                         });
@@ -134,15 +135,21 @@ class _SettingsFormState extends State<SettingsForm> {
                       onChanged: (String value) {
                         _currentSpielklasse = value;
                         setState(() {
-                          for (int i = 0; i < klassezuligaBaden.length; i++) {
-                            if (_currentSpielklasse ==
-                                klassezuligaBaden[i][0]) {
-                              ligahilfe = new List<String>.filled(
-                                  klassezuligaBaden[i].length - 1, 'Hallo');
-                              for (int j = 1;
-                                  j < klassezuligaBaden[i].length;
-                                  j++) {
-                                ligahilfe[j - 1] = klassezuligaBaden[i][j];
+                          ligahilfe = [];
+                          if (_currentVerband == 'Rheinland') {
+                            ligahilfe = ['Kreisliga B Trier/ Saarburg'];
+                          } else {
+                            for (int i = 0; i < ligacodes.length; i++) {
+                              if (ligacodes[i][0] == _currentVerband) {
+                                if (ligacodes[i][1] == _currentTeamtyp) {
+                                  if (ligacodes[i][2] == _currentSpielklasse) {
+                                    for (int j = 3;
+                                        j < ligacodes[i].length;
+                                        j = j + 2) {
+                                      ligahilfe.add(ligacodes[i][j]);
+                                    }
+                                  }
+                                }
                               }
                             }
                           }
@@ -175,9 +182,19 @@ class _SettingsFormState extends State<SettingsForm> {
                         if (_currentVerband == 'Rheinland') {
                           _currentLigaLink = 'kreisliga-b-triersaarburg';
                         } else {
-                          for (int i = 0; i < ligacodesBaden.length; i++) {
-                            if (ligacodesBaden[i][0] == _currentLiga) {
-                              _currentLigaLink = ligacodesBaden[i][1];
+                          for (int i = 0; i < ligacodes.length; i++) {
+                            if (ligacodes[i][0] == _currentVerband) {
+                              if (ligacodes[i][1] == _currentTeamtyp) {
+                                if (ligacodes[i][2] == _currentSpielklasse) {
+                                  for (int j = 3;
+                                      j < ligacodes[i].length;
+                                      j = j + 2) {
+                                    if (ligacodes[i][j] == _currentLiga) {
+                                      _currentLigaLink = ligacodes[i][j + 1];
+                                    }
+                                  }
+                                }
+                              }
                             }
                           }
                         }

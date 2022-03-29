@@ -104,14 +104,10 @@ class _SettingsFormState extends State<SettingsForm> {
 
                         setState(() {
                           spielklassehilfe = [];
-                          if (_currentVerband == 'Rheinland') {
-                            spielklassehilfe = ['Kreisliga B'];
-                          } else {
-                            for (int i = 0; i < ligacodes.length; i++) {
-                              if (ligacodes[i][0] == _currentVerband) {
-                                if (ligacodes[i][1] == _currentTeamtyp) {
-                                  spielklassehilfe.add(ligacodes[i][2]);
-                                }
+                          for (int i = 0; i < ligacodes.length; i++) {
+                            if (ligacodes[i][0] == _currentVerband) {
+                              if (ligacodes[i][1] == _currentTeamtyp) {
+                                spielklassehilfe.add(ligacodes[i][2]);
                               }
                             }
                           }
@@ -136,18 +132,14 @@ class _SettingsFormState extends State<SettingsForm> {
                         _currentSpielklasse = value;
                         setState(() {
                           ligahilfe = [];
-                          if (_currentVerband == 'Rheinland') {
-                            ligahilfe = ['Kreisliga B Trier/ Saarburg'];
-                          } else {
-                            for (int i = 0; i < ligacodes.length; i++) {
-                              if (ligacodes[i][0] == _currentVerband) {
-                                if (ligacodes[i][1] == _currentTeamtyp) {
-                                  if (ligacodes[i][2] == _currentSpielklasse) {
-                                    for (int j = 3;
-                                        j < ligacodes[i].length;
-                                        j = j + 2) {
-                                      ligahilfe.add(ligacodes[i][j]);
-                                    }
+                          for (int i = 0; i < ligacodes.length; i++) {
+                            if (ligacodes[i][0] == _currentVerband) {
+                              if (ligacodes[i][1] == _currentTeamtyp) {
+                                if (ligacodes[i][2] == _currentSpielklasse) {
+                                  for (int j = 3;
+                                      j < ligacodes[i].length;
+                                      j = j + 2) {
+                                    ligahilfe.add(ligacodes[i][j]);
                                   }
                                 }
                               }
@@ -164,34 +156,23 @@ class _SettingsFormState extends State<SettingsForm> {
                     DropdownButtonFormField(
                       validator: (value) =>
                           value == null ? 'Bitte auswählen' : null,
-                      items: (_currentVerband == 'Rheinland')
-                          ? ['Kreisliga B Trier/ Saarburg'].map((liga) {
-                              return DropdownMenuItem(
-                                value: liga ?? 'Wähle deinen Liga aus',
-                                child: Text('$liga'),
-                              );
-                            }).toList()
-                          : ligahilfe.map((liga) {
-                              return DropdownMenuItem(
-                                value: liga ?? 'Wähle deinen Liga aus',
-                                child: Text('$liga'),
-                              );
-                            }).toList(),
+                      items: ligahilfe.map((liga) {
+                        return DropdownMenuItem(
+                          value: liga ?? 'Wähle deinen Liga aus',
+                          child: Text('$liga'),
+                        );
+                      }).toList(),
                       onChanged: (String value) {
                         _currentLiga = value;
-                        if (_currentVerband == 'Rheinland') {
-                          _currentLigaLink = 'kreisliga-b-triersaarburg';
-                        } else {
-                          for (int i = 0; i < ligacodes.length; i++) {
-                            if (ligacodes[i][0] == _currentVerband) {
-                              if (ligacodes[i][1] == _currentTeamtyp) {
-                                if (ligacodes[i][2] == _currentSpielklasse) {
-                                  for (int j = 3;
-                                      j < ligacodes[i].length;
-                                      j = j + 2) {
-                                    if (ligacodes[i][j] == _currentLiga) {
-                                      _currentLigaLink = ligacodes[i][j + 1];
-                                    }
+                        for (int i = 0; i < ligacodes.length; i++) {
+                          if (ligacodes[i][0] == _currentVerband) {
+                            if (ligacodes[i][1] == _currentTeamtyp) {
+                              if (ligacodes[i][2] == _currentSpielklasse) {
+                                for (int j = 3;
+                                    j < ligacodes[i].length;
+                                    j = j + 2) {
+                                  if (ligacodes[i][j] == _currentLiga) {
+                                    _currentLigaLink = ligacodes[i][j + 1];
                                   }
                                 }
                               }

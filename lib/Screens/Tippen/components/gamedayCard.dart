@@ -9,8 +9,8 @@ import 'package:provider/provider.dart';
 class GamedayCard extends StatelessWidget {
   final Game gameday;
   final String leagueCode;
-  var scoreHome;
-  var scoreAway;
+  String scoreHome;
+  String scoreAway;
   final formatDate = new DateFormat('dd.MM.yyyy');
   final formatDateWithTime = new DateFormat('dd.MM.yyyy hh:mm');
 
@@ -90,36 +90,14 @@ class GamedayCard extends StatelessWidget {
                               Expanded(
                                   child: (gameday.dateTime
                                           .isAfter(DateTime.now()))
-                                      ? ((scoreHome == null)
-                                          ? TextField(
-                                              textAlign: TextAlign.center,
-                                              keyboardType:
-                                                  TextInputType.number,
-                                              onChanged: (text) {
-                                                databaseServiceLiga
-                                                    .submitPredictionHome(
-                                                        user.uid,
-                                                        text,
-                                                        gameday.matchNumber,
-                                                        gameday.spieltag,
-                                                        leagueCode);
-                                              },
-                                              style: TextStyle(fontSize: 17))
-                                          : TextFormField(
-                                              keyboardType:
-                                                  TextInputType.number,
-                                              initialValue: scoreHome,
-                                              textAlign: TextAlign.center,
-                                              onChanged: (text) {
-                                                databaseServiceLiga
-                                                    .submitPredictionHome(
-                                                        user.uid,
-                                                        text,
-                                                        gameday.matchNumber,
-                                                        gameday.spieltag,
-                                                        leagueCode);
-                                              },
-                                              style: TextStyle(fontSize: 17)))
+                                      ? (TextFormField(
+                                          keyboardType: TextInputType.number,
+                                          initialValue: scoreHome ?? '',
+                                          textAlign: TextAlign.center,
+                                          onChanged: (text) {
+                                            scoreHome = text;
+                                          },
+                                          style: TextStyle(fontSize: 17)))
                                       : Text(
                                           (gameday.scoreHome == '')
                                               ? "Ergebnis noch nicht verfügbar"
@@ -133,36 +111,14 @@ class GamedayCard extends StatelessWidget {
                               Expanded(
                                   child: (gameday.dateTime
                                           .isAfter(DateTime.now()))
-                                      ? ((scoreAway == null)
-                                          ? TextField(
-                                              keyboardType:
-                                                  TextInputType.number,
-                                              textAlign: TextAlign.center,
-                                              onChanged: (text) {
-                                                databaseServiceLiga
-                                                    .submitPredictionAway(
-                                                        user.uid,
-                                                        text,
-                                                        gameday.matchNumber,
-                                                        gameday.spieltag,
-                                                        leagueCode);
-                                              },
-                                              style: TextStyle(fontSize: 17))
-                                          : TextFormField(
-                                              keyboardType:
-                                                  TextInputType.number,
-                                              initialValue: scoreAway,
-                                              textAlign: TextAlign.center,
-                                              onChanged: (text) {
-                                                databaseServiceLiga
-                                                    .submitPredictionAway(
-                                                        user.uid,
-                                                        text,
-                                                        gameday.matchNumber,
-                                                        gameday.spieltag,
-                                                        leagueCode);
-                                              },
-                                              style: TextStyle(fontSize: 17)))
+                                      ? TextFormField(
+                                          keyboardType: TextInputType.number,
+                                          initialValue: scoreAway ?? '',
+                                          textAlign: TextAlign.center,
+                                          onChanged: (text) {
+                                            scoreAway = text;
+                                          },
+                                          style: TextStyle(fontSize: 17))
                                       : Text(gameday.scoreAway,
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
@@ -171,6 +127,24 @@ class GamedayCard extends StatelessWidget {
                                                   TextDecoration.underline,
                                               fontSize: 17))),
                             ]),
+                          ),
+                          ElevatedButton(
+                            style: TextButton.styleFrom(
+                                primary: Colors.green[200],
+                                backgroundColor: Colors.green[200]),
+                            child: Text(
+                              'Tipp speichern',
+                              style: TextStyle(color: Colors.black),
+                            ),
+                            onPressed: () async {
+                              await databaseServiceLiga.submitPredictionOneGame(
+                                  user.uid,
+                                  scoreHome,
+                                  scoreAway,
+                                  gameday.spieltag,
+                                  leagueCode,
+                                  gameday.matchNumber);
+                            },
                           ),
                         ],
                       ),

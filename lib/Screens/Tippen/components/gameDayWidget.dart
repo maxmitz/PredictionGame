@@ -146,7 +146,7 @@ class _GameDayWidgetState extends State<GameDayWidget> {
                     }),
               ),
             ),
-            ElevatedButton(
+            /*ElevatedButton(
               style: TextButton.styleFrom(
                   primary: Colors.green[200],
                   backgroundColor: Colors.green[200]),
@@ -155,9 +155,9 @@ class _GameDayWidgetState extends State<GameDayWidget> {
                 style: TextStyle(color: Colors.black),
               ),
               onPressed: () async {
-                //await databaseServiceLiga.submitPredictions(userdata.uid, scoreHome, scoreAway, spieltag, leagueCode)
+                await databaseServiceLiga.submitPredictions(userdata.uid, scoreHome, scoreAway, spieltag, leagueCode)
               },
-            ),
+            ),*/
           ],
         );
       }

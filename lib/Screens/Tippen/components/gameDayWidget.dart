@@ -6,6 +6,8 @@ import 'package:flutter_auth/models/user.dart';
 import 'package:flutter_auth/shared/loading.dart';
 import 'package:provider/provider.dart';
 
+import '../../../Services/databaseLiga.dart';
+
 class GameDayWidget extends StatefulWidget {
   @override
   _GameDayWidgetState createState() => _GameDayWidgetState();
@@ -16,6 +18,7 @@ class _GameDayWidgetState extends State<GameDayWidget> {
   var spieltag = 1;
   var ligaNummer = 0;
   var noLeague = false;
+  DatabaseServiceLiga databaseServiceLiga;
 
   @override
   Widget build(BuildContext context) {
@@ -142,6 +145,18 @@ class _GameDayWidgetState extends State<GameDayWidget> {
                           leagueCode: userdata.ligen[ligaNummer]['Link']);
                     }),
               ),
+            ),
+            ElevatedButton(
+              style: TextButton.styleFrom(
+                  primary: Colors.green[200],
+                  backgroundColor: Colors.green[200]),
+              child: Text(
+                'Tipps speichern',
+                style: TextStyle(color: Colors.black),
+              ),
+              onPressed: () async {
+                //await databaseServiceLiga.submitPredictions(userdata.uid, scoreHome, scoreAway, spieltag, leagueCode)
+              },
             ),
           ],
         );

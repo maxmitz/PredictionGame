@@ -49,6 +49,23 @@ class DatabaseServiceLiga {
     }, SetOptions(merge: true));
   }
 
+  Future submitPredictions(String userName, List<String> scoreHome,
+      List<String> scoreAway, String spieltag, String leagueCode) async {
+    for (int i = 0; i < scoreHome.length; i++) {
+      leagueCollection.doc(leagueCode).set({
+        'spieltage': {
+          spieltag: {
+            i.toString(): {
+              'tipps': {
+                userName: {'scoreHome': scoreHome[i], 'scoreAway': scoreAway[i]}
+              }
+            },
+          }
+        }
+      }, SetOptions(merge: true));
+    }
+  }
+
   Future submitPredictionHome(String userName, String scoreHome,
       String matchNumber, String spieltag, String leagueCode) async {
     leagueCollection.doc(leagueCode).set({

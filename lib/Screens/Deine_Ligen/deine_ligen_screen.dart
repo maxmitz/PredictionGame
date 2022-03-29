@@ -70,9 +70,11 @@ class DeineLigenScreen extends StatelessWidget {
                   Divider(),
                   */
                   ElevatedButton(
-                    style: TextButton.styleFrom(primary: Colors.orange[200]),
+                    style: TextButton.styleFrom(
+                        primary: Colors.green[200],
+                        backgroundColor: Colors.green[200]),
                     child: Text(
-                      'Logout',
+                      'Ausloggen',
                       style: TextStyle(color: Colors.black),
                     ),
                     onPressed: () async {

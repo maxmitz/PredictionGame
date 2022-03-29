@@ -9,6 +9,7 @@ class Authenticate extends StatefulWidget {
 }
 
 class _AuthenticateState extends State<Authenticate> {
+  /*
   @override
   void initState() {
     super.initState();
@@ -20,7 +21,7 @@ class _AuthenticateState extends State<Authenticate> {
       androidId: 'com.futipp',
     ).showAlertIfNecessary();
   }
-
+  */
   bool showSignIn = true;
   void toggleView() {
     setState(() => showSignIn = !showSignIn);

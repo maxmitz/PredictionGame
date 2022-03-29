@@ -12,6 +12,7 @@ class CustomNavigationBar extends StatefulWidget {
 }
 
 class NavigationBarState extends State<CustomNavigationBar> {
+  /*
   @override
   void initState() {
     super.initState();
@@ -22,7 +23,7 @@ class NavigationBarState extends State<CustomNavigationBar> {
       androidId: 'com.futipp',
     ).showAlertIfNecessary();
   }
-
+  */
   int _selectedIndex = 1;
 
   List<Widget> _screens = [

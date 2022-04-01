@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_auth/Screens/Deine_Ligen/onboarding/helpOnboarding.dart';
+import 'package:flutter_auth/Screens/Deine_Ligen/onboarding/onboarding.dart';
 import 'package:flutter_auth/Screens/Tippen/components/gameDayWidget.dart';
 import 'package:flutter_auth/Services/database.dart';
 import 'package:flutter_auth/models/game.dart';
@@ -49,13 +51,13 @@ class Body extends StatelessWidget {
                     ),
                     actions: <Widget>[
                       TextButton.icon(
-                        style: TextButton.styleFrom(primary: Colors.black),
-                        icon: Icon(Icons.help_outline),
-                        label: Text('Hilfe'),
-                        onPressed: () {
-                          _showHelpPanel();
-                        },
-                      ),
+                          style: TextButton.styleFrom(primary: Colors.black),
+                          icon: Icon(Icons.help_outline),
+                          label: Text('Hilfe'),
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => HelpOnboarding()));
+                          }),
                     ]),
                 body: SizedBox.expand(
                   child: Container(

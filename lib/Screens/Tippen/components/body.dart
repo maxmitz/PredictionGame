@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth/Screens/Deine_Ligen/onboarding/helpOnboarding.dart';
-import 'package:flutter_auth/Screens/Deine_Ligen/onboarding/onboarding.dart';
 import 'package:flutter_auth/Screens/Tippen/components/gameDayWidget.dart';
 import 'package:flutter_auth/Services/database.dart';
 import 'package:flutter_auth/models/game.dart';
@@ -20,22 +19,6 @@ class Body extends StatelessWidget {
     try {
       ligen = userdata.ligen;
     } catch (e) {}
-
-    void _showHelpPanel() {
-      showModalBottomSheet(
-          context: context,
-          builder: (context) {
-            return Container(
-              padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
-              child: Column(
-                children: [
-                  Text(
-                      'Unter Ligen kannst du deine Ligen hinzufügen. Unter Tippen kannst du tippen. Unter Tippen kannst du deine Liga und den Spieltag aussuchen und dann die Ergebnisse eintragen. Vergangene Ergebnisse können nicht mehr getippt werden. Wenn du getippt hast und das Spiel eingetragen ist (das kann evtl. dauern) bekommst du 5 Punkte, wenn das Ergebnis genau stimmt, 3 Punkte, wenn die Tendenz stimmt (z.B. gewonnen mit einem Tor Vorsprung) und einen Punkte wenn die Richtung stimmt (gewonnen/ verloren). Viel Spaß!'),
-                ],
-              ),
-            );
-          });
-    }
 
     return StreamProvider<List<List<Game>>>.value(
         value: DatabaseService(ligen: ligen).gameday,

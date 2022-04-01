@@ -28,7 +28,6 @@ class AuthService {
   }
 
   //register with email & password
-  // Hier sollte ein Nutzername ergänzt werden
   Future registerWithEmailAndPassword(
       String email, String password, String benutzername) async {
     try {

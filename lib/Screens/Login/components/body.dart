@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth/Screens/Deine_Ligen/deine_ligen_screen.dart';
+import 'package:flutter_auth/Screens/Deine_Ligen/onboarding/onboarding.dart';
 import 'package:flutter_auth/Screens/Login/components/background.dart';
 import 'package:flutter_auth/Screens/Signup/signup_screen.dart';
 import 'package:flutter_auth/components/already_have_an_account_acheck.dart';
@@ -41,7 +42,7 @@ class Body extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return DeineLigenScreen();
+                      return Onboarding();
                     },
                   ),
                 );

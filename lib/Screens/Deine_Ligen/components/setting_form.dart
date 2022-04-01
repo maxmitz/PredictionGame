@@ -31,11 +31,8 @@ class _SettingsFormState extends State<SettingsForm> {
       1, 'Bitte zuerst Spielklasse wählen',
       growable: true);
   var verbandgewaehlt = false;
-  final List<String> alleverbaende = ['Baden', 'Rheinland'];
+  final List<String> alleverbaende = ['Baden', 'Rheinland', 'Südbaden'];
   final List<String> alleteamtypen = ['Herren'];
-  final List<String> teamtypshilfe2 = ['Karlsruhe'];
-  final List<String> teamtypshilfe3 = ['Trier/Saar'];
-  final List<String> spielklassehilfe2 = ['Herren'];
 
   //Stream
   // ignore: close_sinks

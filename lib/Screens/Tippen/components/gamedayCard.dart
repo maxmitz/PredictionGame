@@ -128,24 +128,27 @@ class GamedayCard extends StatelessWidget {
                                               fontSize: 17))),
                             ]),
                           ),
-                          ElevatedButton(
-                            style: TextButton.styleFrom(
-                                primary: Colors.green[200],
-                                backgroundColor: Colors.green[200]),
-                            child: Text(
-                              'Tipp speichern',
-                              style: TextStyle(color: Colors.black),
-                            ),
-                            onPressed: () async {
-                              await databaseServiceLiga.submitPredictionOneGame(
-                                  user.uid,
-                                  scoreHome,
-                                  scoreAway,
-                                  gameday.spieltag,
-                                  leagueCode,
-                                  gameday.matchNumber);
-                            },
-                          ),
+                          (gameday.dateTime.isAfter(DateTime.now()))
+                              ? ElevatedButton(
+                                  style: TextButton.styleFrom(
+                                      primary: Colors.green[200],
+                                      backgroundColor: Colors.green[200]),
+                                  child: Text(
+                                    'Tipp speichern',
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                  onPressed: () async {
+                                    await databaseServiceLiga
+                                        .submitPredictionOneGame(
+                                            user.uid,
+                                            scoreHome,
+                                            scoreAway,
+                                            gameday.spieltag,
+                                            leagueCode,
+                                            gameday.matchNumber);
+                                  },
+                                )
+                              : SizedBox(height: 20)
                         ],
                       ),
                     ));

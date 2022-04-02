@@ -94,6 +94,10 @@ class GamedayCard extends StatelessWidget {
                                           keyboardType: TextInputType.number,
                                           initialValue: scoreHome ?? '',
                                           textAlign: TextAlign.center,
+                                          maxLength: 2,
+                                          decoration: InputDecoration(
+                                            counterText: "",
+                                          ),
                                           onChanged: (text) {
                                             scoreHome = text;
                                           },
@@ -108,6 +112,7 @@ class GamedayCard extends StatelessWidget {
                                               decoration:
                                                   TextDecoration.underline,
                                               fontSize: 17))),
+                              Text(" : "),
                               Expanded(
                                   child: (gameday.dateTime
                                           .isAfter(DateTime.now()))
@@ -115,6 +120,10 @@ class GamedayCard extends StatelessWidget {
                                           keyboardType: TextInputType.number,
                                           initialValue: scoreAway ?? '',
                                           textAlign: TextAlign.center,
+                                          maxLength: 2,
+                                          decoration: InputDecoration(
+                                            counterText: "",
+                                          ),
                                           onChanged: (text) {
                                             scoreAway = text;
                                           },

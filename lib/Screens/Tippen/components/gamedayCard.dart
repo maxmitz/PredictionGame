@@ -112,7 +112,10 @@ class GamedayCard extends StatelessWidget {
                                               decoration:
                                                   TextDecoration.underline,
                                               fontSize: 17))),
-                              Text(" : "),
+                              Text(" : ",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 17)),
                               Expanded(
                                   child: (gameday.dateTime
                                           .isAfter(DateTime.now()))

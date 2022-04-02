@@ -9,26 +9,23 @@ import 'package:provider/provider.dart';
 class GamedayCard extends StatelessWidget {
   final Game gameday;
   final String leagueCode;
-  String scoreHome;
-  String scoreAway;
+  TextEditingController scoreHome;
+  TextEditingController scoreAway;
   final formatDate = new DateFormat('dd.MM.yyyy');
   final formatDateWithTime = new DateFormat('dd.MM.yyyy hh:mm');
 
   DatabaseServiceLiga databaseServiceLiga;
-  FirebaseFirestore _instance;
   CollectionReference leagueCollection =
       FirebaseFirestore.instance.collection('ligen');
 
-  GamedayCard({this.gameday, this.leagueCode});
+  GamedayCard({this.gameday, this.leagueCode, this.scoreAway, this.scoreHome});
 
   Future getPredictionFromUser(String userName) async {
-    _instance = FirebaseFirestore.instance;
-
     DocumentSnapshot snapshot = await leagueCollection.doc(leagueCode).get();
-    scoreHome = snapshot['spieltage'][gameday.spieltag][gameday.matchNumber]
-        ['tipps'][userName]['scoreHome'];
-    scoreAway = snapshot['spieltage'][gameday.spieltag][gameday.matchNumber]
-        ['tipps'][userName]['scoreAway'];
+    scoreHome.text = snapshot['spieltage'][gameday.spieltag]
+        [gameday.matchNumber]['tipps'][userName]['scoreHome'];
+    scoreAway.text = snapshot['spieltage'][gameday.spieltag]
+        [gameday.matchNumber]['tipps'][userName]['scoreAway'];
   }
 
   @override
@@ -92,14 +89,14 @@ class GamedayCard extends StatelessWidget {
                                           .isAfter(DateTime.now()))
                                       ? (TextFormField(
                                           keyboardType: TextInputType.number,
-                                          initialValue: scoreHome ?? '',
+                                          initialValue: scoreHome.text ?? '',
                                           textAlign: TextAlign.center,
                                           maxLength: 2,
                                           decoration: InputDecoration(
                                             counterText: "",
                                           ),
                                           onChanged: (text) {
-                                            scoreHome = text;
+                                            scoreHome.text = text;
                                           },
                                           style: TextStyle(fontSize: 17)))
                                       : Text(
@@ -121,14 +118,14 @@ class GamedayCard extends StatelessWidget {
                                           .isAfter(DateTime.now()))
                                       ? TextFormField(
                                           keyboardType: TextInputType.number,
-                                          initialValue: scoreAway ?? '',
+                                          initialValue: scoreAway.text ?? '',
                                           textAlign: TextAlign.center,
                                           maxLength: 2,
                                           decoration: InputDecoration(
                                             counterText: "",
                                           ),
                                           onChanged: (text) {
-                                            scoreAway = text;
+                                            scoreAway.text = text;
                                           },
                                           style: TextStyle(fontSize: 17))
                                       : Text(gameday.scoreAway,
@@ -140,27 +137,6 @@ class GamedayCard extends StatelessWidget {
                                               fontSize: 17))),
                             ]),
                           ),
-                          (gameday.dateTime.isAfter(DateTime.now()))
-                              ? ElevatedButton(
-                                  style: TextButton.styleFrom(
-                                      primary: Colors.green[200],
-                                      backgroundColor: Colors.green[200]),
-                                  child: Text(
-                                    'Tipp speichern',
-                                    style: TextStyle(color: Colors.black),
-                                  ),
-                                  onPressed: () async {
-                                    await databaseServiceLiga
-                                        .submitPredictionOneGame(
-                                            user.uid,
-                                            scoreHome,
-                                            scoreAway,
-                                            gameday.spieltag,
-                                            leagueCode,
-                                            gameday.matchNumber);
-                                  },
-                                )
-                              : SizedBox(height: 20)
                         ],
                       ),
                     ));

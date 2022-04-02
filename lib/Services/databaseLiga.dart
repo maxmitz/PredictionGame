@@ -55,7 +55,7 @@ class DatabaseServiceLiga {
       leagueCollection.doc(leagueCode).set({
         'spieltage': {
           spieltag: {
-            i.toString(): {
+            (i + 1).toString(): {
               'tipps': {
                 userName: {'scoreHome': scoreHome[i], 'scoreAway': scoreAway[i]}
               }

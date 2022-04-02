@@ -25,13 +25,18 @@ class _GameDayWidgetState extends State<GameDayWidget> {
     final games = Provider.of<List<List<Game>>>(context) ?? [[]];
     final user = Provider.of<TheUser>(context);
     final userdata = Provider.of<UserData>(context);
+    databaseServiceLiga = new DatabaseServiceLiga();
 
     List<Game> gameday = [];
+    List<TextEditingController> textEditingControllersHome = [];
+    List<TextEditingController> textEditingControllersAway = [];
 
     for (Game game in games[ligaNummer]) {
       if (game.spieltag == spieltag.toString()) {
         gameday.add(game);
         noLeague = false;
+        textEditingControllersHome.add(new TextEditingController());
+        textEditingControllersAway.add(new TextEditingController());
       }
     }
     try {
@@ -141,12 +146,15 @@ class _GameDayWidgetState extends State<GameDayWidget> {
                     itemCount: gameday.length,
                     itemBuilder: (context, index) {
                       return GamedayCard(
-                          gameday: gameday[index],
-                          leagueCode: userdata.ligen[ligaNummer]['Link']);
+                        gameday: gameday[index],
+                        leagueCode: userdata.ligen[ligaNummer]['Link'],
+                        scoreHome: textEditingControllersHome[index],
+                        scoreAway: textEditingControllersAway[index],
+                      );
                     }),
               ),
             ),
-            /*ElevatedButton(
+            ElevatedButton(
               style: TextButton.styleFrom(
                   primary: Colors.green[200],
                   backgroundColor: Colors.green[200]),
@@ -155,9 +163,20 @@ class _GameDayWidgetState extends State<GameDayWidget> {
                 style: TextStyle(color: Colors.black),
               ),
               onPressed: () async {
-                await databaseServiceLiga.submitPredictions(userdata.uid, scoreHome, scoreAway, spieltag, leagueCode)
+                List<String> scoreHome = [];
+                List<String> scoreAway = [];
+                for (int i = 0; i < textEditingControllersAway.length; i++) {
+                  scoreHome.add(textEditingControllersHome[i].text);
+                  scoreAway.add(textEditingControllersAway[i].text);
+                }
+                await databaseServiceLiga.submitPredictions(
+                    userdata.uid,
+                    scoreHome,
+                    scoreAway,
+                    spieltag.toString(),
+                    userdata.ligen[ligaNummer]['Link']);
               },
-            ),*/
+            ),
           ],
         );
       }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth/Screens/Tippen/components/gamedayCard.dart';
-import 'package:flutter_auth/Services/database.dart';
 import 'package:flutter_auth/models/game.dart';
 import 'package:flutter_auth/models/user.dart';
 import 'package:flutter_auth/shared/loading.dart';

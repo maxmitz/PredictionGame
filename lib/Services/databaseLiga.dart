@@ -121,7 +121,7 @@ class DatabaseServiceLiga {
     DocumentSnapshot snapshot = await leagueCollection.doc(ligaid).get();
 
     Map list = snapshot.data()['spieltage'];
-    var j = 15;
+    var j = 1;
     try {
       while (list[j.toString()]['1']['home'] != "") {
         var i = 1;

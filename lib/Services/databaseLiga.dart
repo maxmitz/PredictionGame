@@ -1,3 +1,5 @@
+import 'dart:core';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_auth/models/game.dart';
 import 'package:flutter_auth/models/user.dart';
@@ -159,5 +161,16 @@ class DatabaseServiceLiga {
         userId: {"points": points.toString()}
       }
     }, SetOptions(merge: true));
+  }
+
+  Future<List<String>> getCurrentGamedaysFromLeagues(
+      List<String> leagueCodes) async {
+    List<String> currentGamedays = [];
+    for (int i = 0; i < leagueCodes.length; i++) {
+      DocumentSnapshot snapshot =
+          await leagueCollection.doc(leagueCodes[i]).get();
+      currentGamedays.add(snapshot.data()['currentGameday']);
+    }
+    return currentGamedays;
   }
 }

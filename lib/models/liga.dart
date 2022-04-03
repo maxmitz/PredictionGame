@@ -4,13 +4,15 @@ class Liga {
   final String spielklassename;
   final String liganame;
   final String ligalink;
+  final String currentGameday;
 
   Liga(
       {this.verbandname,
       this.teamtypsname,
       this.spielklassename,
       this.liganame,
-      this.ligalink});
+      this.ligalink,
+      this.currentGameday});
 }
 
 class Ligen {

@@ -13,7 +13,6 @@ class GameDayWidget extends StatefulWidget {
 }
 
 class _GameDayWidgetState extends State<GameDayWidget> {
-  // TODO aktueller Spieltag
   var spieltag = 1;
   var ligaNummer = 0;
   var noLeague = false;
@@ -49,7 +48,7 @@ class _GameDayWidgetState extends State<GameDayWidget> {
     if (userdata != null) {
       if (noLeague) {
         return Text(
-          'Füge eine Liga hinzu. ->',
+          '(Bitte warten oder) Füge eine Liga hinzu. ->',
           textAlign: TextAlign.center,
           style:
               TextStyle(fontSize: 20, fontWeight: FontWeight.bold, height: 2),
@@ -144,7 +143,6 @@ class _GameDayWidgetState extends State<GameDayWidget> {
                                 size: 50,
                               ),
                               onPressed: () {
-                                //TODO richtiger Bereich
                                 if (gameday.length != 0) {
                                   setState(() {
                                     spieltag++;

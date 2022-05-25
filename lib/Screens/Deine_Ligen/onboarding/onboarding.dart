@@ -32,98 +32,102 @@ class _OnboardingState extends State<Onboarding> {
   @override
   Widget build(BuildContext context) {
     return Consumer<UserData?>(builder: (_, userdata, __) {
-      if (userdata!.ligen!.length < 1) {
-        return Scaffold(
-          body: Column(
-            children: [
-              Expanded(
-                child: PageView.builder(
-                  controller: _controller,
-                  itemCount: contents.length,
-                  onPageChanged: (int index) {
-                    setState(() {
-                      currentIndex = index;
-                    });
-                  },
-                  itemBuilder: (_, i) {
-                    return Padding(
-                      padding: const EdgeInsets.all(40),
-                      child: Column(
-                        children: [
-                          Text(
-                            contents[i].title!,
-                            style: TextStyle(
-                              fontSize: 35,
-                              fontWeight: FontWeight.bold,
+      if (userdata != null) {
+        if (userdata.ligen!.length < 1) {
+          return Scaffold(
+            body: Column(
+              children: [
+                Expanded(
+                  child: PageView.builder(
+                    controller: _controller,
+                    itemCount: contents.length,
+                    onPageChanged: (int index) {
+                      setState(() {
+                        currentIndex = index;
+                      });
+                    },
+                    itemBuilder: (_, i) {
+                      return Padding(
+                        padding: const EdgeInsets.all(40),
+                        child: Column(
+                          children: [
+                            Text(
+                              contents[i].title!,
+                              style: TextStyle(
+                                fontSize: 35,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
-                          SizedBox(height: 20),
-                          Text(
-                            contents[i].discription!,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 18,
-                              color: Colors.grey,
+                            SizedBox(height: 20),
+                            Text(
+                              contents[i].discription!,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.grey,
+                              ),
                             ),
-                          ),
-                          SizedBox(height: 20),
-                          Align(
-                            child: Image.asset(
-                              contents[i].image!,
-                              alignment: Alignment.bottomCenter,
+                            SizedBox(height: 20),
+                            Align(
+                              child: Image.asset(
+                                contents[i].image!,
+                                alignment: Alignment.bottomCenter,
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
-              ),
-              Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: List.generate(
-                    contents.length,
-                    (index) => buildDot(index, context),
-                  ),
-                ),
-              ),
-              Container(
-                height: 60,
-                margin: EdgeInsets.all(40),
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    if (currentIndex == contents.length - 1) {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) =>
-                              (userdata != null) ? UntereLeiste() : Wrapper(),
+                          ],
                         ),
                       );
-                    }
-                    _controller!.nextPage(
-                      duration: Duration(milliseconds: 100),
-                      curve: Curves.bounceIn,
-                    );
-                  },
-                  child: Text(
-                      currentIndex == contents.length - 1
-                          ? "Schließen"
-                          : "Weiter",
-                      style: TextStyle(color: Colors.black)),
-                  style: TextButton.styleFrom(
-                      primary: Colors.green[200],
-                      backgroundColor: Colors.green[200]),
+                    },
+                  ),
                 ),
-              ),
-              SizedBox(height: 20),
-            ],
-          ),
-        );
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: List.generate(
+                      contents.length,
+                      (index) => buildDot(index, context),
+                    ),
+                  ),
+                ),
+                Container(
+                  height: 60,
+                  margin: EdgeInsets.all(40),
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (currentIndex == contents.length - 1) {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) =>
+                                (userdata != null) ? UntereLeiste() : Wrapper(),
+                          ),
+                        );
+                      }
+                      _controller!.nextPage(
+                        duration: Duration(milliseconds: 100),
+                        curve: Curves.bounceIn,
+                      );
+                    },
+                    child: Text(
+                        currentIndex == contents.length - 1
+                            ? "Schließen"
+                            : "Weiter",
+                        style: TextStyle(color: Colors.black)),
+                    style: TextButton.styleFrom(
+                        primary: Colors.green[200],
+                        backgroundColor: Colors.green[200]),
+                  ),
+                ),
+                SizedBox(height: 20),
+              ],
+            ),
+          );
+        } else {
+          return AnimationPage();
+        }
       } else {
-        return AnimationPage();
+        return Loading();
       }
     });
   }

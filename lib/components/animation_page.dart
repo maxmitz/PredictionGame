@@ -1,11 +1,27 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_auth/components/untere_leiste.dart';
 import 'package:flutter_auth/shared/constants.dart';
 import 'package:rive/rive.dart';
 
 class AnimationPage extends StatelessWidget {
+  final List<String> animations = [
+    'assets/animations/cr7sui.riv',
+    'assets/animations/derhatschongelb.riv',
+    'assets/animations/lasstdenballlaufen.riv'
+  ];
+  final List<String> sprueche = [
+    'EJJJJJJ, \nDa spielen doch welche aus der Ersten mit!',
+    'EJJJJJJ SCHIRI, \nDER HAT SCHON GELB!',
+    'JUUUUUNGS, \nLasst den Ball laufen!'
+  ];
+
+  final _random = Random();
+
   @override
   Widget build(BuildContext context) {
+    final _randomNumber = _random.nextInt(animations.length);
     return Scaffold(
         appBar: AppBar(
           backgroundColor: kPrimaryColor,
@@ -20,7 +36,7 @@ class AnimationPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Juuuuuungs, \nLasst den Ball laufen!',
+              sprueche[_randomNumber],
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 30),
             ),
@@ -28,9 +44,7 @@ class AnimationPage extends StatelessWidget {
             Container(
               width: 400,
               height: 400,
-              child: RiveAnimation.asset(
-                  //'assets/animations/lasstdenballlaufen.riv'),
-                  'assets/animations/cr7sui.riv'),
+              child: RiveAnimation.asset(animations[_randomNumber]),
             ),
             ElevatedButton(
               onPressed: () {

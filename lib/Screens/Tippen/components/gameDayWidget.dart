@@ -58,7 +58,6 @@ class _GameDayWidgetState extends State<GameDayWidget> {
                 if (snapshot.hasData) {
                   snapshotMap = snapshot.data as List;
                   for (int i = 0; i < userdata.ligen!.length; i++) {
-                    //currentGamedays.add(snapshot[i]);
                     currentGamedays.add(snapshotMap[i]);
                   }
                   if (!updatedOnce) {

@@ -16,7 +16,7 @@ class _LigendatenState extends State<Ligendaten> {
     return Consumer<UserData?>(builder: (_, user, __) {
       if (user != null) {
         return StreamBuilder<UserData?>(
-            stream: DatabaseService(uid: user!.uid).userData,
+            stream: DatabaseService(uid: user.uid).userData,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 UserData userdata = snapshot.data!;

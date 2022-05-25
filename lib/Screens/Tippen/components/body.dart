@@ -15,12 +15,10 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var ligen;
-
     return Consumer<UserData?>(builder: (_, userdata, __) {
       if (userdata != null) {
         return StreamProvider<List<List<Game>>?>.value(
-            value: DatabaseService(ligen: ligen).gameday,
+            value: DatabaseService(ligen: userdata.ligen).gameday,
             initialData:
                 null /*[
           [

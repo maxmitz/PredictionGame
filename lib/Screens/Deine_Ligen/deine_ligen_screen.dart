@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth/Screens/Deine_Ligen/components/ligen_daten.dart';
 import 'package:flutter_auth/Screens/Deine_Ligen/components/setting_form.dart';
-import 'package:flutter_auth/Screens/authenticate/authenticate.dart';
 import 'package:flutter_auth/Services/auth.dart';
 import 'package:flutter_auth/models/user.dart';
 import 'package:flutter_auth/shared/constants.dart';

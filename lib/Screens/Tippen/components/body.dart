@@ -19,20 +19,7 @@ class Body extends StatelessWidget {
       if (userdata != null) {
         return StreamProvider<List<List<Game>>?>.value(
             value: DatabaseService(ligen: userdata.ligen).gameday,
-            initialData:
-                null /*[
-          [
-            new Game(
-                away: 'test',
-                home: 'test',
-                scoreAway: '1',
-                scoreHome: '2',
-                dateTime: DateTime.now(),
-                matchNumber: '1',
-                spieltag: '1')
-          ]
-        ]*/
-            ,
+            initialData: null,
             child: MaterialApp(
                 home: Scaffold(
                     resizeToAvoidBottomInset: false,

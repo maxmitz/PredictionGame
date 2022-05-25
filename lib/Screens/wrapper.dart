@@ -9,19 +9,22 @@ import '../Services/database.dart';
 class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<TheUser?>(context);
-
     //return either UntereLeiste or Authenticate widget
-    if (user == null) {
-      return Authenticate();
-    } else {
-      return StreamProvider<UserData?>.value(
-        value: DatabaseService(uid: user.uid).userData,
-        builder: (context, snapshot) {
-          return Onboarding();
-        },
-        initialData: null,
-      );
-    }
+
+    return Consumer<TheUser?>(
+      builder: (_, user, __) {
+        if (user == null) {
+          return Authenticate();
+        } else {
+          return StreamProvider<UserData?>.value(
+            value: DatabaseService(uid: user.uid).userData,
+            builder: (context, snapshot) {
+              return Onboarding();
+            },
+            initialData: null,
+          );
+        }
+      },
+    );
   }
 }

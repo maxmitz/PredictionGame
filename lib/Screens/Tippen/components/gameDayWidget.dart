@@ -21,8 +21,6 @@ class _GameDayWidgetState extends State<GameDayWidget> {
 
   @override
   Widget build(BuildContext context) {
-    //final games = Provider.of<List<List<Game>>?>(context);
-    //final userdata = Provider.of<UserData?>(context);
     databaseServiceLiga = new DatabaseServiceLiga();
 
     List<Game> gameday = [];

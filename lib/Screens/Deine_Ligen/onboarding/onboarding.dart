@@ -31,11 +31,8 @@ class _OnboardingState extends State<Onboarding> {
 
   @override
   Widget build(BuildContext context) {
-    final UserData? userdata = Provider.of<UserData?>(context);
-    if (userdata == null) {
-      return Loading();
-    } else {
-      if (userdata.ligen!.length < 1) {
+    return Consumer<UserData?>(builder: (_, userdata, __) {
+      if (userdata!.ligen!.length < 1) {
         return Scaffold(
           body: Column(
             children: [
@@ -128,7 +125,7 @@ class _OnboardingState extends State<Onboarding> {
       } else {
         return AnimationPage();
       }
-    }
+    });
   }
 
   Container buildDot(int index, BuildContext context) {

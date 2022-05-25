@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_auth/Screens/einzelne_liga/einzelne_liga_screen.dart';
 
 class TabelleTile extends StatelessWidget {
-  final String tab;
-  int platz;
-
-  //final UserData userData;
+  final String? tab;
+  final int? platz;
 
   TabelleTile({this.tab, this.platz});
 
   @override
   Widget build(BuildContext context) {
-    platz = platz + 1;
+    int platzHelper = platz! + 1;
     return Padding(
         padding: EdgeInsets.only(top: 8.0),
         child: Card(
@@ -22,7 +19,7 @@ class TabelleTile extends StatelessWidget {
               backgroundColor: Colors.orange[200],
               backgroundImage: AssetImage('assets/images/signup_top.png'),
             ),
-            title: Text('$platz. $tab'),
+            title: Text('$platzHelper. $tab'),
             subtitle: Text('Es funktioniert'),
             enabled: true,
           ),

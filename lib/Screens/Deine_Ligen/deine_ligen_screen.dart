@@ -10,11 +10,7 @@ import 'package:provider/provider.dart';
 //import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DeineLigenScreen extends StatelessWidget {
-  @override
   final AuthService _auth = AuthService();
-  String _lieblingsTeam;
-  var userData;
-
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<TheUser>(context);
@@ -30,7 +26,7 @@ class DeineLigenScreen extends StatelessWidget {
           });
     }
 
-    void _showLigaPanel(UserData userData) {
+    void _showLigaPanel(UserData? userData) {
       showModalBottomSheet(
           context: context,
           builder: (context) {
@@ -38,37 +34,6 @@ class DeineLigenScreen extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
               child: Column(
                 children: <Widget>[
-                  /*
-                  Text(
-                    'Zu welchem Amateurteam fühlst du dich zugehörig?',
-                    style: TextStyle(fontSize: 18.0),
-                  ),
-                  TextFormField(
-                    initialValue: userData.lieblingsteam,
-                    validator: (val) =>
-                        val.isEmpty ? 'Gib dein Lieblingsteam ein.' : null,
-                    onChanged: (val) {
-                      _lieblingsTeam = val;
-                    },
-                  ),
-                  ElevatedButton(
-                    style: TextButton.styleFrom(primary: Colors.orange[200]),
-                    child: Text(
-                      'Team aktualisieren',
-                      style: TextStyle(color: Colors.black),
-                    ),
-                    onPressed: () async {
-                      if (_lieblingsTeam != null) {
-                        await DatabaseService().updateUserData(
-                            user.uid,
-                            userData.benutzername,
-                            userData.ligen,
-                            _lieblingsTeam);
-                      }
-                    },
-                  ),
-                  Divider(),
-                  */
                   ElevatedButton(
                     style: TextButton.styleFrom(
                         primary: Colors.green[200],
@@ -88,11 +53,11 @@ class DeineLigenScreen extends StatelessWidget {
           });
     }
 
-    return StreamBuilder<UserData>(
+    return StreamBuilder<UserData?>(
         stream: DatabaseService(uid: user.uid).userData,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            userData = snapshot.data;
+            var userData = snapshot.data;
 
             return MaterialApp(
               home: Scaffold(

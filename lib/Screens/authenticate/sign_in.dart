@@ -5,7 +5,7 @@ import 'package:flutter_auth/shared/constants.dart';
 import 'package:flutter_auth/shared/loading.dart';
 
 class SignIn extends StatefulWidget {
-  final Function toggleView;
+  final Function? toggleView;
   SignIn({this.toggleView});
 
   @override
@@ -43,7 +43,7 @@ class _SignInState extends State<SignIn> {
                       decoration:
                           textInputDecoration.copyWith(hintText: 'E-Mail'),
                       validator: (val) =>
-                          val.isEmpty ? 'Gib eine E-Mail-Adresse ein.' : null,
+                          val!.isEmpty ? 'Gib eine E-Mail-Adresse ein.' : null,
                       onChanged: (val) {
                         setState(() => email = val);
                       }),
@@ -52,7 +52,7 @@ class _SignInState extends State<SignIn> {
                       decoration:
                           textInputDecoration.copyWith(hintText: 'Passwort'),
                       validator: (val) =>
-                          val.length < 6 ? 'Dein Passwort ist zu kurz' : null,
+                          val!.length < 6 ? 'Dein Passwort ist zu kurz' : null,
                       obscureText: true,
                       onChanged: (val) {
                         setState(() => password = val);
@@ -68,7 +68,7 @@ class _SignInState extends State<SignIn> {
                             style:
                                 TextStyle(color: Colors.blue, fontSize: 14.0),
                             recognizer: TapGestureRecognizer()
-                              ..onTap = () => widget.toggleView()),
+                              ..onTap = () => widget.toggleView!()),
                       ],
                     ),
                   ),
@@ -80,7 +80,7 @@ class _SignInState extends State<SignIn> {
                         style: TextStyle(color: Colors.white),
                       ),
                       onPressed: () async {
-                        if (_formKey.currentState.validate()) {
+                        if (_formKey.currentState!.validate()) {
                           setState(() => loading = true);
                           dynamic result = await _auth
                               .signInWithEmailAndPassword(email, password);

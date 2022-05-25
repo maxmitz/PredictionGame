@@ -1,7 +1,7 @@
 class OnboardingContent {
-  String image;
-  String title;
-  String discription;
+  String? image;
+  String? title;
+  String? discription;
 
   OnboardingContent({this.image, this.title, this.discription});
 }

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_auth/models/user.dart';
 
 class UserCardLeague extends StatelessWidget {
-  final String name;
-  final String points;
-  final String position;
-  String meinVerein;
+  final String? name;
+  final String? points;
+  final String? position;
+  final String? meinVerein;
 
   //final UserData userData;
 
@@ -13,9 +12,9 @@ class UserCardLeague extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (meinVerein == null) {
-      meinVerein = '';
-    }
+    String meinVereinHelper;
+    meinVereinHelper = meinVerein ?? '';
+
     return Padding(
         padding: EdgeInsets.only(top: 8.0),
         child: Card(
@@ -25,15 +24,16 @@ class UserCardLeague extends StatelessWidget {
                 radius: 25.0,
                 backgroundColor: Colors.purple[50],
                 child: Text(
-                  '${position}.',
+                  '$position.',
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                       fontSize: 30),
                 ),
               ),
-              title: Text(name),
-              subtitle: Text('Punkte: ${points} \nMein Verein: ${meinVerein}')),
+              title: Text(name!),
+              subtitle:
+                  Text('Punkte: $points \nMein Verein: $meinVereinHelper')),
         ));
   }
 }

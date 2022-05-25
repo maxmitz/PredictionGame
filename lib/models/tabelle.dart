@@ -1,5 +1,5 @@
 class Tabelle {
-  final List tabelle;
+  final List? tabelle;
 
   Tabelle({this.tabelle});
 }

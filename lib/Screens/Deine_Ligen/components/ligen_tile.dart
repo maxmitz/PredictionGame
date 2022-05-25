@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_auth/Screens/einzelne_liga/einzelne_liga_screen.dart';
 
 class LigenTile extends StatelessWidget {
-  final Map<String, dynamic> liga;
+  final Map<String, dynamic>? liga;
 
   LigenTile({this.liga});
 
@@ -18,12 +18,12 @@ class LigenTile extends StatelessWidget {
               backgroundColor: Colors.orange[200],
               backgroundImage: AssetImage('assets/images/signup_top.png'),
             ),
-            title: Text(liga['Liga']),
-            subtitle: Text(liga['Teamtyp']),
+            title: Text(liga!['Liga']),
+            subtitle: Text(liga!['Teamtyp']),
             enabled: true,
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => EinzelneLigaScreen(liga: liga)));
+                  builder: (context) => EinzelneLigaScreen(liga: liga!)));
             },
           ),
         ));

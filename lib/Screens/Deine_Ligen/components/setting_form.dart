@@ -17,11 +17,11 @@ class _SettingsFormState extends State<SettingsForm> {
   final _formKey = GlobalKey<FormState>();
 
   // form values
-  String _currentVerband;
-  String _currentTeamtyp;
-  String _currentSpielklasse;
-  String _currentLiga;
-  String _currentLigaLink;
+  String? _currentVerband;
+  String? _currentTeamtyp;
+  String? _currentSpielklasse;
+  String? _currentLiga;
+  String? _currentLigaLink;
 
   List<String> teamtypshilfe =
       new List<String>.filled(1, 'Bitte zuerst Verband wählen', growable: true);
@@ -37,17 +37,17 @@ class _SettingsFormState extends State<SettingsForm> {
   //Stream
   // ignore: close_sinks
   StreamController<List<String>> controller = StreamController();
-  UserData userData;
+  UserData? userData;
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<TheUser>(context);
 
-    return StreamBuilder<UserData>(
+    return StreamBuilder<UserData?>(
         stream: DatabaseService(uid: user.uid).userData,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             userData = snapshot.data;
-            if (userData.ligen.length > 2) {
+            if (userData!.ligen!.length > 2) {
               return Column(
                 children: [
                   Text(
@@ -66,15 +66,15 @@ class _SettingsFormState extends State<SettingsForm> {
                       style: TextStyle(fontSize: 18.0),
                     ),
                     DropdownButtonFormField(
-                      validator: (value) =>
+                      validator: (dynamic value) =>
                           value == null ? 'Bitte auswählen' : null,
                       items: alleverbaende.map((verband) {
                         return DropdownMenuItem(
-                          value: verband ?? 'Wähle deine Verband aus',
+                          value: verband,
                           child: Text('$verband'),
                         );
                       }).toList(),
-                      onChanged: (String value) {
+                      onChanged: (String? value) {
                         _currentVerband = value;
 
                         setState(() {
@@ -88,15 +88,15 @@ class _SettingsFormState extends State<SettingsForm> {
                       style: TextStyle(fontSize: 18.0),
                     ),
                     DropdownButtonFormField(
-                      validator: (value) =>
+                      validator: (dynamic value) =>
                           value == null ? 'Bitte auswählen' : null,
                       items: teamtypshilfe.map((teamtyp) {
                         return DropdownMenuItem(
-                          value: teamtyp ?? 'Wähle deinen Teamtyp aus',
+                          value: teamtyp,
                           child: Text('$teamtyp'),
                         );
                       }).toList(),
-                      onChanged: (String value) {
+                      onChanged: (String? value) {
                         _currentTeamtyp = value;
 
                         setState(() {
@@ -117,15 +117,15 @@ class _SettingsFormState extends State<SettingsForm> {
                       style: TextStyle(fontSize: 18.0),
                     ),
                     DropdownButtonFormField(
-                      validator: (value) =>
+                      validator: (dynamic value) =>
                           value == null ? 'Bitte auswählen' : null,
                       items: spielklassehilfe.map((spielklasse) {
                         return DropdownMenuItem(
-                          value: spielklasse ?? 'Wähle deine Spielklasse aus',
+                          value: spielklasse,
                           child: Text('$spielklasse'),
                         );
                       }).toList(),
-                      onChanged: (String value) {
+                      onChanged: (String? value) {
                         _currentSpielklasse = value;
                         setState(() {
                           ligahilfe = [];
@@ -151,15 +151,15 @@ class _SettingsFormState extends State<SettingsForm> {
                       style: TextStyle(fontSize: 18.0),
                     ),
                     DropdownButtonFormField(
-                      validator: (value) =>
+                      validator: (dynamic value) =>
                           value == null ? 'Bitte auswählen' : null,
                       items: ligahilfe.map((liga) {
                         return DropdownMenuItem(
-                          value: liga ?? 'Wähle deinen Liga aus',
+                          value: liga,
                           child: Text('$liga'),
                         );
                       }).toList(),
-                      onChanged: (String value) {
+                      onChanged: (String? value) {
                         _currentLiga = value;
                         for (int i = 0; i < ligacodes.length; i++) {
                           if (ligacodes[i][0] == _currentVerband) {
@@ -187,7 +187,7 @@ class _SettingsFormState extends State<SettingsForm> {
                           style: TextStyle(color: Colors.black),
                         ),
                         onPressed: () async {
-                          if (_formKey.currentState.validate()) {
+                          if (_formKey.currentState!.validate()) {
                             Liga liga = Liga(
                                 verbandname: _currentVerband,
                                 teamtypsname: _currentTeamtyp,
@@ -195,8 +195,8 @@ class _SettingsFormState extends State<SettingsForm> {
                                 liganame: _currentLiga,
                                 ligalink: _currentLigaLink);
                             await DatabaseService(uid: user.uid)
-                                .addLigaToUserToLiga(
-                                    liga, userData.uid, userData.benutzername);
+                                .addLigaToUserToLiga(liga, userData!.uid,
+                                    userData!.benutzername);
                             Navigator.pop(context);
                           }
                         }),

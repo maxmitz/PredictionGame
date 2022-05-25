@@ -9,19 +9,33 @@ import 'package:provider/provider.dart';
 
 class Body extends StatelessWidget {
   const Body({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final userdata = Provider.of<UserData>(context);
+    final userdata = Provider.of<UserData?>(context);
     var ligen;
     try {
-      ligen = userdata.ligen;
+      ligen = userdata!.ligen;
     } catch (e) {}
 
-    return StreamProvider<List<List<Game>>>.value(
+    return StreamProvider<List<List<Game>>?>.value(
         value: DatabaseService(ligen: ligen).gameday,
+        initialData:
+            null /*[
+          [
+            new Game(
+                away: 'test',
+                home: 'test',
+                scoreAway: '1',
+                scoreHome: '2',
+                dateTime: DateTime.now(),
+                matchNumber: '1',
+                spieltag: '1')
+          ]
+        ]*/
+        ,
         child: MaterialApp(
             home: Scaffold(
                 resizeToAvoidBottomInset: false,

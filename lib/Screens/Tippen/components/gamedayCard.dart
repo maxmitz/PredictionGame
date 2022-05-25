@@ -1,37 +1,34 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_auth/Services/databaseLiga.dart';
 import 'package:flutter_auth/models/game.dart';
 import 'package:flutter_auth/models/user.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class GamedayCard extends StatelessWidget {
-  final Game gameday;
-  final String leagueCode;
-  TextEditingController scoreHome;
-  TextEditingController scoreAway;
+  final Game? gameday;
+  final String? leagueCode;
+  final TextEditingController? scoreHome;
+  final TextEditingController? scoreAway;
   final formatDate = new DateFormat('dd.MM.yyyy');
   final formatDateWithTime = new DateFormat('dd.MM.yyyy hh:mm');
 
-  DatabaseServiceLiga databaseServiceLiga;
-  CollectionReference leagueCollection =
+  final CollectionReference leagueCollection =
       FirebaseFirestore.instance.collection('ligen');
 
   GamedayCard({this.gameday, this.leagueCode, this.scoreAway, this.scoreHome});
 
-  Future getPredictionFromUser(String userName) async {
+  Future getPredictionFromUser(String? userName) async {
     DocumentSnapshot snapshot = await leagueCollection.doc(leagueCode).get();
-    scoreHome.text = snapshot['spieltage'][gameday.spieltag]
-        [gameday.matchNumber]['tipps'][userName]['scoreHome'];
-    scoreAway.text = snapshot['spieltage'][gameday.spieltag]
-        [gameday.matchNumber]['tipps'][userName]['scoreAway'];
+    scoreHome!.text = snapshot['spieltage'][gameday!.spieltag]
+        [gameday!.matchNumber]['tipps'][userName]['scoreHome'];
+    scoreAway!.text = snapshot['spieltage'][gameday!.spieltag]
+        [gameday!.matchNumber]['tipps'][userName]['scoreAway'];
   }
 
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<TheUser>(context);
-    databaseServiceLiga = new DatabaseServiceLiga();
 
     return Container(
         child: FutureBuilder(
@@ -57,7 +54,7 @@ class GamedayCard extends StatelessWidget {
                                     flex: 5,
                                     child: Align(
                                         alignment: Alignment.center,
-                                        child: Text(gameday.home,
+                                        child: Text(gameday!.home!,
                                             style: TextStyle(fontSize: 17)))),
                                 Flexible(
                                     flex: 1,
@@ -70,7 +67,7 @@ class GamedayCard extends StatelessWidget {
                                     child: Align(
                                         alignment: Alignment.centerRight,
                                         child: Text(
-                                          gameday.away,
+                                          gameday!.away!,
                                           style: TextStyle(fontSize: 17),
                                           textAlign: TextAlign.right,
                                         ))),
@@ -80,29 +77,29 @@ class GamedayCard extends StatelessWidget {
                           SizedBox(
                             height: 10,
                           ),
-                          Text(formatDate.format(gameday.dateTime).toString(),
+                          Text(formatDate.format(gameday!.dateTime!).toString(),
                               style: TextStyle(fontSize: 17)),
                           Container(
                             child: Row(children: <Widget>[
                               Expanded(
-                                  child: (gameday.dateTime
+                                  child: (gameday!.dateTime!
                                           .isAfter(DateTime.now()))
                                       ? (TextFormField(
                                           keyboardType: TextInputType.number,
-                                          initialValue: scoreHome.text ?? '',
+                                          initialValue: scoreHome!.text,
                                           textAlign: TextAlign.center,
                                           maxLength: 2,
                                           decoration: InputDecoration(
                                             counterText: "",
                                           ),
                                           onChanged: (text) {
-                                            scoreHome.text = text;
+                                            scoreHome!.text = text;
                                           },
                                           style: TextStyle(fontSize: 17)))
                                       : Text(
-                                          (gameday.scoreHome == '')
+                                          (gameday!.scoreHome == '')
                                               ? "Ergebnis noch nicht verfügbar"
-                                              : gameday.scoreHome,
+                                              : gameday!.scoreHome!,
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
@@ -114,21 +111,21 @@ class GamedayCard extends StatelessWidget {
                                       fontWeight: FontWeight.bold,
                                       fontSize: 17)),
                               Expanded(
-                                  child: (gameday.dateTime
+                                  child: (gameday!.dateTime!
                                           .isAfter(DateTime.now()))
                                       ? TextFormField(
                                           keyboardType: TextInputType.number,
-                                          initialValue: scoreAway.text ?? '',
+                                          initialValue: scoreAway!.text,
                                           textAlign: TextAlign.center,
                                           maxLength: 2,
                                           decoration: InputDecoration(
                                             counterText: "",
                                           ),
                                           onChanged: (text) {
-                                            scoreAway.text = text;
+                                            scoreAway!.text = text;
                                           },
                                           style: TextStyle(fontSize: 17))
-                                      : Text(gameday.scoreAway,
+                                      : Text(gameday!.scoreAway!,
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,

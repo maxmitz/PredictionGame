@@ -1,14 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_auth/models/game.dart';
 import 'package:flutter_auth/models/liga.dart';
 import 'package:flutter_auth/models/user.dart';
 
 class DatabaseService {
-  final String uid;
-  final List ligen;
+  final String? uid;
+  final List? ligen;
   DatabaseService({this.uid, this.ligen});
-  UserData userData2;
+  UserData? userData2;
 
   //collection reference
   final CollectionReference userCollection =
@@ -17,7 +16,7 @@ class DatabaseService {
       FirebaseFirestore.instance.collection('ligen');
 
   Future updateUserData(
-      String id, String nutzername, List ligen, String lieblingsverein) async {
+      String? id, String nutzername, List ligen, String lieblingsverein) async {
     return await userCollection.doc(id).set({
       'Benutzername': nutzername,
       'Ligen': ligen,
@@ -25,7 +24,7 @@ class DatabaseService {
     }, SetOptions(merge: true));
   }
 
-  Future addLigaToUserToLiga(Liga liga, String userId, String name) async {
+  Future addLigaToUserToLiga(Liga liga, String? userId, String? name) async {
     leagueCollection.doc(liga.ligalink).set({
       'tipper': {
         userId: {"points": "0", 'name': name, 'meinVerein': ''}
@@ -50,7 +49,6 @@ class DatabaseService {
     });
   }
 
-  // TODO nur eine Liga löschen
   Future deleteLiga(String ligaName) async {
     var userData = await userCollection.doc(uid).get();
     var ligen = userData['Ligen'];
@@ -70,8 +68,8 @@ class DatabaseService {
     return snapshot.docs.map((doc) {
       return UserData(
           uid: uid,
-          benutzername: doc.data()['Benutzername'] ?? '',
-          ligen: doc.data()['Ligen'] ?? ['Musterliga']);
+          benutzername: doc.get('Benutzername') ?? '',
+          ligen: doc.get('Ligen') ?? ['Musterliga']);
     }).toList();
   }
 
@@ -84,10 +82,10 @@ class DatabaseService {
   UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
     return UserData(
         uid: uid ?? "",
-        benutzername: snapshot.data()['Benutzername'] ?? "Fehler",
-        ligen: snapshot.data()['Ligen'] ?? ['Musterliga'],
+        benutzername: snapshot.get('Benutzername') ?? "Fehler",
+        ligen: snapshot.get('Ligen') ?? ['Musterliga'],
         lieblingsteam:
-            snapshot.data()['Lieblingsverein'] ?? ['DJK Karlsruhe-Ost']);
+            snapshot.get('Lieblingsverein') ?? ['DJK Karlsruhe-Ost']);
   }
 
   // get user doc stream
@@ -103,7 +101,7 @@ class DatabaseService {
   // Liste Games
   List<List<Game>> _gamedayFromSnapshot(QuerySnapshot snapshot) {
     List<List<Game>> gamedayList = [[], [], [], [], [], [], [], [], [], []];
-    List<QueryDocumentSnapshot> docs = [
+    List<QueryDocumentSnapshot?> docs = [
       null,
       null,
       null,
@@ -117,25 +115,27 @@ class DatabaseService {
     ];
     var i = 0;
     for (QueryDocumentSnapshot helper in snapshot.docs) {
-      for (Map liga in ligen) {
-        if (liga['Link'].contains(helper.id)) {
-          docs[i] = helper;
-          i++;
+      if (ligen != null) {
+        for (Map liga in ligen!) {
+          if (liga['Link'].contains(helper.id)) {
+            docs[i] = helper;
+            i++;
+          }
         }
       }
     }
 
     var k = 0;
 
-    for (QueryDocumentSnapshot doc in docs) {
+    for (QueryDocumentSnapshot? doc in docs) {
       if (docs[k] != null) {
-        Map list = doc.data()['spieltage'];
+        Map? list = doc!.get('spieltage');
         var j = 1;
         try {
           while (j < 40) {
             var i = 1;
             try {
-              while (list[j.toString()][i.toString()]['home'] != "") {
+              while (list![j.toString()][i.toString()]['home'] != "") {
                 gamedayList[k].add(Game(
                     home: list[j.toString()][i.toString()]['home'] ?? '',
                     away: list[j.toString()][i.toString()]['away'] ?? '',
@@ -143,9 +143,9 @@ class DatabaseService {
                         list[j.toString()][i.toString()]['scoreHome'] ?? '?',
                     scoreAway:
                         list[j.toString()][i.toString()]['scoreAway'] ?? '?',
-                    dateTime: DateTime.parse(
-                            list[j.toString()][i.toString()]['date']) ??
-                        DateTime.now(),
+                    dateTime: DateTime.parse(list[j.toString()][i.toString()]
+                            ['date'] ??
+                        DateTime.now()),
                     matchNumber: i.toString(),
                     spieltag: j.toString()));
                 i++;

@@ -3,20 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_auth/Screens/Einzelne_Liga/components/userCardLeague.dart';
 
 class Tabelledaten extends StatefulWidget {
-  @override
-  final Map<String, dynamic> liga;
+  final Map<String, dynamic>? liga;
   Tabelledaten(this.liga);
   _TabelledatenState createState() => _TabelledatenState(liga: liga);
 }
 
 class _TabelledatenState extends State<Tabelledaten> {
-  final Map<String, dynamic> liga;
+  final Map<String, dynamic>? liga;
   _TabelledatenState({this.liga});
   Future getUsersFromLeague() async {
     var firestore = FirebaseFirestore.instance;
 
     DocumentSnapshot ds =
-        await firestore.collection("ligen").doc(liga['Link']).get();
+        await firestore.collection("ligen").doc(liga!['Link']).get();
 
     return ds.get('tipper');
   }
@@ -32,18 +31,18 @@ class _TabelledatenState extends State<Tabelledaten> {
                 child: CircularProgressIndicator(),
               );
             } else {
+              final list = snapshot.data as Map;
               return ListView.builder(
-                  itemCount: snapshot.data.length,
+                  itemCount: list.length,
                   itemBuilder: (BuildContext ctx, int index) {
-                    var unsorted = snapshot.data;
-                    var sorted = unsorted.keys.toList()
-                      ..sort((a, b) => int.parse(unsorted[b]['points'])
-                          .compareTo(int.parse(unsorted[a]['points'])));
+                    var sorted = list.keys.toList()
+                      ..sort((a, b) => int.parse(list[b]['points'])
+                          .compareTo(int.parse(list[a]['points'])));
                     var tipper = sorted[index];
                     return UserCardLeague(
-                      name: unsorted[tipper]['name'],
-                      points: unsorted[tipper]['points'],
-                      meinVerein: unsorted[tipper]['meinVerein'],
+                      name: list[tipper]['name'],
+                      points: list[tipper]['points'],
+                      meinVerein: list[tipper]['meinVerein'],
                       position: (index + 1).toString(),
                     );
                   });

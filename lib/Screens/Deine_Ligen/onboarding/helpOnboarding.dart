@@ -9,7 +9,7 @@ class HelpOnboarding extends StatefulWidget {
 
 class _HelpOnboardingState extends State<HelpOnboarding> {
   int currentIndex = 0;
-  PageController _controller;
+  PageController? _controller;
 
   @override
   void initState() {
@@ -19,7 +19,7 @@ class _HelpOnboardingState extends State<HelpOnboarding> {
 
   @override
   void dispose() {
-    _controller.dispose();
+    _controller!.dispose();
     super.dispose();
   }
 
@@ -43,7 +43,7 @@ class _HelpOnboardingState extends State<HelpOnboarding> {
                 child: Column(
                   children: [
                     Text(
-                      contents[i].title,
+                      contents[i].title!,
                       style: TextStyle(
                         fontSize: 35,
                         fontWeight: FontWeight.bold,
@@ -51,7 +51,7 @@ class _HelpOnboardingState extends State<HelpOnboarding> {
                     ),
                     SizedBox(height: 20),
                     Text(
-                      contents[i].discription,
+                      contents[i].discription!,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 18,
@@ -61,7 +61,7 @@ class _HelpOnboardingState extends State<HelpOnboarding> {
                     SizedBox(height: 20),
                     Align(
                       child: Image.asset(
-                        contents[i].image,
+                        contents[i].image!,
                         alignment: Alignment.bottomCenter,
                       ),
                     ),
@@ -84,9 +84,7 @@ class _HelpOnboardingState extends State<HelpOnboarding> {
           height: 60,
           margin: EdgeInsets.all(40),
           width: double.infinity,
-          child: FlatButton(
-            child: Text(
-                currentIndex == contents.length - 1 ? "Schließen" : "Weiter"),
+          child: ElevatedButton(
             onPressed: () {
               if (currentIndex == contents.length - 1) {
                 Navigator.pushReplacement(
@@ -96,16 +94,16 @@ class _HelpOnboardingState extends State<HelpOnboarding> {
                   ),
                 );
               }
-              _controller.nextPage(
+              _controller!.nextPage(
                 duration: Duration(milliseconds: 100),
                 curve: Curves.bounceIn,
               );
             },
-            color: Theme.of(context).primaryColor,
-            textColor: Colors.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
+            child: Text(
+                'currentIndex == contents.length - 1 ? "Schließen" : "Weiter"',
+                style: TextStyle(color: Colors.black)),
+            style: TextButton.styleFrom(
+                primary: Colors.green[200], backgroundColor: Colors.green[200]),
           ),
         ),
         SizedBox(height: 20),

@@ -1,11 +1,11 @@
 class Game {
-  final String home;
-  final String away;
-  final String scoreHome;
-  final String scoreAway;
-  final DateTime dateTime;
-  final String matchNumber;
-  final String spieltag;
+  final String? home;
+  final String? away;
+  final String? scoreHome;
+  final String? scoreAway;
+  final DateTime? dateTime;
+  final String? matchNumber;
+  final String? spieltag;
 
   Game(
       {this.home,

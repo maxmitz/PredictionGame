@@ -1,16 +1,11 @@
 import 'dart:core';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_auth/models/game.dart';
 import 'package:flutter_auth/models/user.dart';
 
-import '../models/liga.dart';
-
 class DatabaseServiceLiga {
-  final String ligaid;
+  final String? ligaid;
   DatabaseServiceLiga({this.ligaid});
 
-  FirebaseFirestore _instance;
   List<UserData> _userDataList = [];
 
   CollectionReference leagueCollection =
@@ -22,13 +17,11 @@ class DatabaseServiceLiga {
     return _userDataList;
   }
 
-  Future<UserData> getUserDataLeagueFromFirebase(String userID) async {
-    _instance = FirebaseFirestore.instance;
-    UserData user;
+  Future<UserData?> getUserDataLeagueFromFirebase(String? userID) async {
+    UserData? user;
 
     DocumentSnapshot snapshot = await leagueCollection.doc(ligaid).get();
-    var data = snapshot.data();
-    var tipperDaten = data['tipper'] as Map;
+    var tipperDaten = snapshot.get('tipper') as Map;
 
     tipperDaten.forEach((key, value) {
       if (key == userID) {
@@ -43,7 +36,7 @@ class DatabaseServiceLiga {
   }
 
   Future<void> updateUserDataLeagueFromFirebase(
-      String userID, String meinVerein) async {
+      String? userID, String? meinVerein) async {
     leagueCollection.doc(ligaid).set({
       'tipper': {
         userID: {'meinVerein': meinVerein}
@@ -51,8 +44,8 @@ class DatabaseServiceLiga {
     }, SetOptions(merge: true));
   }
 
-  Future submitPredictions(String userName, List<String> scoreHome,
-      List<String> scoreAway, String spieltag, String leagueCode) async {
+  Future submitPredictions(String? userName, List<String> scoreHome,
+      List<String> scoreAway, String spieltag, String? leagueCode) async {
     for (int i = 0; i < scoreHome.length; i++) {
       leagueCollection.doc(leagueCode).set({
         'spieltage': {
@@ -118,11 +111,11 @@ class DatabaseServiceLiga {
     }, SetOptions(merge: true));
   }
 
-  Future checkPointsForUser(String userId) async {
+  Future checkPointsForUser(String? userId) async {
     var points = 0;
     DocumentSnapshot snapshot = await leagueCollection.doc(ligaid).get();
 
-    Map list = snapshot.data()['spieltage'];
+    Map list = snapshot.get('spieltage');
     var j = 1;
     try {
       while (list[j.toString()]['1']['home'] != "") {
@@ -135,7 +128,6 @@ class DatabaseServiceLiga {
             var c = list[j.toString()][i.toString()]['scoreAway'];
             var d =
                 list[j.toString()][i.toString()]['tipps'][userId]['scoreAway'];
-            var x = 1;
             if ((a == b) & (c == d)) {
               points += 5;
             } else if ((int.parse(a) - int.parse(c)) ==
@@ -164,12 +156,15 @@ class DatabaseServiceLiga {
   }
 
   Future<List<String>> getCurrentGamedaysFromLeagues(
-      List<String> leagueCodes) async {
+      List<String?> leagueCodes) async {
     List<String> currentGamedays = [];
     for (int i = 0; i < leagueCodes.length; i++) {
       DocumentSnapshot snapshot =
           await leagueCollection.doc(leagueCodes[i]).get();
-      currentGamedays.add(snapshot.data()['currentGameday']);
+      currentGamedays.add(snapshot.get('currentGameday'));
+    }
+    if (currentGamedays.isEmpty) {
+      currentGamedays = [''];
     }
     return currentGamedays;
   }

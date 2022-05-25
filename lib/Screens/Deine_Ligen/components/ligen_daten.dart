@@ -15,11 +15,11 @@ class _LigendatenState extends State<Ligendaten> {
   Widget build(BuildContext context) {
     final user = Provider.of<TheUser>(context);
 
-    return StreamBuilder<UserData>(
+    return StreamBuilder<UserData?>(
         stream: DatabaseService(uid: user.uid).userData,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            UserData userdata = snapshot.data;
+            UserData userdata = snapshot.data!;
 
             return Column(
               mainAxisSize: MainAxisSize.min,
@@ -27,9 +27,9 @@ class _LigendatenState extends State<Ligendaten> {
                 Flexible(
                   child: ListView.builder(
                       shrinkWrap: true,
-                      itemCount: userdata.ligen.length,
+                      itemCount: userdata.ligen!.length,
                       itemBuilder: (context, index) {
-                        return LigenTile(liga: userdata.ligen[index]);
+                        return LigenTile(liga: userdata.ligen![index]);
                       }),
                 ),
                 SizedBox(height: 20.0),

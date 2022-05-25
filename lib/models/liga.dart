@@ -1,10 +1,10 @@
 class Liga {
-  final String verbandname;
-  final String teamtypsname;
-  final String spielklassename;
-  final String liganame;
-  final String ligalink;
-  final String currentGameday;
+  final String? verbandname;
+  final String? teamtypsname;
+  final String? spielklassename;
+  final String? liganame;
+  final String? ligalink;
+  final String? currentGameday;
 
   Liga(
       {this.verbandname,
@@ -16,7 +16,7 @@ class Liga {
 }
 
 class Ligen {
-  final List<Liga> ligenliste;
+  final List<Liga>? ligenliste;
 
   Ligen({this.ligenliste});
 }

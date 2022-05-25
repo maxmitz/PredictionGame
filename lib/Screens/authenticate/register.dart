@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_auth/Services/auth.dart';
@@ -7,7 +9,7 @@ import 'package:flutter_auth/shared/constants.dart';
 import 'package:flutter_auth/shared/loading.dart';
 
 class Register extends StatefulWidget {
-  final Function toggleView;
+  final Function? toggleView;
   Register({this.toggleView});
 
   @override
@@ -46,7 +48,7 @@ class _RegisterState extends State<Register> {
                       decoration: textInputDecoration.copyWith(
                           hintText: 'Benutzername'),
                       validator: (val) =>
-                          val.isEmpty ? 'Gib einen Nutzernamen ein.' : null,
+                          val!.isEmpty ? 'Gib einen Nutzernamen ein.' : null,
                       onChanged: (val) {
                         setState(() => benutzername = val);
                       }),
@@ -55,7 +57,7 @@ class _RegisterState extends State<Register> {
                       decoration:
                           textInputDecoration.copyWith(hintText: 'E-Mail'),
                       validator: (val) =>
-                          val.isEmpty ? 'Gib eine E-Mail-Adresse ein.' : null,
+                          val!.isEmpty ? 'Gib eine E-Mail-Adresse ein.' : null,
                       onChanged: (val) {
                         setState(() => email = val);
                       }),
@@ -64,7 +66,7 @@ class _RegisterState extends State<Register> {
                       decoration:
                           textInputDecoration.copyWith(hintText: 'Passwort'),
                       validator: (val) =>
-                          val.length < 6 ? 'Das Passwort ist zu kurz.' : null,
+                          val!.length < 6 ? 'Das Passwort ist zu kurz.' : null,
                       obscureText: true,
                       onChanged: (val) {
                         setState(() => password = val);
@@ -80,7 +82,7 @@ class _RegisterState extends State<Register> {
                             style:
                                 TextStyle(color: Colors.blue, fontSize: 14.0),
                             recognizer: TapGestureRecognizer()
-                              ..onTap = () => widget.toggleView()),
+                              ..onTap = () => widget.toggleView!()),
                       ],
                     ),
                   ),
@@ -92,11 +94,12 @@ class _RegisterState extends State<Register> {
                         style: TextStyle(color: Colors.white),
                       ),
                       onPressed: () async {
-                        if (_formKey.currentState.validate()) {
+                        if (_formKey.currentState!.validate()) {
                           setState(() => loading = true);
-                          TheUser result =
-                              await _auth.registerWithEmailAndPassword(
-                                  email, password, benutzername);
+                          TheUser? result =
+                              await (_auth.registerWithEmailAndPassword(
+                                      email, password, benutzername)
+                                  as FutureOr<TheUser?>);
 
                           if (result == null) {
                             setState(() {

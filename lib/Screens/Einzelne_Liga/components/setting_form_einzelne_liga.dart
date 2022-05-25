@@ -13,25 +13,25 @@ class SettingsFormEinzelneLiga extends StatefulWidget {
 
   @override
   _SettingsFormEinzelneLigaState createState() =>
-      _SettingsFormEinzelneLigaState(ligaName: ligaName, ligaID: ligaID);
+      _SettingsFormEinzelneLigaState(ligaName, ligaID);
 }
 
 class _SettingsFormEinzelneLigaState extends State<SettingsFormEinzelneLiga> {
   final _formKey = GlobalKey<FormState>();
 
-  int helfer;
-  String neueLiga;
+  int? helfer;
+  String? neueLiga;
   String ligaName;
   String ligaID;
-  _SettingsFormEinzelneLigaState({this.ligaName, this.ligaID});
-  UserData ligaUser;
-  String _meinVerein;
+  _SettingsFormEinzelneLigaState(this.ligaName, this.ligaID);
+  UserData? ligaUser;
+  String? _meinVerein;
 
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<TheUser>(context);
 
-    return StreamBuilder<UserData>(
+    return StreamBuilder<UserData?>(
         stream: DatabaseService(uid: user.uid).userData,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
@@ -55,9 +55,9 @@ class _SettingsFormEinzelneLigaState extends State<SettingsFormEinzelneLiga> {
                     ),
                     TextFormField(
                       initialValue:
-                          (ligaUser == null) ? '' : ligaUser.lieblingsteam,
+                          (ligaUser == null) ? '' : ligaUser!.lieblingsteam,
                       validator: (val) =>
-                          val.isEmpty ? 'Gib dein Lieblingsteam ein.' : null,
+                          val!.isEmpty ? 'Gib dein Lieblingsteam ein.' : null,
                       onChanged: (val) {
                         _meinVerein = val;
                       },
@@ -73,7 +73,6 @@ class _SettingsFormEinzelneLigaState extends State<SettingsFormEinzelneLiga> {
                           await DatabaseServiceLiga(ligaid: ligaID)
                               .updateUserDataLeagueFromFirebase(
                                   user.uid, _meinVerein);
-                          // TODO nicht ins alleligen menü zurück, sondern daten zurückgeben und nur poppen
                           Navigator.pop(context);
                           Navigator.of(context).pop();
                         }),

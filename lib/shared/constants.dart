@@ -14,7 +14,6 @@ const textInputDecoration = InputDecoration(
   ),
 );
 
-// TODO die Logic vor dem 23.03.2022 war wahrscheinlich cleverer. Wichtig zu beachten vor nationaler Implementierung.
 var ligacodes = [
   [
     'Baden',

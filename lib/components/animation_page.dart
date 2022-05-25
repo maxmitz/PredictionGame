@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth/components/untere_leiste.dart';
 import 'package:flutter_auth/shared/constants.dart';
-import 'package:rive/rive.dart';
 
 class AnimationPage extends StatelessWidget {
   @override

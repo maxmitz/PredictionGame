@@ -9,12 +9,14 @@ class AnimationPage extends StatelessWidget {
   final List<String> animations = [
     'assets/animations/cr7sui.riv',
     'assets/animations/derhatschongelb.riv',
-    'assets/animations/lasstdenballlaufen.riv'
+    'assets/animations/lasstdenballlaufen.riv',
+    'assets/animations/wenndiezweiteleutebraucht.riv'
   ];
   final List<String> sprueche = [
     'EJJJJJJ, \nDa spielen doch welche aus der Ersten mit!',
     'EJJJJJJ SCHIRI, \nDER HAT SCHON GELB!',
-    'JUUUUUNGS, \nLasst den Ball laufen!'
+    'JUUUUUNGS, \nLasst den Ball laufen!',
+    'Wenn die Zweite Leute braucht.'
   ];
 
   final _random = Random();

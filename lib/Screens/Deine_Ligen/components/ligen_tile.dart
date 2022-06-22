@@ -8,24 +8,22 @@ class LigenTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: EdgeInsets.only(top: 8.0),
-        child: Card(
-          margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
-          child: ListTile(
-            leading: CircleAvatar(
-              radius: 25.0,
-              backgroundColor: Colors.orange[200],
-              backgroundImage: AssetImage('assets/images/signup_top.png'),
-            ),
-            title: Text(liga!['Liga']),
-            subtitle: Text(liga!['Teamtyp']),
-            enabled: true,
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => EinzelneLigaScreen(liga: liga!)));
-            },
-          ),
-        ));
+    return Card(
+      margin: EdgeInsets.fromLTRB(20, 20, 20, 0),
+      child: ListTile(
+        leading: CircleAvatar(
+          radius: 25.0,
+          backgroundColor: Colors.orange[200],
+          backgroundImage: AssetImage('assets/images/signup_top.png'),
+        ),
+        title: Text(liga!['Liga']),
+        subtitle: Text(liga!['Teamtyp']),
+        enabled: true,
+        onTap: () {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => EinzelneLigaScreen(liga: liga!)));
+        },
+      ),
+    );
   }
 }

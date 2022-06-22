@@ -12,22 +12,26 @@ class DeineLigenScreen extends StatelessWidget {
   final AuthService _auth = AuthService();
   @override
   Widget build(BuildContext context) {
-    void _showSettingsPanel() {
+    void _showAddLeaguePanel() {
       showModalBottomSheet(
+          isScrollControlled: true,
           context: context,
           builder: (context) {
             return Container(
+              height: MediaQuery.of(context).size.height * 0.75,
               padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
               child: SettingsForm(),
             );
           });
     }
 
-    void _showLigaPanel(UserData? userData) {
+    void _showLogoutPanel(UserData? userData) {
       showModalBottomSheet(
+          isScrollControlled: true,
           context: context,
           builder: (context) {
             return Container(
+              height: MediaQuery.of(context).size.height * 0.75,
               padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
               child: Column(
                 children: <Widget>[
@@ -71,14 +75,14 @@ class DeineLigenScreen extends StatelessWidget {
                         style: TextButton.styleFrom(primary: Colors.black),
                         icon: Icon(Icons.library_add),
                         label: Text('Hinzufügen'),
-                        onPressed: () => _showSettingsPanel(),
+                        onPressed: () => _showAddLeaguePanel(),
                       ),
                       TextButton.icon(
                         style: TextButton.styleFrom(primary: Colors.black),
                         icon: Icon(Icons.settings),
                         label: Text('Einstellungen',
                             style: TextStyle(fontSize: 15)),
-                        onPressed: () => _showLigaPanel(userData),
+                        onPressed: () => _showLogoutPanel(userData),
                       ),
                     ],
                   ),

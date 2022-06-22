@@ -3,7 +3,6 @@ import 'package:flutter_auth/Services/database.dart';
 import 'package:flutter_auth/models/user.dart';
 import 'package:flutter_auth/shared/loading.dart';
 import 'package:provider/provider.dart';
-import 'dart:async';
 import 'package:flutter_auth/models/liga.dart';
 
 import '../../../shared/constants.dart';

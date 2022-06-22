@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_auth/Screens/Deine_Ligen/onboarding/helpOnboarding.dart';
 import 'package:flutter_auth/Screens/Tippen/components/gameDayWidget.dart';
+import 'package:flutter_auth/Screens/onboarding/helpOnboarding.dart';
 import 'package:flutter_auth/Services/database.dart';
 import 'package:flutter_auth/models/game.dart';
 import 'package:flutter_auth/models/user.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_auth/Screens/Deine_Ligen/onboarding/onboarding.dart';
 import 'package:flutter_auth/Screens/authenticate/authenticate.dart';
+import 'package:flutter_auth/Screens/onboarding/onboarding.dart';
 import 'package:flutter_auth/models/user.dart';
 import 'package:provider/provider.dart';
 

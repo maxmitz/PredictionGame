@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_auth/Screens/Deine_Ligen/onboarding/content_model.dart';
 import '../../../components/untere_leiste.dart';
+import 'content_model.dart';
 
 class HelpOnboarding extends StatefulWidget {
   @override
@@ -100,7 +100,7 @@ class _HelpOnboardingState extends State<HelpOnboarding> {
               );
             },
             child: Text(
-                'currentIndex == contents.length - 1 ? "Schließen" : "Weiter"',
+                currentIndex == contents.length - 1 ? "Schließen" : "Weiter",
                 style: TextStyle(color: Colors.black)),
             style: TextButton.styleFrom(
                 primary: Colors.green[200], backgroundColor: Colors.green[200]),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_auth/Screens/Deine_Ligen/onboarding/content_model.dart';
 import 'package:flutter_auth/Screens/wrapper.dart';
 import 'package:flutter_auth/components/animation_page.dart';
 import 'package:flutter_auth/models/user.dart';
@@ -7,6 +6,7 @@ import 'package:flutter_auth/shared/loading.dart';
 import 'package:provider/provider.dart';
 
 import '../../../components/untere_leiste.dart';
+import 'content_model.dart';
 
 class Onboarding extends StatefulWidget {
   @override

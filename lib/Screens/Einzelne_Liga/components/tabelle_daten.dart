@@ -40,10 +40,10 @@ class _TabelledatenState extends State<Tabelledaten> {
                           .compareTo(int.parse(list[a]['points'])));
                     var tipper = sorted[index];
                     return UserCardLeague(
-                      name: list[tipper]['name'],
-                      points: list[tipper]['points'],
+                      list[tipper]['name'] ?? "Datenbankfehler",
+                      list[tipper]['points'] ?? "Datenbankfehler",
+                      (index + 1).toString(),
                       meinVerein: list[tipper]['meinVerein'],
-                      position: (index + 1).toString(),
                     );
                   });
             }

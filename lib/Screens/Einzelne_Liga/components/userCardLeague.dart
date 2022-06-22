@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class UserCardLeague extends StatelessWidget {
-  final String? name;
-  final String? points;
-  final String? position;
+  final String name;
+  final String points;
+  final String position;
   final String? meinVerein;
 
   //final UserData userData;
 
-  UserCardLeague({this.name, this.points, this.position, this.meinVerein});
+  UserCardLeague(this.name, this.points, this.position, {this.meinVerein});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class UserCardLeague extends StatelessWidget {
                       fontSize: 30),
                 ),
               ),
-              title: Text(name!),
+              title: Text(name),
               subtitle:
                   Text('Punkte: $points \nMein Verein: $meinVereinHelper')),
         ));

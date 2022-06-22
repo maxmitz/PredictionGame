@@ -35,8 +35,6 @@ class _SettingsFormState extends State<SettingsForm> {
   final List<String> alleteamtypen = ['Herren'];
 
   //Stream
-  // ignore: close_sinks
-  StreamController<List<String>> controller = StreamController();
   UserData? userData;
   @override
   Widget build(BuildContext context) {

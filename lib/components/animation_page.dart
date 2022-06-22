@@ -16,7 +16,7 @@ class AnimationPage extends StatelessWidget {
     'EJJJJJJ, \nDa spielen doch welche aus der Ersten mit!',
     'EJJJJJJ SCHIRI, \nDER HAT SCHON GELB!',
     'JUUUUUNGS, \nLasst den Ball laufen!',
-    'Wenn die Zweite Leute braucht.'
+    'Wenn noch Leute für die Zweite gefunden werden müssen.'
   ];
 
   final _random = Random();

@@ -27,6 +27,8 @@ class _GameDayWidgetState extends State<GameDayWidget> {
     List<TextEditingController> textEditingControllersHome = [];
     List<TextEditingController> textEditingControllersAway = [];
     List<String?> currentGamedays = [];
+    List<String?> totalGamedays = [];
+
     List<String?> leagueCodes = [];
 
     return Consumer<UserData?>(builder: (_, userdata, __) {
@@ -52,13 +54,15 @@ class _GameDayWidgetState extends State<GameDayWidget> {
 
           return FutureBuilder(
               future: databaseServiceLiga
-                  .getCurrentGamedaysFromLeagues(leagueCodes),
+                  .getCurrentandTotalGamedaysFromLeagues(leagueCodes),
               builder: (context, snapshot) {
                 var snapshotMap;
                 if (snapshot.hasData) {
-                  snapshotMap = snapshot.data as List;
+                  snapshotMap = snapshot.data as List<Tupel>;
                   for (int i = 0; i < userdata.ligen!.length; i++) {
-                    currentGamedays.add(snapshotMap[i]);
+                    Tupel tupel = snapshotMap[i] as Tupel;
+                    currentGamedays.add(tupel.currentGameday);
+                    totalGamedays.add(tupel.totalGamedays);
                   }
                   if (!updatedOnce) {
                     updatedOnce = true;
@@ -150,7 +154,9 @@ class _GameDayWidgetState extends State<GameDayWidget> {
                                     size: 50,
                                   ),
                                   onPressed: () {
-                                    if (gameday.length != 0) {
+                                    if (spieltag <
+                                        int.parse(totalGamedays[ligaNummer] ??
+                                            '50')) {
                                       setState(() {
                                         spieltag++;
                                       });

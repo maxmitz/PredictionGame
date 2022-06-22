@@ -155,17 +155,27 @@ class DatabaseServiceLiga {
     }, SetOptions(merge: true));
   }
 
-  Future<List<String>> getCurrentGamedaysFromLeagues(
+  Future<List<Tupel>> getCurrentandTotalGamedaysFromLeagues(
       List<String?> leagueCodes) async {
-    List<String> currentGamedays = [];
-    for (int i = 0; i < leagueCodes.length; i++) {
-      DocumentSnapshot snapshot =
-          await leagueCollection.doc(leagueCodes[i]).get();
-      currentGamedays.add(snapshot.get('currentGameday'));
+    List<Tupel> gamedayTupel = [];
+    try {
+      for (int i = 0; i < leagueCodes.length; i++) {
+        DocumentSnapshot snapshot =
+            await leagueCollection.doc(leagueCodes[i]).get();
+        gamedayTupel.add(Tupel(
+            snapshot.get('currentGameday'), snapshot.get('totalGamedays')));
+      }
+    } catch (e) {}
+    if (gamedayTupel.isEmpty) {
+      gamedayTupel = [];
     }
-    if (currentGamedays.isEmpty) {
-      currentGamedays = [''];
-    }
-    return currentGamedays;
+    return gamedayTupel;
   }
+}
+
+class Tupel {
+  final String currentGameday;
+  final String totalGamedays;
+
+  Tupel(this.currentGameday, this.totalGamedays);
 }

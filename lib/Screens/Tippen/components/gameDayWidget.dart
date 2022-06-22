@@ -71,7 +71,8 @@ class _GameDayWidgetState extends State<GameDayWidget> {
                   return Consumer<List<List<Game>>?>(builder: (_, games, __) {
                     if (games != null) {
                       for (Game game in games[ligaNummer]) {
-                        if (game.spieltag == spieltag.toString()) {
+                        if (game.spieltag == spieltag.toString() &&
+                            !gameday.contains(game)) {
                           gameday.add(game);
                           noLeague = false;
                           textEditingControllersHome

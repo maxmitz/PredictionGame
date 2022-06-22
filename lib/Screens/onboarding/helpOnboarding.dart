@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_auth/shared/tpnColors.dart';
 import '../../../components/untere_leiste.dart';
 import 'content_model.dart';
 
@@ -118,7 +119,7 @@ class _HelpOnboardingState extends State<HelpOnboarding> {
       margin: EdgeInsets.only(right: 5),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: Theme.of(context).primaryColor,
+        color: TPNColors.lightGreen,
       ),
     );
   }

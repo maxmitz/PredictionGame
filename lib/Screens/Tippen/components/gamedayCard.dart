@@ -22,10 +22,19 @@ class GamedayCard extends StatelessWidget {
 
   Future getPredictionFromUser(String? userName) async {
     DocumentSnapshot snapshot = await leagueCollection.doc(leagueCode).get();
-    scoreHome!.text = snapshot['spieltage'][gameday!.spieltag]
-        [gameday!.matchNumber]['tipps'][userName]['scoreHome'];
-    scoreAway!.text = snapshot['spieltage'][gameday!.spieltag]
-        [gameday!.matchNumber]['tipps'][userName]['scoreAway'];
+    try {
+      scoreHome!.text = snapshot['spieltage'][gameday!.spieltag]
+          [gameday!.matchNumber]['tipps'][userName]['scoreHome'];
+    } catch (e) {
+      scoreHome!.text = "0";
+    }
+
+    try {
+      scoreAway!.text = snapshot['spieltage'][gameday!.spieltag]
+          [gameday!.matchNumber]['tipps'][userName]['scoreAway'];
+    } catch (e) {
+      scoreAway!.text = "0";
+    }
   }
 
   @override

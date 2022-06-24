@@ -56,11 +56,10 @@ class _GameDayWidgetState extends State<GameDayWidget> {
               future: databaseServiceLiga
                   .getCurrentandTotalGamedaysFromLeagues(leagueCodes),
               builder: (context, snapshot) {
-                var snapshotMap;
                 if (snapshot.hasData) {
-                  snapshotMap = snapshot.data as List<Tupel>;
-                  for (int i = 0; i < userdata.ligen!.length; i++) {
-                    Tupel tupel = snapshotMap[i] as Tupel;
+                  var snapshotMap = snapshot.data as List<Tupel>;
+                  for (int i = 0; i < snapshotMap.length; i++) {
+                    Tupel tupel = snapshotMap[i];
                     currentGamedays.add(tupel.currentGameday);
                     totalGamedays.add(tupel.totalGamedays);
                   }

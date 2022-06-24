@@ -11,14 +11,16 @@ class AnimationPage extends StatelessWidget {
     'assets/animations/derhatschongelb.riv',
     'assets/animations/lasstdenballlaufen.riv',
     'assets/animations/wenndiezweiteleutebraucht.riv',
-    'assets/animations/alterbezirksliga.riv'
+    'assets/animations/alterbezirksliga.riv',
+    'assets/animations/ichkannnächstewocheehnicht.riv'
   ];
   final List<String> sprueche = [
     'EJJJJJJ, \nDa spielen doch welche aus der Ersten mit!',
     'EJJJJJJ SCHIRI, \nDER HAT SCHON GELB!',
     'JUUUUUNGS, \nLasst den Ball laufen!',
     'Wenn noch Leute für die Zweite gefunden werden müssen.',
-    'Wenn der Alte von der SG Schöndorf früher mal Landesliga gespielt hat.'
+    'Wenn der Alte von der SG Schöndorf früher mal Landesliga gespielt hat.',
+    'Ist mir egal!\nIch kann nächste Woche sowieso nicht.'
   ];
 
   final _random = Random();

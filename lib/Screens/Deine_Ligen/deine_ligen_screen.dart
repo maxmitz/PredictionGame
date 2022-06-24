@@ -4,8 +4,6 @@ import 'package:flutter_auth/Screens/Deine_Ligen/components/setting_form.dart';
 import 'package:flutter_auth/Services/auth.dart';
 import 'package:flutter_auth/models/user.dart';
 import 'package:flutter_auth/shared/constants.dart';
-import 'package:flutter_auth/Services/database.dart';
-import 'package:flutter_auth/shared/loading.dart';
 import 'package:provider/provider.dart';
 
 class DeineLigenScreen extends StatelessWidget {
@@ -54,50 +52,42 @@ class DeineLigenScreen extends StatelessWidget {
           });
     }
 
-    return Consumer<TheUser>(builder: (_, user, __) {
-      return StreamBuilder<UserData?>(
-          stream: DatabaseService(uid: user.uid).userData,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              var userData = snapshot.data;
-
-              return MaterialApp(
-                home: Scaffold(
-                  appBar: AppBar(
-                    backgroundColor: kPrimaryColor,
-                    title: Text(
-                      'Ligen',
-                      textAlign: TextAlign.left,
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    actions: <Widget>[
-                      TextButton.icon(
-                        style: TextButton.styleFrom(primary: Colors.black),
-                        icon: Icon(Icons.library_add),
-                        label: Text('Hinzufügen'),
-                        onPressed: () => _showAddLeaguePanel(),
-                      ),
-                      TextButton.icon(
-                        style: TextButton.styleFrom(primary: Colors.black),
-                        icon: Icon(Icons.settings),
-                        label: Text('Einstellungen',
-                            style: TextStyle(fontSize: 15)),
-                        onPressed: () => _showLogoutPanel(userData),
-                      ),
-                    ],
-                  ),
-                  body: Container(
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage('assets/images/main_top.png'),
-                              fit: BoxFit.cover)),
-                      child: Ligendaten()),
+    return Consumer<UserData?>(builder: (_, userData, __) {
+      return MaterialApp(
+        home: Scaffold(
+          appBar: AppBar(
+            backgroundColor: kPrimaryColor,
+            title: Text(
+              'Ligen',
+              textAlign: TextAlign.left,
+              style: TextStyle(fontSize: 20),
+            ),
+            actions: <Widget>[
+              TextButton.icon(
+                style: TextButton.styleFrom(primary: Colors.black),
+                icon: Icon(Icons.library_add),
+                label: Text('Hinzufügen'),
+                onPressed: () => _showAddLeaguePanel(),
+              ),
+              TextButton.icon(
+                style: TextButton.styleFrom(primary: Colors.black),
+                icon: Icon(Icons.settings),
+                label: Text(
+                  'Einstellungen',
+                  style: TextStyle(fontSize: 15),
                 ),
-              );
-            } else {
-              return Loading();
-            }
-          });
+                onPressed: () => _showLogoutPanel(userData),
+              ),
+            ],
+          ),
+          body: Container(
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('assets/images/main_top.png'),
+                      fit: BoxFit.cover)),
+              child: Ligendaten()),
+        ),
+      );
     });
   }
 }

@@ -5,10 +5,9 @@ import 'package:flutter_auth/models/user.dart';
 import 'package:flutter_auth/shared/loading.dart';
 import 'package:provider/provider.dart';
 
-// ignore: must_be_immutable
 class SettingsFormEinzelneLiga extends StatefulWidget {
-  String ligaName;
-  String ligaID;
+  final String ligaName;
+  final String ligaID;
   SettingsFormEinzelneLiga(this.ligaName, this.ligaID);
 
   @override

@@ -17,8 +17,8 @@ class TippenScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<UserData?>(builder: (_, userdata, __) {
       if (userdata != null) {
-        return StreamProvider<List<List<Game>>?>.value(
-            value: DatabaseService(ligen: userdata.ligen).gameday,
+        return FutureProvider<List<List<Game>>?>.value(
+            value: DatabaseService(ligen: userdata.ligen).gameday.first,
             initialData: null,
             child: MaterialApp(
                 home: Scaffold(

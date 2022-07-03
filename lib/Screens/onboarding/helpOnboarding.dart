@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_auth/shared/tpnColors.dart';
+import 'package:flutter_auth/shared/tpnStyle.dart';
 import '../../../components/untere_leiste.dart';
 import 'content_model.dart';
 

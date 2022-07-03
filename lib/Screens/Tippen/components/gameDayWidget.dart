@@ -212,7 +212,7 @@ class _GameDayWidgetState extends State<GameDayWidget> {
                         ),
                         ElevatedButton(
                           style: TextButton.styleFrom(
-                              primary: TPNColors.buttonGreen),
+                              backgroundColor: TPNColors.buttonGreen),
                           child: Text(
                             'Tipps speichern',
                             style: TextStyle(color: Colors.black),

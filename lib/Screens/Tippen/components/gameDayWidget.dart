@@ -3,6 +3,7 @@ import 'package:flutter_auth/Screens/Tippen/components/gamedayCard.dart';
 import 'package:flutter_auth/models/game.dart';
 import 'package:flutter_auth/models/user.dart';
 import 'package:flutter_auth/shared/loading.dart';
+import 'package:flutter_auth/shared/tpnStyle.dart';
 import 'package:provider/provider.dart';
 
 import '../../../Services/databaseLiga.dart';
@@ -211,8 +212,7 @@ class _GameDayWidgetState extends State<GameDayWidget> {
                         ),
                         ElevatedButton(
                           style: TextButton.styleFrom(
-                              primary: Colors.green[200],
-                              backgroundColor: Colors.green[200]),
+                              primary: TPNColors.buttonGreen),
                           child: Text(
                             'Tipps speichern',
                             style: TextStyle(color: Colors.black),

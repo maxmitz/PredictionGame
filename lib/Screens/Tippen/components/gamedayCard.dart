@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_auth/models/game.dart';
 import 'package:flutter_auth/models/user.dart';
-import 'package:flutter_auth/shared/tpnColors.dart';
+import 'package:flutter_auth/shared/tpnStyle.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 

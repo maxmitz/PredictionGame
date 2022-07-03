@@ -15,8 +15,13 @@ class TippenScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<String> leagueCodes = [];
+
     return Consumer<UserData?>(builder: (_, userdata, __) {
       if (userdata != null) {
+        for (int i = 0; i < userdata.ligen!.length; i++) {
+          leagueCodes.add(userdata.ligen![i]['Link']);
+        }
         return FutureProvider<List<List<Game>>?>.value(
             value: DatabaseService(ligen: userdata.ligen).gameday.first,
             initialData: null,
@@ -47,7 +52,7 @@ class TippenScreen extends StatelessWidget {
                             image: DecorationImage(
                                 image: AssetImage('assets/images/main_top.png'),
                                 fit: BoxFit.cover)),
-                        child: GameDayWidget(),
+                        child: GameDayWidget(leagueCodes: leagueCodes),
                       ),
                     ))));
       } else {

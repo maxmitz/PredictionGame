@@ -8,28 +8,41 @@ import 'package:provider/provider.dart';
 import '../../../Services/databaseLiga.dart';
 
 class GameDayWidget extends StatefulWidget {
+  final List<String> leagueCodes;
+  GameDayWidget({required this.leagueCodes});
+
   @override
-  _GameDayWidgetState createState() => _GameDayWidgetState();
+  _GameDayWidgetState createState() => _GameDayWidgetState(leagueCodes);
 }
 
 class _GameDayWidgetState extends State<GameDayWidget> {
   var spieltag = 1;
   var ligaNummer = 0;
   var noLeague = false;
-  late DatabaseServiceLiga databaseServiceLiga;
+  DatabaseServiceLiga databaseServiceLiga = new DatabaseServiceLiga();
   bool updatedOnce = false;
+  late final Future? gamedayInfos;
+  final List<String> leagueCodes;
+
+  _GameDayWidgetState(this.leagueCodes);
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (leagueCodes.isNotEmpty) {
+      gamedayInfos = databaseServiceLiga
+          .getCurrentandTotalGamedaysFromLeagues(leagueCodes);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    databaseServiceLiga = new DatabaseServiceLiga();
-
     List<Game> gameday = [];
     List<TextEditingController> textEditingControllersHome = [];
     List<TextEditingController> textEditingControllersAway = [];
     List<String?> currentGamedays = [];
     List<String?> totalGamedays = [];
-
-    List<String?> leagueCodes = [];
 
     return Consumer<UserData?>(builder: (_, userdata, __) {
       if (userdata != null) {
@@ -47,14 +60,12 @@ class _GameDayWidgetState extends State<GameDayWidget> {
                 TextStyle(fontSize: 20, fontWeight: FontWeight.bold, height: 2),
           );
         } else {
-          // Get currentGamedays
           for (int i = 0; i < userdata.ligen!.length; i++) {
             leagueCodes.add(userdata.ligen![i]['Link']);
           }
 
           return FutureBuilder(
-              future: databaseServiceLiga
-                  .getCurrentandTotalGamedaysFromLeagues(leagueCodes),
+              future: gamedayInfos,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   var snapshotMap = snapshot.data as List<Tupel>;

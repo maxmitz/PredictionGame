@@ -88,17 +88,14 @@ class DatabaseService {
             snapshot.get('Lieblingsverein') ?? ['DJK Karlsruhe-Ost']);
   }
 
-  // get user doc stream
   Stream<UserData> get userData {
     return userCollection.doc(uid).snapshots().map(_userDataFromSnapshot);
   }
 
-  //get games stream
   Stream<List<List<Game>>> get gameday {
     return leagueCollection.snapshots().map(_gamedayFromSnapshot);
   }
 
-  // Liste Games
   List<List<Game>> _gamedayFromSnapshot(QuerySnapshot snapshot) {
     List<List<Game>> gamedayList = [[], [], [], [], [], [], [], [], [], []];
     List<QueryDocumentSnapshot?> docs = [

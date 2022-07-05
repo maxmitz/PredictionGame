@@ -7,4 +7,5 @@ class TPNColors {
   static const Color lightGrey = Color(0xFFD0D0CE);
   static const Color superLightGreen = Color(0xFFDDEFE8);
   static const Color buttonGreen = Color(0xFFA5D6A7);
+  static const Color buttonOrange = Color(0xFFED8B00);
 }

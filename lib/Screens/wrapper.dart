@@ -9,8 +9,6 @@ import '../Services/database.dart';
 class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    //return either UntereLeiste or Authenticate widget
-
     return Consumer<TheUser?>(
       builder: (_, user, __) {
         if (user == null) {

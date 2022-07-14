@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_auth/Screens/Tippen/tippen_screen.dart';
 import 'package:flutter_auth/Screens/Deine_Ligen/deine_ligen_screen.dart';
 import 'package:flutter_auth/shared/constants.dart';
-//import 'package:new_version/new_version.dart';
 
+// enable min 2.17
 class CustomNavigationBar extends StatefulWidget {
   CustomNavigationBar({Key? key}) : super(key: key);
 

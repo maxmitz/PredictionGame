@@ -12,7 +12,7 @@ class SettingsFormEinzelneLiga extends StatefulWidget {
 
   @override
   _SettingsFormEinzelneLigaState createState() =>
-      _SettingsFormEinzelneLigaState(ligaName, ligaID);
+      _SettingsFormEinzelneLigaState();
 }
 
 class _SettingsFormEinzelneLigaState extends State<SettingsFormEinzelneLiga> {
@@ -20,16 +20,13 @@ class _SettingsFormEinzelneLigaState extends State<SettingsFormEinzelneLiga> {
 
   int? helfer;
   String? neueLiga;
-  String ligaName;
-  String ligaID;
-  _SettingsFormEinzelneLigaState(this.ligaName, this.ligaID);
   UserData? ligaUser;
   String? _meinVerein;
 
   @override
   Widget build(BuildContext context) {
     return Consumer<UserData>(builder: (_, userData, __) {
-      DatabaseServiceLiga(ligaid: ligaID)
+      DatabaseServiceLiga(ligaid: widget.ligaID)
           .getUserDataLeagueFromFirebase(userData.uid)
           .then((result) {
         setState(() {
@@ -61,7 +58,7 @@ class _SettingsFormEinzelneLigaState extends State<SettingsFormEinzelneLiga> {
                     style: TextStyle(color: Colors.black),
                   ),
                   onPressed: () async {
-                    await DatabaseServiceLiga(ligaid: ligaID)
+                    await DatabaseServiceLiga(ligaid: widget.ligaID)
                         .updateUserDataLeagueFromFirebase(
                             userData.uid, _meinVerein);
                     Navigator.pop(context);
@@ -76,7 +73,7 @@ class _SettingsFormEinzelneLigaState extends State<SettingsFormEinzelneLiga> {
                   ),
                   onPressed: () async {
                     await DatabaseService(uid: userData.uid)
-                        .deleteLiga(ligaName);
+                        .deleteLiga(widget.ligaID);
                     Navigator.pop(context);
                     Navigator.of(context).pop();
                   }),
